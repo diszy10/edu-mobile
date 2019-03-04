@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
+  final Function onAvatarTapped;
+
+  CustomDrawer({this.onAvatarTapped});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,7 +25,10 @@ class CustomDrawer extends StatelessWidget {
                   CircleAvatar(
                     radius: 36.0,
                     child: GestureDetector(
-                      onTap: () => Navigator.popAndPushNamed(context, '/profile'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        onAvatarTapped();
+                      },
                     ),
                     backgroundImage: NetworkImage(
                         'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),

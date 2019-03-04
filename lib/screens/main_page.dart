@@ -23,6 +23,12 @@ class _MainPageState extends State<MainPage> {
     ProfilePage(),
   ];
 
+  void changeToProfile() {
+    setState(() {
+      _selectedPage = 4;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +41,7 @@ class _MainPageState extends State<MainPage> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
-      drawer: CustomDrawer(),
+      drawer: CustomDrawer(onAvatarTapped: this.changeToProfile),
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPage,
