@@ -32,15 +32,16 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        elevation: 0.3,
-        title: Text(
-          'EDUKASI',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   iconTheme: IconThemeData(color: Colors.black),
+      //   elevation: 0.4,
+      //   centerTitle: true,
+      //   title: Text(
+      //     'EDUKASI',
+      //     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      //   ),
+      // ),
       drawer: CustomDrawer(onAvatarTapped: this.changeToProfile),
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
@@ -54,19 +55,19 @@ class _MainPageState extends State<MainPage> {
         iconSize: 28.0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.view_stream), title: Text('')),
+              icon: Icon(Icons.view_stream), title: Text('Activity')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.people_outline), title: Text('')),
+              icon: Icon(Icons.people_outline), title: Text('What\'s Due')),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.chat_bubble_outline,
-                size: 22.0,
+                size: 24.0,
               ),
-              title: Text('')),
+              title: Text('Inbox')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none), title: Text('')),
+              icon: Icon(Icons.notifications_none), title: Text('Updates')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), title: Text('')),
+              icon: Icon(Icons.person_outline), title: Text('Account')),
         ],
       ),
     );

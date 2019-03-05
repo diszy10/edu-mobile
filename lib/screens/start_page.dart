@@ -12,7 +12,7 @@ class StartPage extends StatelessWidget {
       minWidth: MediaQuery.of(context).size.width,
       height: 55.0,
       child: FlatButton(
-        onPressed: () => Navigator.pushNamed(context, '/main'),
+        onPressed: () => Navigator.pushReplacementNamed(context, '/main'),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(4.0))),
         color: Theme.of(context).primaryColor,

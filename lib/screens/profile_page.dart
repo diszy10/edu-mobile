@@ -4,8 +4,9 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profileCard = Card(
+      elevation: 8.0,
       margin:EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -65,8 +66,9 @@ class ProfilePage extends StatelessWidget {
     );
     
     final settingCard = Card(
+      elevation: 8.0,
       margin:EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Row(
@@ -82,29 +84,29 @@ class ProfilePage extends StatelessWidget {
                       TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 24.0),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.account_circle, size: 50.0, color: Colors.deepOrange[200]),
-                      SizedBox(width: 16.0),
-                      Text('Account', style: TextStyle(fontSize: 18.0),)
-                    ],
-                  ),
-                  SizedBox(height: 16.0),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.check_circle, size: 50.0, color: Colors.pink[200]),
-                      SizedBox(width: 16.0),
-                      Text('Email', style: TextStyle(fontSize: 18.0),)
-                    ],
-                  ),
-                  SizedBox(height: 16.0),
-                  Row(
-                    children: <Widget>[
-                      Icon(Icons.cloud_circle, size: 50.0, color: Colors.green[200]),
-                      SizedBox(width: 16.0),
-                      Text('Phone', style: TextStyle(fontSize: 18.0),)
-                    ],
-                  ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Icon(Icons.account_circle, size: 50.0, color: Colors.deepOrange[200]),
+                  //     SizedBox(width: 16.0),
+                  //     Text('Account', style: TextStyle(fontSize: 18.0),)
+                  //   ],
+                  // ),
+                  // SizedBox(height: 16.0),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Icon(Icons.check_circle, size: 50.0, color: Colors.pink[200]),
+                  //     SizedBox(width: 16.0),
+                  //     Text('Email', style: TextStyle(fontSize: 18.0),)
+                  //   ],
+                  // ),
+                  // SizedBox(height: 16.0),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Icon(Icons.cloud_circle, size: 50.0, color: Colors.green[200]),
+                  //     SizedBox(width: 16.0),
+                  //     Text('Phone', style: TextStyle(fontSize: 18.0),)
+                  //   ],
+                  // ),
                 ],
               ),
             ),
@@ -114,14 +116,15 @@ class ProfilePage extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: Color(0xFFF7F7F7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[PageTitle(text: 'My Profile'), profileCard, settingCard],
+                children: <Widget>[PageTitle(text: 'Profile'), profileCard, settingCard],
               ),
             ),
           ),
@@ -139,8 +142,8 @@ class PageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(left: 24.0, top: 16.0, bottom: 32.0),
+        padding: const EdgeInsets.only(left: 24.0, bottom: 32.0),
         child: Text(text,
-            style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold)));
+            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold)));
   }
 }

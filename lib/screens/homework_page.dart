@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class HomeworkPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -18,11 +20,8 @@ class HomeworkPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    'Homeworks',
-                    style:
-                        TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
-                  ),
+                  PageTitle(text: 'Homeworks'),
+
                 ],
               ),
             ),
@@ -30,5 +29,17 @@ class HomeworkPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PageTitle extends StatelessWidget {
+  final String text;
+
+  const PageTitle({Key key, this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold));
   }
 }

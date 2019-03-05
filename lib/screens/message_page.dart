@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:edukasi_mobile/models/message.dart';
+
+import 'package:edukasi_mobile/screens/chat_page.dart';
 
 class MessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF7F7F7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -43,18 +47,10 @@ class PageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(left: 24.0, top: 16.0, bottom: 32.0),
+        padding: const EdgeInsets.only(left: 24.0, bottom: 32.0),
         child: Text(text,
-            style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold)));
+            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold)));
   }
-}
-
-class Message {
-  final String name;
-  final String position;
-  final String urlPhoto;
-
-  Message(this.name, this.position, this.urlPhoto);
 }
 
 List<Message> messages = [
@@ -73,6 +69,7 @@ List<Message> messages = [
 class MessageCard extends Card {
   MessageCard(BuildContext context, Message message)
       : super(
+          elevation: 8.0,
           margin: EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
@@ -127,7 +124,9 @@ class MessageCard extends Card {
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(message: message,)));
+                              }
                             ),
                             // Icon(Icons.arrow_forward,)
                           ],
