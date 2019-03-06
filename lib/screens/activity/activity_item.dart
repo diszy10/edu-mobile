@@ -10,33 +10,34 @@ class ActivityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, '/homework'),
+      onTap: () {},
       splashColor: Theme.of(context).primaryColor.withOpacity(0.3),
       child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
+          padding: EdgeInsets.symmetric(vertical: 16.0),
           decoration: BoxDecoration(
               border: Border(
                   left: BorderSide(
                       width: 5.0, color: activity.leftBorderColor))),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: new DecorationImage(
-                    fit: BoxFit.cover,
-                    image: new NetworkImage(activity.imageUrl),
+              Flexible(
+                child: Container(
+                  width: 50.0,
+                  height: 50.0,
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: new DecorationImage(
+                      fit: BoxFit.cover,
+                      image: new NetworkImage(
+                          activity.imageUrl),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
-                width: 28.0,
-              ),
               Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -45,8 +46,7 @@ class ActivityItem extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           activity.subject,
-                          style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           activity.timeStamp,
@@ -55,42 +55,36 @@ class ActivityItem extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 5.0,
+                      height: 4.0,
                     ),
                     Text(
                       activity.author,
                       style: TextStyle(color: Color(0xFF3A3E41)),
                     ),
                     SizedBox(
-                      height: 15.0,
+                      height: 8.0,
                     ),
-                    Text(activity.description, style: TextStyle(fontSize: 16.0)),
+                    Text(activity.description,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                     SizedBox(
-                      height: 15.0,
+                      height: 8.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Icon(
-                          Icons.library_books,
-                          color: Colors.black38,
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.library_books, color: Colors.black45,),
+                            Text('2 exercise')
+                          ],
                         ),
-                        SizedBox(
-                          width: 8.0,
+                        SizedBox(width: 16.0),
+                        Row(
+                          children: <Widget>[
+                            Icon(Icons.library_books, color: Colors.black45,),
+                            Text('1 homework')
+                          ],
                         ),
-                        Text('2 exercise'),
-                        SizedBox(
-                          width: 24.0,
-                        ),
-                        Icon(
-                          Icons.library_books,
-                          color: Colors.black38,
-                        ),
-                        SizedBox(
-                          width: 8.0,
-                        ),
-                        Text('1 homework'),
                       ],
                     ),
                   ],
