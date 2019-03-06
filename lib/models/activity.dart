@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Activity {
+  // TODO: Add homework, exercise
   final String imageUrl, subject, author, timeStamp, description;
   final Color leftBorderColor;
 

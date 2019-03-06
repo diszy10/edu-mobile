@@ -4,15 +4,16 @@ class ActivityHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _todayClass = Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+      padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Text('Today class',
-          style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
     );
 
     Widget _kidAvatar(
         [String imageUrl =
             'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg']) {
       return Container(
+        margin: EdgeInsetsDirectional.only(top: 16.0),
         width: 60.0,
         height: 60.0,
         decoration: new BoxDecoration(
@@ -36,7 +37,7 @@ class ActivityHeader extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         // TODO: Implements Kid List View for switching between each Kid feeds
