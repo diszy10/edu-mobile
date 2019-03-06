@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './stream_page.dart';
+import './activity/activity_page.dart';
 import './class_page.dart';
 import './message_page.dart';
 import './notification_page.dart';
@@ -16,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   int _selectedPage = 0;
 
   final _pageOptions = [
-    StreamPage(),
+    ActivityPage(),
     ClassPage(),
     MessagePage(),
     NotificationPage(),
