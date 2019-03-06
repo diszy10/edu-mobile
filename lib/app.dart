@@ -33,10 +33,8 @@ final ThemeData _eduTheme = _buildEduTheme();
 ThemeData _buildEduTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    primaryColor: eduPrimary,
-    buttonColor: eduPrimary,
-    scaffoldBackgroundColor: Colors.white,
-
-    buttonTheme: ButtonThemeData(buttonColor: Colors.yellow)
-  );
+      primaryColor: eduPrimary,
+      buttonColor: eduPrimary,
+      scaffoldBackgroundColor: Colors.white,
+      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow));
 }

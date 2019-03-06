@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class StreamPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final switchKids = Padding(
         padding: EdgeInsets.only(left: 32.0, top: 24.0),
         child: Container(
@@ -65,7 +64,6 @@ class StreamPage extends StatelessWidget {
     //     ),
     //   ),
     // );
-
 
     final mathFeed = InkWell(
       onTap: () => Navigator.pushNamed(context, '/homework'),

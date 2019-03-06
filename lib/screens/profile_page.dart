@@ -5,7 +5,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final profileCard = Card(
       elevation: 8.0,
-      margin:EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
+      margin: EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,8 +49,13 @@ class ProfilePage extends StatelessWidget {
                     child: ButtonBar(
                       children: <Widget>[
                         FlatButton(
-                          color: Theme.of(context).primaryColor.withOpacity(0.1),
-                          child: Text('Edit Profile', style: TextStyle(color: Theme.of(context).primaryColor),),
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.1),
+                          child: Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
                           onPressed: () {},
                         ),
                         // Icon(Icons.arrow_forward,)
@@ -64,10 +69,10 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     );
-    
+
     final settingCard = Card(
       elevation: 8.0,
-      margin:EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
+      margin: EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
@@ -81,7 +86,7 @@ class ProfilePage extends StatelessWidget {
                   Text(
                     'Settings',
                     style:
-                      TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 24.0),
                   // Row(
@@ -124,7 +129,11 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[PageTitle(text: 'Profile'), profileCard, settingCard],
+                children: <Widget>[
+                  PageTitle(text: 'Profile'),
+                  profileCard,
+                  settingCard
+                ],
               ),
             ),
           ),
