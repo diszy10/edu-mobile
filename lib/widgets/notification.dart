@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class EduNotification extends StatefulWidget {
   const EduNotification({Key key}) : super(key: key);
 
   @override
-  _EduNotificationsState createState() => new _EduNotification();
+  _EduNotificationsState createState() => _EduNotification();
 }
 
 class _EduNotificationsState extends State<EduNotification> {
@@ -20,6 +21,22 @@ class _EduNotificationsState extends State<EduNotification> {
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         selectNotification: onSelectNotification);
   }
+
+//Widget UI disini
+
+// Buat cek informasi fungsi notifikasi
+//   Future onSelectNotification(String payload) async {
+//     showDialog(
+//       context: context,
+//       builder: (_) {
+//         return new AlertDialog(
+//           title: Text("PayLoad"),
+//           content: Text("Payload : $payload"),
+//         );
+//       },
+//     );
+//   }
+// }
 
   Future _notification() async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
