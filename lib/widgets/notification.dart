@@ -16,7 +16,7 @@ class _EduNotificationState extends State<EduNotification> {
   initState() {
     super.initState();
     var initializationSettingsAndroid =
-        new AndroidInitializationSettings('app_icon');
+        new AndroidInitializationSettings('icon_app');
     var initializationSettingsIOS = new IOSInitializationSettings();
     var initializationSettings = new InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
