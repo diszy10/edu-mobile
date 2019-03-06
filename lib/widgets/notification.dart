@@ -8,6 +8,19 @@ class EduNotification extends StatefulWidget {
 }
 
 class _EduNotificationsState extends State<EduNotification> {
+  @override
+  initState() {
+    super.initState();
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        selectNotification: onSelectNotification);
+  }
+
   Future _notification() async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         '1', 'Edookasi', 'Edookasi for better education',
