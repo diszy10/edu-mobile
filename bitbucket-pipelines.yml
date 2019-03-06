@@ -1,0 +1,15 @@
+image: audkar/flutter-sdk  # Lesser size. ~750MB
+# image: cirrusci/flutter  # From trusted CI provider. ~1GB
+
+pipelines:
+  pull-requests:
+    '{development,feature/*,bugfix/*}':
+      - step:
+          caches:
+            - flutter
+          script:
+            - flutter test
+
+definitions:
+  caches:
+    flutter: ~/sdks/flutter
