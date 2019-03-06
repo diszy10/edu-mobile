@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './widgets/colors.dart';
+import './widgets/notification.dart';
 
 import './screens/start_page.dart';
 import './screens/main_page.dart';
@@ -15,6 +16,7 @@ class EdukasiApp extends StatelessWidget {
       '/main': (BuildContext context) => new MainPage(),
       '/attendance': (BuildContext context) => new AttendancePage(),
       '/homework': (BuildContext context) => new HomeworkPage(),
+      '/test': (BuildContext context) => new EduNotification(),
     };
 
     return MaterialApp(
