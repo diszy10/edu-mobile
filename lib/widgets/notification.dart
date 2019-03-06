@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -5,10 +6,12 @@ class EduNotification extends StatefulWidget {
   const EduNotification({Key key}) : super(key: key);
 
   @override
-  _EduNotificationsState createState() => _EduNotification();
+  _EduNotificationState createState() => _EduNotificationState();
 }
 
-class _EduNotificationsState extends State<EduNotification> {
+class _EduNotificationState extends State<EduNotification> {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   @override
   initState() {
     super.initState();
@@ -19,39 +22,54 @@ class _EduNotificationsState extends State<EduNotification> {
         initializationSettingsAndroid, initializationSettingsIOS);
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        selectNotification: onSelectNotification);
+        onSelectNotification: onSelectNotification);
   }
 
-//Widget UI disini
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Plugin example app'),
+        ),
+        body: new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              new RaisedButton(
+                onPressed: _showNotificationWithDefaultSound,
+                child: new Text('Show Notification With Default Sound'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
 // Buat cek informasi fungsi notifikasi
-//   Future onSelectNotification(String payload) async {
-//     showDialog(
-//       context: context,
-//       builder: (_) {
-//         return new AlertDialog(
-//           title: Text("PayLoad"),
-//           content: Text("Payload : $payload"),
-//         );
-//       },
-//     );
-//   }
-// }
+  Future onSelectNotification(String payload) async {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return new AlertDialog(
+          title: Text("PayLoad"),
+          content: Text("Payload : $payload"),
+        );
+      },
+    );
+  }
 
-  Future _notification() async {
+  Future _showNotificationWithDefaultSound() async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        '1', 'Edookasi', 'Edookasi for better education',
-        playSound: false, importance: Importance.Max, priority: Priority.High);
-    var iOSPlatformChannelSpecifics =
-        new IOSNotificationDetails(presentSound: false);
+        'your channel id', 'your channel name', 'your channel description',
+        importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     var platformChannelSpecifics = new NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
-      0,
-      'Harida, S.Pd.',
-      'Tolong jangan nyuri risol dikantin lagi ya kamu !',
-      platformChannelSpecifics,
-      payload: 'No_Sound',
-    );
+        0, 'plain title', 'plain body', platformChannelSpecifics,
+        payload: 'item id 2');
   }
 }
