@@ -23,7 +23,8 @@ class NotificationPage extends StatelessWidget {
                     ),
                     trailing: Icon(
                       Icons.remove_circle,
-                      color: Colors.red[200], size: 16.0,
+                      color: Colors.red[200],
+                      size: 16.0,
                     ),
                   )
                 ],

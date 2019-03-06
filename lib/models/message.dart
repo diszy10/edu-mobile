@@ -1,4 +1,3 @@
-
 class Message {
   final String name;
   final String position;

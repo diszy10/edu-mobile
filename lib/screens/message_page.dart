@@ -114,20 +114,24 @@ class MessageCard extends Card {
                         child: ButtonBar(
                           children: <Widget>[
                             FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0)),
-                              color: Theme.of(context)
-                                  .primaryColor
-                                  .withOpacity(0.1),
-                              child: Text(
-                                'Message',
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(message: message,)));
-                              }
-                            ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0)),
+                                color: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1),
+                                child: Text(
+                                  'Message',
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ChatPage(
+                                                message: message,
+                                              )));
+                                }),
                             // Icon(Icons.arrow_forward,)
                           ],
                         ),
