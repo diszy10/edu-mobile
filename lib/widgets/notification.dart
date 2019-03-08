@@ -55,7 +55,7 @@ class _EduNotificationState extends State<EduNotification> {
       context: context,
       builder: (_) {
         return new AlertDialog(
-          title: Text("PayLoad"),
+          title: Text("Informasi Fungsi Notifikasi"),
           content: Text("Payload : $payload"),
         );
       },
@@ -71,7 +71,7 @@ class _EduNotificationState extends State<EduNotification> {
         androidPlatformChannelSpecifics, 
         iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
-        1, 'Badriah, S.Kom.', 'WOY BISA DONG', platformChannelSpecifics,
-        payload: 'item id 2');
+        1, 'Badriah, S.Kom.', 'Test', platformChannelSpecifics,
+        payload: 'Notifikasi Lokal');
   }
 }
