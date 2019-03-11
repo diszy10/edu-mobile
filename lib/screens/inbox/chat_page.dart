@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:edukasi_mobile/models/message.dart';
+
+import '../../models/inbox.dart';
 
 class ChatPage extends StatefulWidget {
-  final Message message;
-  const ChatPage({this.message});
+  final Inbox inbox;
+  const ChatPage({this.inbox});
 
   _ChatPageState createState() => _ChatPageState();
 }
@@ -28,9 +29,9 @@ class _ChatPageState extends State<ChatPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ChatHeader(
-                    name: widget.message.name,
-                    position: widget.message.position,
-                    urlPhoto: widget.message.urlPhoto,
+                    name: widget.inbox.name,
+                    position: widget.inbox.position,
+                    urlPhoto: widget.inbox.urlPhoto,
                   ),
                 ],
               ),
@@ -62,7 +63,7 @@ class ChatHeader extends StatelessWidget {
               children: <Widget>[
                 Text(name,
                     style:
-                        TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
                 SizedBox(
                   height: 8.0,
                 ),

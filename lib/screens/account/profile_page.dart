@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Widget _buildPageTitle = Padding(
+        padding: EdgeInsets.all(32.0),
+        child: Text('Profile',
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)));
+
     final profileCard = Card(
       elevation: 8.0,
       margin: EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
@@ -121,38 +126,16 @@ class ProfilePage extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: Color(0xFFF7F7F7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  PageTitle(text: 'Profile'),
-                  profileCard,
-                  settingCard
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[_buildPageTitle, profileCard, settingCard],
             ),
           ),
         ),
       ),
     );
-  }
-}
-
-class PageTitle extends StatelessWidget {
-  final String text;
-
-  const PageTitle({Key key, this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 24.0, bottom: 32.0),
-        child: Text(text,
-            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold)));
   }
 }
