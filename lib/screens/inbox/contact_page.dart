@@ -7,16 +7,33 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _contacts = [
-      Inbox(name: 'Mrs. Regina', position: 'Headmaster',
-          urlPhoto: 'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg'),
-      Inbox(name: 'Ms. Yuna', position: 'English Teacher',
-          urlPhoto: 'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg'),
-      Inbox(name: 'Ms. Ariana', position: 'Math Teacher',
-          urlPhoto: 'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'),
-      Inbox(name: 'Ms. Luna', position: 'Science Teacher',
-          urlPhoto: 'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
-      Inbox(name: 'Ms. Reina', position: 'Social Teacher',
-          urlPhoto: 'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
+      Inbox(
+          name: 'Mrs. Regina',
+          position: 'Headmaster',
+          urlPhoto:
+              'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg'),
+      Inbox(
+          name: 'Ms. Yuna',
+          position: 'English Teacher',
+          message: 'Thank you',
+          urlPhoto:
+              'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg'),
+      Inbox(
+          name: 'Ms. Ariana',
+          position: 'Math Teacher',
+          urlPhoto:
+              'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'),
+      Inbox(
+          name: 'Ms. Luna',
+          position: 'Science Teacher',
+          urlPhoto:
+              'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
+      Inbox(
+          name: 'Ms. Reina',
+          position: 'Social Teacher',
+          message: 'Have a good day',
+          urlPhoto:
+              'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
     ];
 
     Widget _buildPageTitle = Padding(
@@ -33,7 +50,7 @@ class ContactPage extends StatelessWidget {
             Inbox contact = contacts[index];
             return InkWell(
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ChatPage(

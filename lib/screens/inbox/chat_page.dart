@@ -23,18 +23,31 @@ class _ChatPageState extends State<ChatPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
-            child: Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  ChatHeader(
-                    name: widget.inbox.name,
-                    position: widget.inbox.position,
-                    urlPhoto: widget.inbox.urlPhoto,
-                  ),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ChatHeader(
+                  name: widget.inbox.name,
+                  position: widget.inbox.position,
+                  urlPhoto: widget.inbox.urlPhoto,
+                ),
+                widget.inbox.message != null
+                    ? Container(
+                        margin: EdgeInsets.only(left: 24.0),
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                            color: Colors.blueGrey[50],
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(widget.inbox.message,
+                                style: TextStyle(fontSize: 16.0)),
+                          ],
+                        ),
+                      )
+                    : Container()
+              ],
             ),
           ),
         ),
