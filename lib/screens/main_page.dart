@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './activity/activity_page.dart';
 import './class_page.dart';
 import './message_page.dart';
-import './notification_page.dart';
+import './update/update_page.dart';
 import './profile_page.dart';
 import '../widgets/custom_drawer.dart';
 
@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
     ActivityPage(),
     ClassPage(),
     MessagePage(),
-    NotificationPage(),
+    UpdatePage(),
     ProfilePage(),
   ];
 
