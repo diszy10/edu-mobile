@@ -130,7 +130,7 @@ class ActivityHeader extends StatelessWidget {
         // TODO: Implements Kid List View for switching between each Kid feeds
         // TODO: Implements real time for date text
         children: <Widget>[
-          InkWell(
+          GestureDetector(
               onTap: () {
                 showRoundedModalBottomSheet(
                   context: context,
