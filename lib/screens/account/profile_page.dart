@@ -18,14 +18,14 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              width: 90.0,
-              height: 90.0,
+              width: 80.0,
+              height: 80.0,
               decoration: new BoxDecoration(
                 shape: BoxShape.circle,
                 image: new DecorationImage(
                   fit: BoxFit.cover,
                   image: new NetworkImage(
-                      'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
+                      'http://cdn2.tstatic.net/style/foto/bank/images/raisa-andriana_20180614_154024.jpg'),
                 ),
               ),
             ),
@@ -44,12 +44,12 @@ class ProfilePage extends StatelessWidget {
                   SizedBox(
                     height: 8.0,
                   ),
-                  Text(
-                    'I love to play and learn math!',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
+                  // Text(
+                  //   'I love to play and learn math!',
+                  //   style: TextStyle(
+                  //     fontSize: 16.0,
+                  //   ),
+                  // ),
                   ButtonTheme.bar(
                     child: ButtonBar(
                       children: <Widget>[
