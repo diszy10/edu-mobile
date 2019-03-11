@@ -22,11 +22,6 @@ class InboxPage extends StatelessWidget {
               'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg')
     ];
 
-    Widget _buildPageTitle = Padding(
-        padding: EdgeInsets.all(32.0),
-        child: Text('Inbox',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)));
-
     Widget _buildPageContent(List<Inbox> inbox) {
       return ListView.builder(
         physics: BouncingScrollPhysics(),
@@ -97,23 +92,49 @@ class InboxPage extends StatelessWidget {
     }
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ContactPage()));
-        },
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[_buildPageTitle, _buildPageContent(_inbox)],
+              children: <Widget>[InboxHeader(), _buildPageContent(_inbox)],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class InboxHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 32.0, top: 16.0, right: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text('Inbox',
+              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+          ButtonTheme.bar(
+            child: ButtonBar(
+              children: <Widget>[
+                FlatButton(
+                  color: Theme.of(context).primaryColor.withOpacity(0.1),
+                  child: Text(
+                    'New',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ContactPage()));
+                  },
+                ),
+                // Icon(Icons.arrow_forward,)
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
