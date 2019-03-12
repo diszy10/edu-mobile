@@ -184,6 +184,18 @@ class ChatMessage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                new Text(
+                  "17:50",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 12.0,
+                  ),
+                ),
+              ],
+            ),
             new Container(
               margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
               padding: EdgeInsets.all(16.0),
