@@ -37,12 +37,11 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-  
     Widget _buildTextComposer() {
       return IconTheme(
         data: IconThemeData(color: Theme.of(context).accentColor), //new
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+          margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.withOpacity(0.5)),
@@ -80,28 +79,29 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0.0,
+        title: Text(widget.inbox.name, style: TextStyle(color: Colors.black),),
       ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            ChatHeader(
-              name: widget.inbox.name,
-              position: widget.inbox.position,
-              urlPhoto: widget.inbox.urlPhoto,
-            ),
-            widget.inbox.message != null
-                ? Container(
-                    margin: EdgeInsets.only(left: 24.0),
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey[50],
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Text(widget.inbox.message,
-                        style: TextStyle(fontSize: 16.0)),
-                  )
-                : Container(),
+            // ChatHeader(
+            //   name: widget.inbox.name,
+            //   position: widget.inbox.position,
+            //   urlPhoto: widget.inbox.urlPhoto,
+            // ),
+            // widget.inbox.message != null
+            //     ? Container(
+            //         margin: EdgeInsets.only(left: 24.0),
+            //         padding: EdgeInsets.all(16.0),
+            //         decoration: BoxDecoration(
+            //             color: Colors.blueGrey[50],
+            //             borderRadius: BorderRadius.circular(10.0)),
+            //         child: Text(widget.inbox.message,
+            //             style: TextStyle(fontSize: 16.0)),
+            //       )
+            //     : Container(),
             Flexible(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
@@ -178,8 +178,9 @@ class ChatMessage extends StatelessWidget {
       ),
       axisAlignment: 0.0,
       child: Container(
-        margin: EdgeInsets.only(left: 220.0, right: 16.0, bottom: 16.0),
+        margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
         padding: EdgeInsets.all(16.0),
+        constraints: BoxConstraints(maxWidth: 250.0),
         decoration: BoxDecoration(
             color: Colors.blueGrey[50],
             borderRadius: BorderRadius.circular(10.0)),

@@ -101,22 +101,44 @@ class ContactPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        elevation: 0.0,
-      ),
+        // appBar: AppBar(
+        //   centerTitle: false,
+        //   backgroundColor: Colors.white,
+        //   iconTheme: IconThemeData(color: Colors.black),
+        //   elevation: 0.0,
+        // ),
+        body: NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+              elevation: 0.5,
+              backgroundColor: Colors.white,
+              iconTheme: IconThemeData(color: Colors.black),
+              expandedHeight: 100.0,
+              centerTitle: false,
+              floating: true,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: false,
+                title: Text(
+                  'Contact',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              )),
+        ];
+      },
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[_buildPageTitle, _buildPageContent(_contacts)],
+              children: <Widget>[_buildPageContent(_contacts)],
             ),
           ),
         ),
       ),
-    );
+    ));
   }
 }
