@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UpcomingSection extends StatelessWidget {
+class UpcomingTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

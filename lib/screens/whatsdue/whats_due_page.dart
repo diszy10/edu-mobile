@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './upcoming_section.dart';
+import './upcoming_tab_view.dart';
 
 class WhatsDuePage extends StatelessWidget {
   @override
@@ -56,7 +56,7 @@ class WhatsDuePage extends StatelessWidget {
         body: SafeArea(
             child: TabBarView(
           children: [
-            UpcomingSection(),
+            UpcomingTabView(),
             Icon(Icons.directions_transit),
           ],
         )),
