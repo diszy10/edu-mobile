@@ -23,7 +23,7 @@ void main() {
     await tester.tap(find.byIcon(Icons.view_stream));
     await tester.pump();
 
-    expect(find.text('Activities'), findsOneWidget);
+    expect(find.text('Today class'), findsOneWidget);
 
     // Verify Classes tab
     await tester.tap(find.byIcon(Icons.people_outline));
@@ -37,16 +37,17 @@ void main() {
 
     expect(find.text('Messages'), findsOneWidget);
 
-    // Verify Notifications tab
+    // Verify Updates tab
     await tester.tap(find.byIcon(Icons.notifications_none));
     await tester.pump();
-
-    expect(find.text('Notifications'), findsOneWidget);
+    // Because Update page have Updates 
+    // as Title and navigation bar subtitle
+    expect(find.text('Updates'), findsNWidgets(2));
 
     // Verify Profile tab
     await tester.tap(find.byIcon(Icons.person_outline));
     await tester.pump();
 
-    expect(find.text('My Profile'), findsOneWidget);
+    expect(find.text('Profile'), findsOneWidget);
   });
 }

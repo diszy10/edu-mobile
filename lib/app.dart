@@ -21,7 +21,7 @@ class EdukasiApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Edukasi',
       home: MainPage(),
-      initialRoute: '/start',
+      // initialRoute: '/start',
       routes: _routes,
       theme: _eduTheme,
     );
