@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/inbox.dart';
 
@@ -168,6 +169,8 @@ class ChatHeader extends StatelessWidget {
 }
 
 class ChatMessage extends StatelessWidget {
+  static DateTime now = DateTime.now();
+  String parsedTime = DateFormat('kk:mm').format(now);
   final String text;
   final AnimationController animationController;
   ChatMessage({this.text, this.animationController});
@@ -181,13 +184,35 @@ class ChatMessage extends StatelessWidget {
       ),
       axisAlignment: 0.0,
       child: Container(
-        margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
-        padding: EdgeInsets.all(16.0),
-        constraints: BoxConstraints(maxWidth: 250.0),
-        decoration: BoxDecoration(
-            color: Colors.blueGrey[50],
-            borderRadius: BorderRadius.circular(10.0)),
-        child: Text(text, style: TextStyle(fontSize: 16.0)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            new Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                new Container(
+                  margin: const EdgeInsets.only(bottom: 12.0),
+                  child: new Text(
+                    parsedTime,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ),
+                new Container(
+                  margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
+                  padding: EdgeInsets.all(16.0),
+                  constraints: BoxConstraints(maxWidth: 250.0),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey[50],
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Text(text, style: TextStyle(fontSize: 16.0)),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
