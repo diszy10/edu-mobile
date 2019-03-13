@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/inbox.dart';
+import '../../widgets/gradientColor.dart';
 
 class ChatPage extends StatefulWidget {
   final Inbox inbox;
@@ -76,14 +77,11 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: false,
+        centerTitle: true,
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0.0,
-        title: Text(
-          widget.inbox.name,
-          style: TextStyle(color: Colors.black),
-        ),
+        title: BluePurpleGradientText(title: widget.inbox.name),
       ),
       body: SafeArea(
         child: Column(
@@ -140,9 +138,7 @@ class ChatHeader extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(name,
-                    style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+                BluePurpleGradientText(title: name),
                 SizedBox(
                   height: 8.0,
                 ),
