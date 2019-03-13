@@ -42,20 +42,25 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
       return IconTheme(
         data: IconThemeData(color: Theme.of(context).accentColor), //new
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          padding: EdgeInsets.all(16.0),
+          // margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          padding: EdgeInsets.all(1.0),
+          height: 70.0,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.withOpacity(0.5)),
-              borderRadius: BorderRadius.circular(30.0)),
+              // borderRadius: BorderRadius.circular(30.0)
+              ),
           child: Row(
             children: <Widget>[
               Flexible(
-                child: TextField(
+                child: Column( 
+                children: <Widget>[ TextField(
                   autofocus: true,
                   controller: _textController,
                   onSubmitted: _handleSubmitted,
                   decoration:
-                      InputDecoration.collapsed(hintText: "Send a message"),
+                      InputDecoration.collapsed(hintText: "Type to chat..."),
+                ),
+                ],
                 ),
               ),
               Container(
@@ -170,7 +175,8 @@ class ChatHeader extends StatelessWidget {
 
 class ChatMessage extends StatelessWidget {
   static DateTime now = DateTime.now();
-  String parsedTime = DateFormat('kk:mm').format(now);
+  String sendTime = DateFormat('kk:mm').format(now);
+  String lastDay =DateFormat('dd MMMM').format(now);
   final String text;
   final AnimationController animationController;
   ChatMessage({this.text, this.animationController});
@@ -187,19 +193,9 @@ class ChatMessage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            new Row(
+            new Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                new Container(
-                  margin: const EdgeInsets.only(bottom: 12.0),
-                  child: new Text(
-                    parsedTime,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 12.0,
-                    ),
-                  ),
-                ),
                 new Container(
                   margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
                   padding: EdgeInsets.all(16.0),
@@ -208,6 +204,16 @@ class ChatMessage extends StatelessWidget {
                       color: Colors.blueGrey[50],
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Text(text, style: TextStyle(fontSize: 16.0)),
+                ),
+                new Container(
+                  margin: const EdgeInsets.only(bottom: 12.0),
+                  child: new Text(
+                    sendTime,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12.0,
+                    ),
+                  ),
                 ),
               ],
             ),
