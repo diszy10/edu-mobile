@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class HomeworkPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -21,7 +19,6 @@ class HomeworkPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   PageTitle(text: 'Homeworks'),
-
                 ],
               ),
             ),
