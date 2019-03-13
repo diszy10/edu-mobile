@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import './upcoming_tab_view.dart';
+import '../../widgets/gradientColor.dart';
 
 class WhatsDuePage extends StatelessWidget {
+  final String title = 'What\'s Due';
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -20,12 +23,11 @@ class WhatsDuePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('What\'s Due',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold)),
-                  Text('Homeworks due date', style: TextStyle(color: Colors.grey),)
+                  BluePurpleGradientText(title: title),
+                  Text(
+                    'Homeworks due date',
+                    style: TextStyle(color: Colors.grey),
+                  )
                 ],
               ),
             ),

@@ -4,5 +4,4 @@ class Kids {
   final String urlPhoto;
 
   Kids(this.name, this.klass, this.urlPhoto);
-  
 }

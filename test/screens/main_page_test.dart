@@ -40,7 +40,7 @@ void main() {
     // Verify Updates tab
     await tester.tap(find.byIcon(Icons.notifications_none));
     await tester.pump();
-    // Because Update page have Updates 
+    // Because Update page have Updates
     // as Title and navigation bar subtitle
     expect(find.text('Updates'), findsNWidgets(2));
 

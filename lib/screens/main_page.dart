@@ -39,11 +39,9 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.view_stream), title: Text('Activity')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.people_outline),
-              title: Text('What\'s Due')),
+              icon: Icon(Icons.people_outline), title: Text('What\'s Due')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              title: Text('Inbox')),
+              icon: Icon(Icons.chat_bubble_outline), title: Text('Inbox')),
           BottomNavigationBarItem(
               icon: Icon(Icons.notifications_none), title: Text('Updates')),
           BottomNavigationBarItem(

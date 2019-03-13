@@ -79,7 +79,10 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0.0,
-        title: Text(widget.inbox.name, style: TextStyle(color: Colors.black),),
+        title: Text(
+          widget.inbox.name,
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SafeArea(
         child: Column(
