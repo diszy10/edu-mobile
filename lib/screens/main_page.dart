@@ -39,15 +39,20 @@ class _MainPageState extends State<MainPage> {
         iconSize: 28.0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_activity, size: 24.0),
+              icon: Icon(CustomIcons.icon_activity, size: 20.0, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_activity, size: 20.0, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_duedate, size: 24.0),
+              icon: Icon(CustomIcons.icon_duedate, size: 20.0, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_duedate, size: 20.0, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_inbox, size: 24.0), title: Text('')),
+              icon: Icon(CustomIcons.icon_inbox, size: 20.0, color: Color(0xFFA7AAAC)), 
+              activeIcon: Icon(CustomIcons.icon_inbox, size: 20.0, color: Theme.of(context).primaryColor), 
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_notifications, size: 24.0),
+              icon: Icon(CustomIcons.icon_notifications, size: 20.0, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_notifications, size: 20.0, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
               icon: Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './upcoming_tab_view.dart';
+import './overdue_tab_view.dart';
 
 class WhatsDuePage extends StatelessWidget {
   @override
@@ -30,6 +31,8 @@ class WhatsDuePage extends StatelessWidget {
               ),
             ),
             bottom: TabBar(
+              indicatorColor: Theme.of(context).primaryColor,
+              indicatorWeight: 3,
               tabs: [
                 Tab(
                   child:
@@ -45,7 +48,7 @@ class WhatsDuePage extends StatelessWidget {
                           padding: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle, color: Colors.deepOrange),
-                          child: Text('2'))
+                          child: Text('2', style: TextStyle(color: Colors.white),))
                     ],
                   ),
                 ),
@@ -57,7 +60,7 @@ class WhatsDuePage extends StatelessWidget {
             child: TabBarView(
           children: [
             UpcomingTabView(),
-            Icon(Icons.directions_transit),
+            OverdueTabView()
           ],
         )),
       ),
