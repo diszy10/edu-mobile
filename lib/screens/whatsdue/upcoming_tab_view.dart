@@ -19,14 +19,18 @@ class UpcomingTabView extends StatelessWidget {
                   '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
               Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
                   '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
+              Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
+                  '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
+              Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
+                  '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
             ]),
         Upcoming(subject: 'Science', totalHomework: '3', topic: 'Yuna'),
         Upcoming(
-            subject: 'Indonesian (Language & Literature)', totalHomework: '1')
+            subject: 'Indonesian (Language & Literature)', totalHomework: '1', topic: 'Yuna')
       ]),
       Due(day: 'THU', date: '13', timestamp: 'Tomorrow', upcoming: [
-        Upcoming(subject: 'Physics', totalHomework: '2'),
-        Upcoming(subject: 'Korean (Language & Literature)', totalHomework: '1'),
+        Upcoming(subject: 'Physics', totalHomework: '2', topic: 'Yuna'),
+        Upcoming(subject: 'Korean (Language & Literature)', totalHomework: '1', topic: 'Yuna'),
       ])
     ];
 
@@ -196,12 +200,14 @@ class HomeworkModal extends StatelessWidget {
               // ),
               ),
           // Subject Text
-          Container(
-            child: Text(
-              upcoming.subject,
-              style: TextStyle(
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
+          Center(
+            child: Container(
+              child: Text(
+                upcoming.subject,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -233,7 +239,9 @@ class HomeworkModal extends StatelessWidget {
             ),
           ),
           Divider(color: Colors.grey[300]),
-          LessonSection(upcoming.homework[0])
+          upcoming.homework != null
+              ? LessonSection(upcoming.homework[0])
+              : Container()
           // upcoming.homework != null
           //     ? ListView.builder(
           //         shrinkWrap: true,
@@ -263,6 +271,7 @@ class LessonSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          // Total homework and submit tag
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -287,6 +296,7 @@ class LessonSection extends StatelessWidget {
                   ))
             ],
           ),
+          // Lesson title text
           Container(
             margin: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
@@ -294,12 +304,9 @@ class LessonSection extends StatelessWidget {
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
           ),
+          // Content text
           Container(
-            child: Text(
-              homework.content,
-              style: TextStyle(color: Colors.grey),
-              maxLines: 2,
-            ),
+            child: Text(homework.content, style: TextStyle(color: Colors.grey)),
           )
         ],
       ),
@@ -372,6 +379,65 @@ class HomeworkPage extends StatelessWidget {
           ),
         ),
         Divider(color: Colors.grey[300]),
+        upcoming.homework != null
+            ? ListView.builder(
+                shrinkWrap: true,
+                itemCount: upcoming.homework.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.all(24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // Total homework and submit tag
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Homeworks ' +
+                                  upcoming.homework[index].no.toString(),
+                              style:
+                                  TextStyle(fontSize: 14.0, color: Colors.grey),
+                            ),
+                            Container(
+                                padding: EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    color: Color(0xFFC1FFC6),
+                                    borderRadius: BorderRadius.circular(4.0)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Icon(Icons.done,
+                                        size: 14.0, color: Color(0xFF21A62A)),
+                                    Text('Submitted',
+                                        style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Color(0xFF21A62A))),
+                                  ],
+                                ))
+                          ],
+                        ),
+                        // Lesson title text
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 16.0),
+                          child: Text(
+                            upcoming.homework[index].lesson,
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        // Content text
+                        Container(
+                          child: Text(upcoming.homework[index].content,
+                              style: TextStyle(color: Colors.grey)),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              )
+            : Container()
       ],
     )));
   }
