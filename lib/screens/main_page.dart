@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../presentation/custom_icons_icons.dart';
 
 import './activity/activity_page.dart';
 import './whatsdue/whats_due_page.dart';
@@ -27,6 +28,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Theme.of(context).primaryColor,
         currentIndex: _selectedPage,
         onTap: (int index) {
           setState(() {
@@ -37,17 +39,30 @@ class _MainPageState extends State<MainPage> {
         iconSize: 28.0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.view_stream), title: Text('Activity')),
+              icon: Icon(CustomIcons.icon_activity, size: 24.0),
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.people_outline),
-              title: Text('What\'s Due')),
+              icon: Icon(CustomIcons.icon_duedate, size: 24.0),
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              title: Text('Inbox')),
+              icon: Icon(CustomIcons.icon_inbox, size: 24.0), title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none), title: Text('Updates')),
+              icon: Icon(CustomIcons.icon_notifications, size: 24.0),
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), title: Text('Account')),
+              icon: Container(
+                width: 24.0,
+                height: 24.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                    fit: BoxFit.cover,
+                    image: new NetworkImage(
+                        'http://cdn2.tstatic.net/style/foto/bank/images/raisa-andriana_20180614_154024.jpg'),
+                  ),
+                ),
+              ),
+              title: Text('')),
         ],
       ),
     );
