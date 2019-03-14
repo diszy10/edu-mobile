@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rounded_modal/rounded_modal.dart';
 
 class UpcomingTabView extends StatelessWidget {
   @override
@@ -48,26 +49,53 @@ class UpcomingTabView extends StatelessWidget {
                       ListView.builder(
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.only(top: 8.0),
-                            decoration: BoxDecoration(
+                          return GestureDetector(
+                            onTap: () {
+                              showRoundedModalBottomSheet(
+                                context: context,
+                                radius: 10.0,
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(4.0),
-                                border: Border.all(
-                                    color: Color(0xFFEEEFEF), width: 1.5)),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: 16.0, top: 14.0, bottom: 14.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Math & Logic',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text('1 homeworks')
-                                ],
+                                builder: (context) {
+                                  return Container(
+                                    child: Column(
+                                      children: <Widget>[
+                                        // Border top
+                                        Container(
+                                          margin: EdgeInsets.only(top: 16.0),
+                                          width: 38.0,
+                                          height: 4.0,
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(top: 8.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  border: Border.all(
+                                      color: Color(0xFFEEEFEF), width: 1.5)),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 16.0, top: 14.0, bottom: 14.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Math & Logic',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text('1 homeworks')
+                                  ],
+                                ),
                               ),
                             ),
                           );
