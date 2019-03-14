@@ -13,25 +13,20 @@ class UpcomingTabView extends StatelessWidget {
         Upcoming(
             subject: 'Math & Logic',
             totalHomework: '2',
-            assignedBy: 'Ratna Wulandari',
+            topic: 'Decimal fractions and place value patterns',
             homework: [
               Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
                   '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
               Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
                   '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
             ]),
-        Upcoming(subject: 'Science', totalHomework: '3', assignedBy: 'Yuna'),
+        Upcoming(subject: 'Science', totalHomework: '3', topic: 'Yuna'),
         Upcoming(
-            subject: 'Indonesian (Language & Literature)',
-            totalHomework: '1',
-            assignedBy: 'Reina')
+            subject: 'Indonesian (Language & Literature)', totalHomework: '1')
       ]),
       Due(day: 'THU', date: '13', timestamp: 'Tomorrow', upcoming: [
-        Upcoming(subject: 'Physics', totalHomework: '2', assignedBy: 'Ariana'),
-        Upcoming(
-            subject: 'Korean (Language & Literature)',
-            totalHomework: '1',
-            assignedBy: 'Regina'),
+        Upcoming(subject: 'Physics', totalHomework: '2'),
+        Upcoming(subject: 'Korean (Language & Literature)', totalHomework: '1'),
       ])
     ];
 
@@ -126,92 +121,12 @@ class RowCard extends StatelessWidget {
           autoResize: false,
           color: Colors.white,
           builder: (context) {
-            return Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  // Border top
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(new MaterialPageRoute<Null>(
-                            builder: (BuildContext context) {
-                              return HomeworkPage();
-                            },
-                            fullscreenDialog: true));
-                      },
-                      child: Center(
-                          child: Container(
-                              margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              padding: EdgeInsets.all(4.0),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(Icons.keyboard_arrow_up,
-                                  size: 24.0,
-                                  color: Theme.of(context).primaryColor)))
-                      // Center(
-                      //   child: Container(
-                      //     margin: EdgeInsets.only(top: 16.0),
-                      //     width: 38.0,
-                      //     height: 4.0,
-                      //     decoration: BoxDecoration(
-                      //         color: Colors.grey,
-                      //         borderRadius: BorderRadius.circular(10.0)),
-                      //   ),
-                      // ),
-                      ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16.0),
-                    child: Text(
-                      upcoming.subject,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Container(
-                    margin: EdgeInsets.only(left: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('Assigned by',
-                            style: TextStyle(color: Colors.grey)),
-                        SizedBox(width: 5.0),
-                        Text(
-                          upcoming.assignedBy,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Divider(color: Colors.grey[300]),
-                  SizedBox(height: 8.0),
-                  HomeworkSection(upcoming.homework[0])
-                  // upcoming.homework != null
-                  //     ? ListView.builder(
-                  //         shrinkWrap: true,
-                  //         physics: BouncingScrollPhysics(),
-                  //         itemCount: upcoming.homework.length,
-                  //         itemBuilder: (context, index) {
-                  //           return HomeworkSection(upcoming.homework[index]);
-                  //         },
-                  //       )
-                  //     : Container()
-                ],
-              ),
-            );
+            return new HomeworkModal(upcoming: upcoming);
           },
         );
       },
 
-      /// Card
+      /// Card subject & homework
       child: Container(
         margin: EdgeInsets.only(top: 8.0),
         decoration: BoxDecoration(
@@ -237,16 +152,118 @@ class RowCard extends StatelessWidget {
   }
 }
 
-class HomeworkSection extends StatelessWidget {
+class HomeworkModal extends StatelessWidget {
+  const HomeworkModal({
+    Key key,
+    @required this.upcoming,
+  }) : super(key: key);
+
+  final Upcoming upcoming;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          // Border top
+          GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(new MaterialPageRoute<Null>(
+                    builder: (BuildContext context) {
+                      return HomeworkPage(upcoming: upcoming, );
+                    },
+                    fullscreenDialog: true));
+              },
+              child: Center(
+                  child: Container(
+                      margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      padding: EdgeInsets.all(2.0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(Icons.keyboard_arrow_up,
+                          size: 24.0, color: Theme.of(context).primaryColor)))
+              // Strip Card
+              // Center(
+              //   child: Container(
+              //     margin: EdgeInsets.only(top: 16.0),
+              //     width: 38.0,
+              //     height: 4.0,
+              //     decoration: BoxDecoration(
+              //         color: Colors.grey,
+              //         borderRadius: BorderRadius.circular(10.0)),
+              //   ),
+              // ),
+              ),
+          // Subject Text
+          Container(
+            child: Text(
+              upcoming.subject,
+              style: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          // Topic Text
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
+            child: Text(
+              'Topic: ' + upcoming.topic,
+              style: TextStyle(color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Divider(color: Colors.grey[300]),
+          // Due date text
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.movie, color: Color(0xFFFF5B30)),
+                SizedBox(width: 16.0),
+                Text('Due on', style: TextStyle(color: Colors.grey)),
+                SizedBox(width: 4.0),
+                Text(
+                  'Monday, 10 March 2019',
+                  style: TextStyle(color: Color(0xFFFF5B30)),
+                )
+              ],
+            ),
+          ),
+          Divider(color: Colors.grey[300]),
+          LessonSection(upcoming.homework[0])
+          // upcoming.homework != null
+          //     ? ListView.builder(
+          //         shrinkWrap: true,
+          //         // physics: BouncingScrollPhysics(),
+          //         scrollDirection: Axis.vertical,
+          //         itemCount: upcoming.homework.length,
+          //         itemBuilder: (context, index) {
+          //           return LessonSection(upcoming.homework[index]);
+          //         },
+          //       )
+          //     : Container()
+        ],
+      ),
+    );
+  }
+}
+
+// Homework modal bottom part
+class LessonSection extends StatelessWidget {
   Homework homework;
-  HomeworkSection(this.homework);
+  LessonSection(this.homework);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
@@ -282,9 +299,9 @@ class HomeworkSection extends StatelessWidget {
           ),
           Container(
             child: Text(
-              homework.desc,
+              homework.content,
               style: TextStyle(color: Colors.grey),
-              maxLines: 3,
+              maxLines: 2,
             ),
           )
         ],
@@ -293,27 +310,33 @@ class HomeworkSection extends StatelessWidget {
   }
 }
 
+// Pop up new page to detail homework
 class HomeworkPage extends StatelessWidget {
+  Upcoming upcoming;
+  Homework homework;
+  HomeworkPage({this.upcoming, this.homework});
+
   @override
   Widget build(BuildContext context) {
+    Widget closeButton = Align(
+        alignment: Alignment.centerRight,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 24.0, horizontal: 24.0),
+            child: Icon(
+              Icons.close,
+              size: 26.0,
+            ),
+          ),
+        ));
+
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        ],
-      ),
-      body: Center(
-        child: Text('Sup'),
-      ),
-    );
+        body: SafeArea(
+            child: Column(
+      children: <Widget>[closeButton],
+    )));
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../presentation/custom_icons_icons.dart';
 
 import './activity/activity_page.dart';
-import './whatsdue/whats_due_page.dart';
+import './whatsdue/whatsdue_page.dart';
 import './inbox/inbox_page.dart';
 import './update/update_page.dart';
 import './account/profile_page.dart';
@@ -28,7 +28,6 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Theme.of(context).primaryColor,
         currentIndex: _selectedPage,
         onTap: (int index) {
           setState(() {
