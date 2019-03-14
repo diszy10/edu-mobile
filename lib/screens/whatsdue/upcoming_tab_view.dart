@@ -121,7 +121,7 @@ class RowCard extends StatelessWidget {
           autoResize: false,
           color: Colors.white,
           builder: (context) {
-            return new HomeworkModal(upcoming: upcoming);
+            return new HomeworkModal(upcoming);
           },
         );
       },
@@ -153,11 +153,7 @@ class RowCard extends StatelessWidget {
 }
 
 class HomeworkModal extends StatelessWidget {
-  const HomeworkModal({
-    Key key,
-    @required this.upcoming,
-  }) : super(key: key);
-
+  HomeworkModal(this.upcoming);
   final Upcoming upcoming;
 
   @override
@@ -170,11 +166,12 @@ class HomeworkModal extends StatelessWidget {
           // Border top
           GestureDetector(
               onTap: () {
-                Navigator.of(context).pushReplacement(new MaterialPageRoute<Null>(
-                    builder: (BuildContext context) {
-                      return HomeworkPage(upcoming: upcoming, );
-                    },
-                    fullscreenDialog: true));
+                Navigator.of(context)
+                    .pushReplacement(new MaterialPageRoute<Null>(
+                        builder: (BuildContext context) {
+                          return HomeworkPage(upcoming: upcoming);
+                        },
+                        fullscreenDialog: true));
               },
               child: Center(
                   child: Container(
@@ -313,8 +310,7 @@ class LessonSection extends StatelessWidget {
 // Pop up new page to detail homework
 class HomeworkPage extends StatelessWidget {
   Upcoming upcoming;
-  Homework homework;
-  HomeworkPage({this.upcoming, this.homework});
+  HomeworkPage({this.upcoming});
 
   @override
   Widget build(BuildContext context) {
@@ -336,7 +332,47 @@ class HomeworkPage extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Column(
-      children: <Widget>[closeButton],
+      children: <Widget>[
+        closeButton,
+        // Subject Text
+        Container(
+          child: Text(
+            upcoming.subject,
+            style: TextStyle(
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Topic Text
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
+          child: Text(
+            'Topic: ' + upcoming.topic,
+            style: TextStyle(color: Colors.grey),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Divider(color: Colors.grey[300]),
+        // Due date text
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(Icons.movie, color: Color(0xFFFF5B30)),
+              SizedBox(width: 16.0),
+              Text('Due on', style: TextStyle(color: Colors.grey)),
+              SizedBox(width: 4.0),
+              Text(
+                'Monday, 10 March 2019',
+                style: TextStyle(color: Color(0xFFFF5B30)),
+              )
+            ],
+          ),
+        ),
+        Divider(color: Colors.grey[300]),
+      ],
     )));
   }
 }
