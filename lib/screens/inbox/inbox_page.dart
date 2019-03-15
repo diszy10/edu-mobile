@@ -9,9 +9,9 @@ class InboxPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _inbox = [
       Inbox(
-          name: 'Ms. Reina',
-          position: 'Social Teacher',
-          message: 'Have a good day',
+          name: 'Ratna Wulandari',
+          position: 'Math & Logic',
+          message: 'Hi, Parents',
           urlPhoto:
               'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
       Inbox(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/inbox.dart';
+import '../../widgets/gradientColor.dart';
 
 class ChatPage extends StatefulWidget {
   final Inbox inbox;
@@ -12,6 +14,8 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
+  static DateTime now = DateTime.now();
+  final String lastDay = DateFormat("d MMMM").format(now);
 
   void _handleSubmitted(String text) {
     _textController.clear();
@@ -53,8 +57,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                   autofocus: true,
                   controller: _textController,
                   onSubmitted: _handleSubmitted,
-                  decoration:
-                      InputDecoration.collapsed(hintText: "Send a message"),
+                  decoration: InputDecoration.collapsed(hintText: "Message..."),
                 ),
               ),
               Container(
@@ -75,33 +78,64 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          iconSize: 18.0,
+          color: Colors.black,
+          onPressed: null,
+        ),
+        centerTitle: true,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        // iconTheme: IconThemeData(color: Colors.black),
         elevation: 0.0,
-        title: Text(widget.inbox.name, style: TextStyle(color: Colors.black),),
+        title: Column( 
+        children: <Widget>[ 
+          BluePurpleGradientText(text: widget.inbox.name, fontSize: 20.0, fontWeight: null),
+          Text(
+            widget.inbox.position,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15.0
+            ),
+          )
+        ],
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_horiz),
+            color: Colors.black,
+            onPressed: null,
+          ),
+        ],
+        bottom: PreferredSize(
+          child: Container(
+            color: Colors.black,
+          ),
+          preferredSize: Size.fromHeight(4.0),
+        ),
       ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            // ChatHeader(
-            //   name: widget.inbox.name,
-            //   position: widget.inbox.position,
-            //   urlPhoto: widget.inbox.urlPhoto,
-            // ),
-            // widget.inbox.message != null
-            //     ? Container(
-            //         margin: EdgeInsets.only(left: 24.0),
-            //         padding: EdgeInsets.all(16.0),
-            //         decoration: BoxDecoration(
-            //             color: Colors.blueGrey[50],
-            //             borderRadius: BorderRadius.circular(10.0)),
-            //         child: Text(widget.inbox.message,
-            //             style: TextStyle(fontSize: 16.0)),
-            //       )
-            //     : Container(),
+            Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    "Text in edit process"
+                  )
+                ),
+                Text(lastDay,
+                style: TextStyle(
+                  color: Colors.black),
+                ),
+              ],
+            ),
+            ),
             Flexible(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
@@ -136,9 +170,7 @@ class ChatHeader extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(name,
-                    style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+                BluePurpleGradientText(text: name, fontSize: 40.0, fontWeight: FontWeight.bold),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -165,6 +197,8 @@ class ChatHeader extends StatelessWidget {
 }
 
 class ChatMessage extends StatelessWidget {
+  static DateTime now = DateTime.now();
+  String sendTime = DateFormat('kk:mm').format(now);
   final String text;
   final AnimationController animationController;
   ChatMessage({this.text, this.animationController});
@@ -178,13 +212,35 @@ class ChatMessage extends StatelessWidget {
       ),
       axisAlignment: 0.0,
       child: Container(
-        margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
-        padding: EdgeInsets.all(16.0),
-        constraints: BoxConstraints(maxWidth: 250.0),
-        decoration: BoxDecoration(
-            color: Colors.blueGrey[50],
-            borderRadius: BorderRadius.circular(10.0)),
-        child: Text(text, style: TextStyle(fontSize: 16.0)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            new Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                new Container(
+                  margin: const EdgeInsets.only(bottom: 12.0),
+                  child: new Text(
+                    sendTime,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ),
+                new Container(
+                  margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
+                  padding: EdgeInsets.all(16.0),
+                  constraints: BoxConstraints(maxWidth: 250.0),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey[50],
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Text(text, style: TextStyle(fontSize: 16.0)),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

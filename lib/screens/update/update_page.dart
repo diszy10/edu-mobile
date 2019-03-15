@@ -6,9 +6,18 @@ class UpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _updatesList = <Updates>[
-      Updates(1, title: 'Announcement', content: 'Parent meeting', timeStamp: '8.30 AM'),
-      Updates(2, title: 'Teaching session', content: 'Ms. Luna teach math', timeStamp: '9.45 AM'),
-      Updates(3, title: 'Homework Assignment', content: 'New homework assignment for Raline', timeStamp: '11.30 AM')
+      Updates(1,
+          title: 'Announcement',
+          content: 'Parent meeting',
+          timeStamp: '8.30 AM'),
+      Updates(2,
+          title: 'Teaching session',
+          content: 'Ms. Luna teach math',
+          timeStamp: '9.45 AM'),
+      Updates(3,
+          title: 'Homework Assignment',
+          content: 'New homework assignment for Raline',
+          timeStamp: '11.30 AM')
     ];
 
     Widget _buildPageTitle = Padding(

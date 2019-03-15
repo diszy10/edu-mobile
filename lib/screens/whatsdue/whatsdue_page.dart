@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import './upcoming_tab_view.dart';
 import './overdue_tab_view.dart';
+import '../../widgets/gradientColor.dart';
 
 class WhatsDuePage extends StatelessWidget {
+  final String title = 'What\'s Due';
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

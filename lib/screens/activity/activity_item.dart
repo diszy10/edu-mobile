@@ -16,8 +16,8 @@ class ActivityItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 16.0),
           decoration: BoxDecoration(
               border: Border(
-                  left: BorderSide(
-                      width: 5.0, color: activity.leftBorderColor))),
+                  left:
+                      BorderSide(width: 5.0, color: activity.leftBorderColor))),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,8 +30,7 @@ class ActivityItem extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: new DecorationImage(
                       fit: BoxFit.cover,
-                      image: new NetworkImage(
-                          activity.imageUrl),
+                      image: new NetworkImage(activity.imageUrl),
                     ),
                   ),
                 ),
@@ -74,14 +73,20 @@ class ActivityItem extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Icon(Icons.library_books, color: Colors.black45,),
+                            Icon(
+                              Icons.library_books,
+                              color: Colors.black45,
+                            ),
                             Text('2 exercise')
                           ],
                         ),
                         SizedBox(width: 16.0),
                         Row(
                           children: <Widget>[
-                            Icon(Icons.library_books, color: Colors.black45,),
+                            Icon(
+                              Icons.library_books,
+                              color: Colors.black45,
+                            ),
                             Text('1 homework')
                           ],
                         ),

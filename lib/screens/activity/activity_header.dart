@@ -154,11 +154,12 @@ class ActivityHeader extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Padding(
-                                padding: EdgeInsets.only(left: 32.0, bottom: 16.0),
+                                padding:
+                                    EdgeInsets.only(left: 32.0, bottom: 16.0),
                                 child: Text(
                                   'Switch Kids',
                                   style: TextStyle(
-                                      fontSize:  24.0,
+                                      fontSize: 24.0,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
