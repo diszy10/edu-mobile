@@ -18,7 +18,7 @@ class HomeworkPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
               child: Column(
                 children: <Widget>[
-                  PageTitle(text: 'Homeworks'),
+                  PageTitle(text: 'Homeworkss'),
                 ],
               ),
             ),
