@@ -23,7 +23,7 @@ class WhatsDuePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  BluePurpleGradientText(title: title),
+                  BluePurpleGradientText(text: title, fontSize: 40.0, fontWeight: FontWeight.bold),
                   Text(
                     'Homeworks due date',
                     style: TextStyle(color: Colors.grey),
