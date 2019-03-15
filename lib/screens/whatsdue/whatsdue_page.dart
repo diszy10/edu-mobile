@@ -6,15 +6,11 @@ import './overdue_tab_view.dart';
 class WhatsDuePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double deviceHeight = MediaQuery.of(context).size.height;
-    final double targetHeight = deviceHeight > 550.0 ? 130.0 : 130.0;
-    // final double targetPadding = deviceWidth - targetWidth;
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(130),
+          preferredSize: Size.fromHeight(145),
           child: AppBar(
             elevation: 0.1,
             automaticallyImplyLeading: false,

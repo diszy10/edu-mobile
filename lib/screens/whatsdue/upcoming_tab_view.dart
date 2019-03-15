@@ -152,7 +152,11 @@ class RowCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Text(upcoming.totalHomework + ' homework')
+              SizedBox(height: 4.0),
+              Text(
+                upcoming.totalHomework + ' homework',
+                style: TextStyle(color: Colors.grey)
+              )
             ],
           ),
         ),
@@ -233,7 +237,7 @@ class HomeworkModal extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Icon(Icons.movie, color: Color(0xFFFF5B30)),
-                SizedBox(width: 16.0),
+                SizedBox(width: 6.0),
                 Text('Due on', style: TextStyle(color: Colors.grey)),
                 SizedBox(width: 4.0),
                 Text(
@@ -375,7 +379,7 @@ class HomeworkPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Icon(Icons.movie, color: Color(0xFFFF5B30)),
-              SizedBox(width: 16.0),
+              SizedBox(width: 4.0),
               Text('Due on', style: TextStyle(color: Colors.grey)),
               SizedBox(width: 4.0),
               Text(
