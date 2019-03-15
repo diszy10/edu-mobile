@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../presentation/custom_icons_icons.dart';
 
 import './activity/activity_page.dart';
-import './whatsdue/whats_due_page.dart';
+import './whatsdue/whatsdue_page.dart';
 import './inbox/inbox_page.dart';
 import './update/update_page.dart';
 import './account/profile_page.dart';
@@ -37,15 +38,35 @@ class _MainPageState extends State<MainPage> {
         iconSize: 28.0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.view_stream), title: Text('Activity')),
+              icon: Icon(CustomIcons.icon_activity, size: 20.0, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_activity, size: 20.0, color: Theme.of(context).primaryColor),
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.people_outline), title: Text('What\'s Due')),
+              icon: Icon(CustomIcons.icon_duedate, size: 20.0, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_duedate, size: 20.0, color: Theme.of(context).primaryColor),
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline), title: Text('Inbox')),
+              icon: Icon(CustomIcons.icon_inbox, size: 20.0, color: Color(0xFFA7AAAC)), 
+              activeIcon: Icon(CustomIcons.icon_inbox, size: 20.0, color: Theme.of(context).primaryColor), 
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none), title: Text('Updates')),
+              icon: Icon(CustomIcons.icon_notifications, size: 20.0, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_notifications, size: 20.0, color: Theme.of(context).primaryColor),
+              title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), title: Text('Account')),
+              icon: Container(
+                width: 24.0,
+                height: 24.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                    fit: BoxFit.cover,
+                    image: new NetworkImage(
+                        'http://cdn2.tstatic.net/style/foto/bank/images/raisa-andriana_20180614_154024.jpg'),
+                  ),
+                ),
+              ),
+              title: Text('')),
         ],
       ),
     );

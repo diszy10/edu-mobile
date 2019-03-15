@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './upcoming_tab_view.dart';
+import './overdue_tab_view.dart';
 import '../../widgets/gradientColor.dart';
 
 class WhatsDuePage extends StatelessWidget {
@@ -12,18 +13,25 @@ class WhatsDuePage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(130.0),
+          preferredSize: Size.fromHeight(145),
           child: AppBar(
             elevation: 0.1,
             automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
             centerTitle: false,
             flexibleSpace: Container(
-              margin: EdgeInsets.only(left: 24.0, top: 42.0),
+              margin: EdgeInsets.only(left: 24.0, top: 64.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  BluePurpleGradientText(text: title, fontSize: 40.0, fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 4.0),
+                    child: Text('What\'s Due',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold)),
+                  ),
                   Text(
                     'Homeworks due date',
                     style: TextStyle(color: Colors.grey),
@@ -32,12 +40,18 @@ class WhatsDuePage extends StatelessWidget {
               ),
             ),
             bottom: TabBar(
+              unselectedLabelColor: Colors.black,
+              labelColor: Theme.of(context).primaryColor,
+              indicatorColor: Theme.of(context).primaryColor,
+              indicatorWeight: 3,
               tabs: [
                 Tab(
+                  // text: 'Upcoming',
                   child:
                       Text('Upcoming', style: TextStyle(color: Colors.black)),
                 ),
                 Tab(
+                  // text: 'Overdue',
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -47,7 +61,10 @@ class WhatsDuePage extends StatelessWidget {
                           padding: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle, color: Colors.deepOrange),
-                          child: Text('2'))
+                          child: Text(
+                            '2',
+                            style: TextStyle(color: Colors.white),
+                          ))
                     ],
                   ),
                 ),
@@ -57,10 +74,7 @@ class WhatsDuePage extends StatelessWidget {
         ),
         body: SafeArea(
             child: TabBarView(
-          children: [
-            UpcomingTabView(),
-            Icon(Icons.directions_transit),
-          ],
+          children: [UpcomingTabView(), OverdueTabView()],
         )),
       ),
     );

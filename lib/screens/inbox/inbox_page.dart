@@ -121,10 +121,7 @@ class InboxHeader extends StatelessWidget {
               children: <Widget>[
                 FlatButton(
                   color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  child: Text(
-                    'New',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
+                  child: Icon(Icons.add, size: 18.0, color: Theme.of(context).primaryColor),
                   onPressed: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => ContactPage()));
