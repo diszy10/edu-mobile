@@ -20,11 +20,14 @@ class _MainPageState extends State<MainPage> {
     WhatsDuePage(),
     InboxPage(),
     UpdatePage(),
-    ProfilePage(),
+    ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double iconSize = deviceHeight > 640.0 ? 24.0 : 20.0;
+
     return Scaffold(
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
@@ -38,31 +41,39 @@ class _MainPageState extends State<MainPage> {
         iconSize: 28.0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_activity, size: 20.0, color: Color(0xFFA7AAAC)),
-              activeIcon: Icon(CustomIcons.icon_activity, size: 20.0, color: Theme.of(context).primaryColor),
+              icon: Icon(CustomIcons.icon_activity,
+                  size: iconSize, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_activity,
+                  size: iconSize, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_duedate, size: 20.0, color: Color(0xFFA7AAAC)),
-              activeIcon: Icon(CustomIcons.icon_duedate, size: 20.0, color: Theme.of(context).primaryColor),
+              icon: Icon(CustomIcons.icon_duedate,
+                  size: iconSize, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_duedate,
+                  size: iconSize, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_inbox, size: 20.0, color: Color(0xFFA7AAAC)), 
-              activeIcon: Icon(CustomIcons.icon_inbox, size: 20.0, color: Theme.of(context).primaryColor), 
+              icon: Icon(CustomIcons.icon_inbox,
+                  size: iconSize, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_inbox,
+                  size: iconSize, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
-              icon: Icon(CustomIcons.icon_notifications, size: 20.0, color: Color(0xFFA7AAAC)),
-              activeIcon: Icon(CustomIcons.icon_notifications, size: 20.0, color: Theme.of(context).primaryColor),
+              icon: Icon(CustomIcons.icon_notifications,
+                  size: iconSize, color: Color(0xFFA7AAAC)),
+              activeIcon: Icon(CustomIcons.icon_notifications,
+                  size: iconSize, color: Theme.of(context).primaryColor),
               title: Text('')),
           BottomNavigationBarItem(
               icon: Container(
-                width: 24.0,
-                height: 24.0,
-                decoration: new BoxDecoration(
+                width: 26.0,
+                height: 26.0,
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image: new DecorationImage(
+                  image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: new NetworkImage(
-                        'http://cdn2.tstatic.net/style/foto/bank/images/raisa-andriana_20180614_154024.jpg'),
+                    image: NetworkImage(
+                        'https://www.workingmother.com/sites/workingmother.com/files/styles/1000_1x_/public/images/2016/10/emily_blunt.jpg?itok=uRNPOZ2B&fc=50,50'),
                   ),
                 ),
               ),

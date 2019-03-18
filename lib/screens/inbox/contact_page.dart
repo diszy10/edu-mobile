@@ -1,47 +1,62 @@
 import 'package:flutter/material.dart';
 
 import '../../models/inbox.dart';
+import '../../widgets/gradient_text_color.dart';
 import './chat_page.dart';
 
 class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double photoSize = deviceHeight > 640.0 ? 60.0 : 50.0;
+    final double nameFontSize = deviceHeight > 640.0 ? 20.0 : 16.0;
+
     final _contacts = [
       Inbox(
-          name: 'Mrs. Regina',
-          position: 'Headmaster',
+          name: 'Latika Puspasari',
+          teacher: 'Homeroom Teacher',
           urlPhoto:
               'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg'),
       Inbox(
-          name: 'Ms. Yuna',
-          position: 'English Teacher',
+          name: 'Vanya Sitorus',
+          teacher: 'Math Teacher',
+          urlPhoto:
+              'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
+      Inbox(
+          name: 'Natalia Napitupulu',
+          teacher: 'English Teacher',
           message: 'Thank you',
           urlPhoto:
               'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg'),
       Inbox(
-          name: 'Ms. Ariana',
-          position: 'Math Teacher',
+          name: 'Tirtayasa Saragih',
+          teacher: 'Science Teacher',
           urlPhoto:
               'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'),
       Inbox(
-          name: 'Ms. Luna',
-          position: 'Science Teacher',
+          name: 'Margana Wastuti',
+          teacher: 'Art Teacher',
           urlPhoto:
               'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
-      Inbox(
-          name: 'Ms. Reina',
-          position: 'Social Teacher',
-          message: 'Have a good day',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
     ];
 
-    Widget _buildPageTitle = Padding(
-        padding: EdgeInsets.only(left: 32.0, top: 16.0, bottom: 24.0),
-        child: Text('Contacts',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)));
+    Widget _buildSearchBar() {
+      return Container(
+          margin: EdgeInsets.all(16.0),
+          padding: EdgeInsets.only(left: 16.0, top: 4.0, bottom: 4.0),
+          alignment: AlignmentDirectional.centerStart,
+          decoration: BoxDecoration(
+              color: Color(0xFFF4F4F4),
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          child: TextField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Search teacher',
+            ),
+          ));
+    }
 
-    Widget _buildPageContent(List<Inbox> contacts) {
+    Widget _buildContactList(List<Inbox> contacts) {
       return ListView.builder(
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
@@ -63,13 +78,13 @@ class ContactPage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      width: 60.0,
-                      height: 60.0,
-                      decoration: new BoxDecoration(
+                      width: photoSize,
+                      height: photoSize,
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: new DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: new NetworkImage(contacts[index].urlPhoto),
+                          image: NetworkImage(contacts[index].urlPhoto),
                         ),
                       ),
                     ),
@@ -80,13 +95,13 @@ class ContactPage extends StatelessWidget {
                         Text(
                           contacts[index].name,
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontSize: nameFontSize, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: 8.0,
                         ),
                         Text(
-                          contacts[index].position,
+                          contacts[index].teacher,
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -101,44 +116,33 @@ class ContactPage extends StatelessWidget {
     }
 
     return Scaffold(
-        // appBar: AppBar(
-        //   centerTitle: false,
-        //   backgroundColor: Colors.white,
-        //   iconTheme: IconThemeData(color: Colors.black),
-        //   elevation: 0.0,
-        // ),
-        body: NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return <Widget>[
-          SliverAppBar(
-              elevation: 0.5,
-              backgroundColor: Colors.white,
-              iconTheme: IconThemeData(color: Colors.black),
-              expandedHeight: 100.0,
-              centerTitle: false,
-              floating: true,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: false,
-                title: Text(
-                  'Contact',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              )),
-        ];
-      },
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          iconSize: 18.0,
+          onPressed: () => Navigator.pop(context),
+        ),
+        elevation: 0.0,
+        title: BluePurpleGradientText(
+          text: 'New Message',
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[_buildPageContent(_contacts)],
+              children: <Widget>[
+                _buildSearchBar(),
+                _buildContactList(_contacts)
+              ],
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

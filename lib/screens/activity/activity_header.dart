@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rounded_modal/rounded_modal.dart';
 
 class ActivityHeader extends StatelessWidget {
   @override
@@ -130,50 +129,7 @@ class ActivityHeader extends StatelessWidget {
         // TODO: Implements Kid List View for switching between each Kid feeds
         // TODO: Implements real time for date text
         children: <Widget>[
-          GestureDetector(
-              onTap: () {
-                showRoundedModalBottomSheet(
-                  context: context,
-                  radius: 10.0, // This is the default
-                  color: Colors.white, // Also default
-                  builder: (context) {
-                    return Container(
-                      child: Column(
-                        children: <Widget>[
-                          // Border top
-                          Container(
-                            margin: EdgeInsets.only(top: 24.0),
-                            width: 40.0,
-                            height: 5.0,
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10.0)),
-                          ),
-                          SizedBox(height: 16.0),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(left: 32.0, bottom: 16.0),
-                                child: Text(
-                                  'Switch Kids',
-                                  style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              _gempiKid,
-                              _rafatarKid
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-              child: _kidAvatar()),
+          _kidAvatar(),
           _todayClass,
           _date('2 March 2019')
         ],
