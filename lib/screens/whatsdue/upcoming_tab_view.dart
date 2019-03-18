@@ -72,7 +72,7 @@ class RowDate extends StatelessWidget {
               children: <Widget>[
                 Text(
                   due.day,
-                  style: TextStyle(color: Color(0xFF2C3235)),
+                  style: TextStyle(color: Color(0xFF2C3235), fontWeight: FontWeight.bold),
                 ),
                 Text(
                   due.date,
@@ -153,7 +153,7 @@ class RowCard extends StatelessWidget {
               Text(
                 upcoming.subject,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: 'Circular'),
               ),
               SizedBox(height: 4.0),
               Text(upcoming.totalHomework.toString() + ' homeworks',

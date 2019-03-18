@@ -49,12 +49,13 @@ class RowDate extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Container(
-            margin: EdgeInsets.only(right: 16.0),
+            margin: EdgeInsets.only(top: 8.0, right: 16.0),
             child: Column(
               children: <Widget>[
                 Text(
                   due.day,
-                  style: TextStyle(color: Color(0xFF838C97)),
+                  style: TextStyle(
+                      color: Color(0xFF838C97), fontWeight: FontWeight.bold),
                 ),
                 Text(
                   due.date,
@@ -99,19 +100,20 @@ class RowCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 8.0),
       decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(4.0),
           border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
-      child: Padding(
-        padding: EdgeInsets.only(left: 16.0, top: 14.0, bottom: 14.0),
+      child: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               upcoming.subject,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontFamily: 'Circular'),
             ),
             SizedBox(height: 4.0),
             Text(upcoming.totalHomework.toString() + ' homeworks',

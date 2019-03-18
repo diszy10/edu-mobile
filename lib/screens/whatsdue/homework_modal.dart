@@ -53,7 +53,6 @@ class HomeworkModal extends StatelessWidget {
             child: OrangeMagentaGradientText(
               text: upcoming.subject,
               fontSize: subjectFontSize,
-              fontWeight: FontWeight.bold,
             ),
           ),
           // Topic text
@@ -61,7 +60,7 @@ class HomeworkModal extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
             child: Text(
               'Topic: ' + upcoming.topic,
-              style: TextStyle(fontSize: 16.0, color: Color(0xFF838C97)),
+              style: TextStyle(fontSize: 16.0, color: Color(0xFF838C97), fontFamily: 'Okomito'),
               textAlign: TextAlign.center,
             ),
           ),

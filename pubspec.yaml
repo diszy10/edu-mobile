@@ -43,9 +43,17 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
-    - family:  CustomIcons
+    - family: CustomIcons
       fonts:
       - asset: assets/fonts/CustomIcons.ttf
+    - family: Okomito
+      fonts:
+      - asset: assets/fonts/Okomito-Regular.ttf
+        weight: 400
+    - family: Circular
+      fonts:
+      - asset: assets/fonts/CircularStd-Bold.otf
+        weight: 700
 
   # To add assets to your application, add an assets section, like this:
   # assets:

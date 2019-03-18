@@ -44,7 +44,6 @@ class InboxPage extends StatelessWidget {
           BluePurpleGradientText(
             text: 'Inbox',
             fontSize: titleFontSize,
-            fontWeight: FontWeight.bold,
           ),
           Text(
             'You have 1 unread message',

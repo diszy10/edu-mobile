@@ -13,19 +13,6 @@ class HomeworkPage extends StatelessWidget {
     final double subjectFontSize = deviceHeight > 640.0 ? 28.0 : 24.0;
     final double lessonFontSize = deviceHeight > 640.0 ? 20.0 : 18.0;
 
-    // Widget _closeButton = Align(
-    //     alignment: Alignment.centerRight,
-    //     child: GestureDetector(
-    //       onTap: () => Navigator.pop(context),
-    //       child: Container(
-    //         margin: EdgeInsets.fromLTRB(0, 8.0, 24.0, 16.0),
-    //         child: Icon(
-    //           Icons.close,
-    //           size: 24.0,
-    //         ),
-    //       ),
-    //     ));
-
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -46,7 +33,6 @@ class HomeworkPage extends StatelessWidget {
                 child: OrangeMagentaGradientText(
                   text: upcoming.subject,
                   fontSize: subjectFontSize,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

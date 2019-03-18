@@ -32,5 +32,13 @@ ThemeData _buildEduTheme() {
       primaryColor: eduPrimary,
       buttonColor: eduPrimary,
       scaffoldBackgroundColor: Colors.white,
-      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow));
+      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow),
+      textTheme: _buildEduTextTheme(base.textTheme)
+  );
+}
+
+TextTheme _buildEduTextTheme(TextTheme base) {
+  return base.apply(
+      fontFamily: 'Okomito'
+  );
 }

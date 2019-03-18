@@ -3,10 +3,9 @@ import 'package:gradient_text/gradient_text.dart';
 
 class BluePurpleGradientText extends StatelessWidget {
   final String text;
-  final FontWeight fontWeight;
   final double fontSize;
 
-  BluePurpleGradientText({this.text, this.fontWeight, this.fontSize});
+  BluePurpleGradientText({this.text, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class BluePurpleGradientText extends StatelessWidget {
         Color(0xff735AFF),
         Color(0xff43A1FF),
       ]),
-      style: TextStyle(fontSize: this.fontSize, fontWeight: this.fontWeight),
+      style: TextStyle(fontFamily: 'Circular', fontSize: this.fontSize, fontWeight: FontWeight.w700),
       textAlign: TextAlign.center,
     );
   }
@@ -24,10 +23,9 @@ class BluePurpleGradientText extends StatelessWidget {
 
 class OrangeMagentaGradientText extends StatelessWidget {
   final String text;
-  final FontWeight fontWeight;
   final double fontSize;
 
-  OrangeMagentaGradientText({this.text, this.fontWeight, this.fontSize});
+  OrangeMagentaGradientText({this.text, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class OrangeMagentaGradientText extends StatelessWidget {
         Color(0xffFF9344),
         Color(0xffFF2B8B),
       ]),
-      style: TextStyle(fontSize: this.fontSize, fontWeight: this.fontWeight),
+      style: TextStyle(fontFamily: 'Circular', fontSize: this.fontSize, fontWeight: FontWeight.w700),
       textAlign: TextAlign.center,
     );
   }
