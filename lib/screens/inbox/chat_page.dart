@@ -81,14 +81,15 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(right: 16.0),
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                        color: Color(0xFFD4D8DC),
-                        borderRadius: BorderRadius.circular(24.0)),
-                    child: GestureDetector(
-                      onTap: () => _handleSubmitted(_textController.text),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(24.0),
+                    onTap: () => _handleSubmitted(_textController.text),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 16.0),
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFD4D8DC),
+                          borderRadius: BorderRadius.circular(24.0)),
                       child: Text(
                         'Send',
                         style: TextStyle(color: Colors.white),
@@ -170,8 +171,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                         widget.inbox.name +
                             ' is Cantika\'s ' +
                             widget.inbox.teacher,
-                        style:
-                            TextStyle(color: Color(0xFFBB793E)),
+                        style: TextStyle(color: Color(0xFFBB793E)),
                         overflow: TextOverflow.ellipsis,
                       ),
                     )

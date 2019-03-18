@@ -22,7 +22,7 @@ class OverdueTabView extends StatelessWidget {
         itemCount: due.length,
         itemBuilder: (context, index) {
           return Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 24.0),
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
               child: RowDate(due[index]));
         },
       );
