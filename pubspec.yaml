@@ -23,7 +23,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  rounded_modal: ^1.0.0
   gradient_text: ^1.0.2
   intl: ^0.15.7
 
@@ -44,9 +43,17 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
-    - family:  CustomIcons
+    - family: CustomIcons
       fonts:
       - asset: assets/fonts/CustomIcons.ttf
+    - family: Okomito
+      fonts:
+      - asset: assets/fonts/Okomito-Regular.ttf
+        weight: 400
+    - family: Circular
+      fonts:
+      - asset: assets/fonts/CircularStd-Bold.otf
+        weight: 700
 
   # To add assets to your application, add an assets section, like this:
   # assets:

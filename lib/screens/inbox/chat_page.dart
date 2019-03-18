@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/inbox.dart';
-import '../../widgets/gradientColor.dart';
+import '../../widgets/gradient_text_color.dart';
 
 class ChatPage extends StatefulWidget {
   final Inbox inbox;
@@ -41,37 +41,66 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double targetMargin = deviceHeight > 640.0 ? 0 : 8.0;
+
     Widget _buildTextComposer() {
       return IconTheme(
-        data: IconThemeData(color: Theme.of(context).accentColor), //new
+        data: IconThemeData(color: Theme.of(context).accentColor),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          padding: EdgeInsets.all(16.0),
+          margin: EdgeInsets.only(bottom: 16.0),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.withOpacity(0.5)),
-              borderRadius: BorderRadius.circular(30.0)),
-          child: Row(
+              border: BorderDirectional(
+                  top: BorderSide(color: Colors.grey.withOpacity(0.5)))),
+          child: Column(
             children: <Widget>[
-              Flexible(
+              Container(
+                padding: EdgeInsets.all(24.0),
                 child: TextField(
                   autofocus: true,
                   controller: _textController,
                   onSubmitted: _handleSubmitted,
-                  decoration: InputDecoration.collapsed(hintText: "Message..."),
+                  decoration: InputDecoration.collapsed(
+                      hintText: "Type your message..."),
                 ),
               ),
-              Container(
-                child: GestureDetector(
-                  onTap: () => _handleSubmitted(_textController.text),
-                  child: Text(
-                    'Send',
-                    style: TextStyle(color: Colors.blue),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 16.0),
+                    child: Row(
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(Icons.camera_alt, color: Colors.grey),
+                            onPressed: () {}),
+                        IconButton(
+                          icon: Icon(Icons.photo_library, color: Colors.grey),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(24.0),
+                    onTap: () => _handleSubmitted(_textController.text),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 16.0),
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFD4D8DC),
+                          borderRadius: BorderRadius.circular(24.0)),
+                      child: Text(
+                        'Send',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
-        ), //new
+        ),
       );
     }
 
@@ -81,66 +110,78 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           iconSize: 18.0,
-          color: Colors.black,
-          onPressed: null,
+          onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
-        // iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.black),
         elevation: 0.0,
-        title: Column( 
-        children: <Widget>[ 
-          BluePurpleGradientText(text: widget.inbox.name, fontSize: 20.0, fontWeight: null),
-          Text(
-            widget.inbox.position,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 15.0
+        title: Row(
+          children: <Widget>[
+            Flexible(
+              child: Container(
+                width: 40.0,
+                height: 40.0,
+                margin: EdgeInsets.only(right: targetMargin),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(widget.inbox.urlPhoto),
+                  ),
+                ),
+              ),
             ),
-          )
-        ],
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  BluePurpleGradientText(
+                      text: widget.inbox.name, fontSize: 16.0),
+                  Text(
+                    widget.inbox.teacher,
+                    style: TextStyle(color: Color(0xFF9EA0A1), fontSize: 14.0),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.more_horiz),
-            color: Colors.black,
-            onPressed: null,
+            onPressed: () {},
           ),
         ],
-        bottom: PreferredSize(
-          child: Container(
-            color: Colors.black,
-          ),
-          preferredSize: Size.fromHeight(4.0),
-        ),
       ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    "Text in edit process"
-                  )
-                ),
-                Text(lastDay,
-                style: TextStyle(
-                  color: Colors.black),
-                ),
-              ],
-            ),
-            ),
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(color: Color(0xFFFFF0DA)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.perm_contact_calendar, color: Color(0xFFFA792D)),
+                    SizedBox(width: 8.0),
+                    Expanded(
+                      child: Text(
+                        widget.inbox.name +
+                            ' is Cantika\'s ' +
+                            widget.inbox.teacher,
+                        style: TextStyle(color: Color(0xFFBB793E)),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )
+                  ],
+                )),
             Flexible(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
                 reverse: true,
-                itemBuilder: (_, int index) => _messages[index],
+                itemBuilder: (_, index) => _messages[index],
                 itemCount: _messages.length,
               ),
             ),
@@ -152,53 +193,9 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   }
 }
 
-class ChatHeader extends StatelessWidget {
-  final String name;
-  final String position;
-  final String urlPhoto;
-
-  const ChatHeader({Key key, this.name, this.position, this.urlPhoto})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 24.0, bottom: 32.0, right: 24.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                BluePurpleGradientText(text: name, fontSize: 40.0, fontWeight: FontWeight.bold),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  position,
-                  style: TextStyle(fontSize: 18.0),
-                )
-              ],
-            ),
-            Container(
-              width: 90.0,
-              height: 90.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(urlPhoto),
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
 class ChatMessage extends StatelessWidget {
   static DateTime now = DateTime.now();
-  String sendTime = DateFormat('kk:mm').format(now);
+  final String sendTime = DateFormat('kk:mm').format(now);
   final String text;
   final AnimationController animationController;
   ChatMessage({this.text, this.animationController});
@@ -215,27 +212,30 @@ class ChatMessage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            new Row(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                new Container(
-                  margin: const EdgeInsets.only(bottom: 12.0),
-                  child: new Text(
-                    sendTime,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 12.0,
-                    ),
-                  ),
-                ),
-                new Container(
+                Container(
                   margin: EdgeInsets.only(left: 8.0, bottom: 8.0),
                   padding: EdgeInsets.all(16.0),
                   constraints: BoxConstraints(maxWidth: 250.0),
                   decoration: BoxDecoration(
-                      color: Colors.blueGrey[50],
-                      borderRadius: BorderRadius.circular(10.0)),
+                      color: Color(0xFFDDEEFF),
+                      borderRadius: BorderRadiusDirectional.only(
+                          topStart: Radius.circular(32.0),
+                          topEnd: Radius.circular(16.0),
+                          bottomStart: Radius.circular(32.0))),
                   child: Text(text, style: TextStyle(fontSize: 16.0)),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 12.0),
+                  child: Text(
+                    sendTime,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12.0,
+                    ),
+                  ),
                 ),
               ],
             ),

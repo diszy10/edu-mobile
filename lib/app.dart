@@ -4,17 +4,13 @@ import './widgets/colors.dart';
 
 import './screens/start_page.dart';
 import './screens/main_page.dart';
-import './screens/attendance_page.dart';
-import './screens/homework_page.dart';
 
 class EdukasiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _routes = <String, WidgetBuilder>{
-      '/start': (BuildContext context) => new StartPage(),
-      '/main': (BuildContext context) => new MainPage(),
-      '/attendance': (BuildContext context) => new AttendancePage(),
-      '/homework': (BuildContext context) => new HomeworkPage(),
+      '/start': (BuildContext context) => StartPage(),
+      '/main': (BuildContext context) => MainPage(),
     };
 
     return MaterialApp(
@@ -36,5 +32,13 @@ ThemeData _buildEduTheme() {
       primaryColor: eduPrimary,
       buttonColor: eduPrimary,
       scaffoldBackgroundColor: Colors.white,
-      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow));
+      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow),
+      textTheme: _buildEduTextTheme(base.textTheme)
+  );
+}
+
+TextTheme _buildEduTextTheme(TextTheme base) {
+  return base.apply(
+      fontFamily: 'Okomito'
+  );
 }

@@ -1,48 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:rounded_modal/rounded_modal.dart';
 
 import '../../models/due.dart';
 import '../../models/upcoming.dart';
 import '../../models/homework.dart';
+import './homework_modal.dart';
 
 class UpcomingTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _dueList = <Due>[
+    final _upcomingList = <Due>[
       Due(day: 'WED', date: '12', timestamp: 'Today', upcoming: [
         Upcoming(
             subject: 'Math & Logic',
-            totalHomework: '2',
+            totalHomework: 2,
             topic: 'Decimal fractions and place value patterns',
+            dueDate: 'Monday, 10 March 2019',
             homework: [
               Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
                   '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
-              Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
-                  '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
-              Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
-                  '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
-              Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
-                  '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ...'),
+              Homework(2, 'Place Value and Rounding',
+                  '100+60+1 = ... \n90+80+3 = ...\n120+76+90 = ...\n250+123+9 = ...')
             ]),
-        Upcoming(subject: 'Science', totalHomework: '3', topic: 'Yuna'),
+        Upcoming(subject: 'Science', totalHomework: 3, topic: 'Yuna'),
         Upcoming(
             subject: 'Indonesian (Language & Literature)',
-            totalHomework: '1',
+            totalHomework: 1,
             topic: 'Yuna')
       ]),
       Due(day: 'THU', date: '13', timestamp: 'Tomorrow', upcoming: [
-        Upcoming(subject: 'Physics', totalHomework: '2', topic: 'Yuna'),
+        Upcoming(subject: 'Physics', totalHomework: 2, topic: 'Yuna'),
         Upcoming(
             subject: 'Korean (Language & Literature)',
-            totalHomework: '1',
+            totalHomework: 1,
             topic: 'Yuna'),
       ])
     ];
 
-    Widget _buildDueFeed(List<Due> due) {
+    Widget _buildUpcomingFeed(List<Due> due) {
       return ListView.builder(
-        // physics: BouncingScrollPhysics(),
-        // shrinkWrap: true,
         itemCount: due.length,
         itemBuilder: (context, index) {
           return Padding(
@@ -54,12 +49,13 @@ class UpcomingTabView extends StatelessWidget {
     }
 
     return Scaffold(
-        backgroundColor: Color(0xFFF7F8F9), body: _buildDueFeed(_dueList));
+        backgroundColor: Color(0xFFF7F8F9),
+        body: _buildUpcomingFeed(_upcomingList));
   }
 }
 
 class RowDate extends StatelessWidget {
-  Due due;
+  final Due due;
   RowDate(this.due);
 
   @override
@@ -76,7 +72,7 @@ class RowDate extends StatelessWidget {
               children: <Widget>[
                 Text(
                   due.day,
-                  style: TextStyle(color: Color(0xFF2C3235)),
+                  style: TextStyle(color: Color(0xFF2C3235), fontWeight: FontWeight.bold),
                 ),
                 Text(
                   due.date,
@@ -102,6 +98,7 @@ class RowDate extends StatelessWidget {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: due.upcoming.length,
                   itemBuilder: (context, index) {
                     return RowCard(due.upcoming[index]);
@@ -122,337 +119,49 @@ class RowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showRoundedModalBottomSheet(
-          context: context,
-          radius: 10.0,
-          autoResize: false,
+    return Container(
+      margin: EdgeInsets.only(top: 8.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.0),
+          border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
+      child: InkWell(
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Container(
+                  color: Color(0xFF737373),
+                  child: Container(
+                    height: 650.0,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).canvasColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0),
+                        )),
+                    child: HomeworkModal(upcoming),
+                  ),
+                );
+              });
+        },
+        child: Container(
           color: Colors.white,
-          builder: (context) {
-            return new HomeworkModal(upcoming);
-          },
-        );
-      },
-
-      /// Card subject & homework
-      child: Container(
-        margin: EdgeInsets.only(top: 8.0),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(4.0),
-            border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
-        child: Padding(
-          padding: EdgeInsets.only(left: 16.0, top: 14.0, bottom: 14.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 upcoming.subject,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: 'Circular'),
               ),
               SizedBox(height: 4.0),
-              Text(
-                upcoming.totalHomework + ' homework',
-                style: TextStyle(color: Colors.grey)
-              )
+              Text(upcoming.totalHomework.toString() + ' homeworks',
+                  style: TextStyle(color: Colors.grey))
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class HomeworkModal extends StatelessWidget {
-  HomeworkModal(this.upcoming);
-  final Upcoming upcoming;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          // Border top
-          GestureDetector(
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacement(new MaterialPageRoute<Null>(
-                        builder: (BuildContext context) {
-                          return HomeworkPage(upcoming: upcoming);
-                        },
-                        fullscreenDialog: true));
-              },
-              child: Center(
-                  child: Container(
-                      margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      padding: EdgeInsets.all(2.0),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.keyboard_arrow_up,
-                          size: 24.0, color: Theme.of(context).primaryColor)))
-              // Strip Card
-              // Center(
-              //   child: Container(
-              //     margin: EdgeInsets.only(top: 16.0),
-              //     width: 38.0,
-              //     height: 4.0,
-              //     decoration: BoxDecoration(
-              //         color: Colors.grey,
-              //         borderRadius: BorderRadius.circular(10.0)),
-              //   ),
-              // ),
-              ),
-          // Subject Text
-          Center(
-            child: Container(
-              child: Text(
-                upcoming.subject,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          // Topic Text
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
-            child: Text(
-              'Topic: ' + upcoming.topic,
-              style: TextStyle(color: Colors.grey),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Divider(color: Colors.grey[300]),
-          // Due date text
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 24.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Icon(Icons.movie, color: Color(0xFFFF5B30)),
-                SizedBox(width: 6.0),
-                Text('Due on', style: TextStyle(color: Colors.grey)),
-                SizedBox(width: 4.0),
-                Text(
-                  'Monday, 10 March 2019',
-                  style: TextStyle(color: Color(0xFFFF5B30)),
-                )
-              ],
-            ),
-          ),
-          Divider(color: Colors.grey[300]),
-          // upcoming.homework != null
-          //     ? LessonSection(upcoming.homework[0])
-          //     : Container()
-          Expanded(
-            child: upcoming.homework != null
-                ? ListView.builder(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemCount: upcoming.homework.length,
-                    itemBuilder: (context, index) {
-                      return LessonSection(upcoming.homework[index]);
-                    },
-                  )
-                : Container(),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-// Homework modal bottom part
-class LessonSection extends StatelessWidget {
-  Homework homework;
-  LessonSection(this.homework);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          // Total homework and submit tag
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                'Homeworks ' + homework.no.toString(),
-                style: TextStyle(fontSize: 14.0, color: Colors.grey),
-              ),
-              Container(
-                  padding: EdgeInsets.all(5.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Color(0xFFC1FFC6),
-                      borderRadius: BorderRadius.circular(4.0)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(Icons.done, size: 14.0, color: Color(0xFF21A62A)),
-                      Text('Submitted',
-                          style: TextStyle(
-                              fontSize: 14.0, color: Color(0xFF21A62A))),
-                    ],
-                  ))
-            ],
-          ),
-          // Lesson title text
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 16.0),
-            child: Text(
-              homework.lesson,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          // Content text
-          Container(
-            child: Text(homework.content, style: TextStyle(color: Colors.grey)),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-// Pop up new page to detail homework
-class HomeworkPage extends StatelessWidget {
-  Upcoming upcoming;
-  HomeworkPage({this.upcoming});
-
-  @override
-  Widget build(BuildContext context) {
-    Widget closeButton = Align(
-        alignment: Alignment.centerRight,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            margin: EdgeInsets.only(top: 24.0, bottom: 8.0, right: 24.0),
-            child: Icon(
-              Icons.close,
-              size: 26.0,
-            ),
-          ),
-        ));
-
-    return Scaffold(
-        body: SafeArea(
-            child: Column(
-      children: <Widget>[
-        closeButton,
-        // Subject Text
-        Container(
-          child: Text(
-            upcoming.subject,
-            style: TextStyle(
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        // Topic Text
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
-          child: Text(
-            'Topic: ' + upcoming.topic,
-            style: TextStyle(color: Colors.grey),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Divider(color: Colors.grey[300]),
-        // Due date text
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Icon(Icons.movie, color: Color(0xFFFF5B30)),
-              SizedBox(width: 4.0),
-              Text('Due on', style: TextStyle(color: Colors.grey)),
-              SizedBox(width: 4.0),
-              Text(
-                'Monday, 10 March 2019',
-                style: TextStyle(color: Color(0xFFFF5B30)),
-              )
-            ],
-          ),
-        ),
-        Divider(color: Colors.grey[300]),
-        Expanded(
-          child: upcoming.homework != null
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: upcoming.homework.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.all(24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // Total homework and submit tag
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                'Homeworks ' +
-                                    upcoming.homework[index].no.toString(),
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.grey),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(5.0),
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      color: Color(0xFFC1FFC6),
-                                      borderRadius: BorderRadius.circular(4.0)),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Icon(Icons.done,
-                                          size: 14.0, color: Color(0xFF21A62A)),
-                                      Text('Submitted',
-                                          style: TextStyle(
-                                              fontSize: 14.0,
-                                              color: Color(0xFF21A62A))),
-                                    ],
-                                  ))
-                            ],
-                          ),
-                          // Lesson title text
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 16.0),
-                            child: Text(
-                              upcoming.homework[index].lesson,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          // Content text
-                          Container(
-                            child: Text(upcoming.homework[index].content,
-                                style: TextStyle(color: Colors.grey)),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                )
-              : Container(),
-        )
-      ],
-    )));
   }
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../models/updates.dart';
+import '../../widgets/gradient_text_color.dart';
 
 class UpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
+
     final _updatesList = <Updates>[
       Updates(1,
           title: 'Announcement',
@@ -22,8 +26,7 @@ class UpdatePage extends StatelessWidget {
 
     Widget _buildPageTitle = Padding(
         padding: EdgeInsets.only(left: 32.0, top: 32.0, bottom: 8.0),
-        child: Text('Updates',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)));
+        child: BluePurpleGradientText(text: 'Updates', fontSize: titleFontSize));
 
     Widget _buildDate = Padding(
         padding: EdgeInsets.only(left: 32.0, right: 32.0, bottom: 16.0),
