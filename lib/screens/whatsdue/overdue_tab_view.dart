@@ -32,8 +32,9 @@ class OverdueTabView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFFF7F8F9),
-      body: ScopedModelDescendant<AppModel>(
-          builder: (context, child, model) => _buildDueFeed(model.overdueList)),
+      body: ScopedModelDescendant<AppModel>(builder: (context, child, model) {
+        return _buildDueFeed(model.overdueList);
+      }),
     );
   }
 }
