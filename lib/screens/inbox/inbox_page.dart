@@ -47,6 +47,7 @@ class InboxPage extends StatelessWidget {
             text: 'Inbox',
             fontSize: titleFontSize,
           ),
+          SizedBox(height: 4.0),
           Text(
             'You have 1 unread message',
             style: TextStyle(color: Color(0xFF989B9C), fontSize: 16.0),
@@ -78,12 +79,12 @@ class InboxPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(24.0),
+                    borderRadius: BorderRadius.circular(20.0),
                     child: Image.network(
                       inbox[index].urlPhoto,
                       fit: BoxFit.cover,
-                      height: 60.0,
-                      width: 60.0,
+                      height: 50.0,
+                      width: 50.0,
                     ),
                   ),
                   SizedBox(width: 16.0),
@@ -107,7 +108,7 @@ class InboxPage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 8.0,
+                          height: 4.0,
                         ),
                         inbox[index] == inbox[0]
                             ? Text(

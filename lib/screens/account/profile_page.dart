@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/gradient_text_color.dart';
+
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
+
     Widget _buildPageTitle = Padding(
-        padding: EdgeInsets.all(32.0),
-        child: Text('Profile',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)));
+        padding: EdgeInsets.only(left: 32.0, top: 32.0, bottom: 32.0),
+        child:
+            BluePurpleGradientText(text: 'Profile', fontSize: titleFontSize));
 
     final profileCard = Card(
       elevation: 8.0,
@@ -17,16 +22,13 @@ class ProfilePage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              width: 80.0,
-              height: 80.0,
-              decoration: new BoxDecoration(
-                shape: BoxShape.circle,
-                image: new DecorationImage(
-                  fit: BoxFit.cover,
-                  image: new NetworkImage(
-                      'https://www.workingmother.com/sites/workingmother.com/files/styles/1000_1x_/public/images/2016/10/emily_blunt.jpg?itok=uRNPOZ2B&fc=50,50'),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image.network(
+                'https://www.workingmother.com/sites/workingmother.com/files/styles/1000_1x_/public/images/2016/10/emily_blunt.jpg?itok=uRNPOZ2B&fc=50,50',
+                fit: BoxFit.cover,
+                height: 50.0,
+                width: 50.0,
               ),
             ),
             SizedBox(
@@ -37,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Kamila Nasyidah ',
+                    'Kamila Nasyidah',
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
@@ -69,6 +71,7 @@ class ProfilePage extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: Color(0xFFF7F7F7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(

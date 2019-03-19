@@ -27,7 +27,7 @@ class AppModel extends Model {
                     '100+60+1 = ... \n90+80+3 = ... \n120+76+90 = ... \n250+123+9 = ...')
           ]),
       Upcoming(
-          subject: 'Science',
+          subject: 'Indonesian (Language & Literature)',
           topic: 'How animals reproduce',
           totalHomework: 1,
           dueDate: 'Monday, 18 March 2019',
@@ -41,7 +41,7 @@ class AppModel extends Model {
     ]),
     Due(dayShort: 'TUE', date: '19', day: 'Tomorrow', upcoming: [
       Upcoming(
-          subject: 'Indonesian (Language & Literature)',
+          subject: 'Science',
           topic: 'Decimal fractions and place value patterns',
           totalHomework: 2,
           dueDate: 'Monday, 19 March 2019',
