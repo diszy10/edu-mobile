@@ -4,6 +4,7 @@ import '../models/due.dart';
 import '../models/upcoming.dart';
 import '../models/overdue.dart';
 import '../models/homework.dart';
+import '../models/inbox.dart';
 
 class AppModel extends Model {
   final _upcomingList = <Due>[
@@ -146,11 +147,72 @@ class AppModel extends Model {
     ]),
   ];
 
+  final _inboxList = <Inbox>[
+    Inbox(
+        name: 'Latika Puspasari',
+        teacher: 'Homeroom Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg',
+        message: 'Sama-sama ibunya cantika',
+        timestamp: '1d'),
+    Inbox(
+        name: 'Vanya Sitorus',
+        teacher: 'Math Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg',
+        message: 'Baik, sama2 bu',
+        timestamp: '15 Mar'),
+    Inbox(
+        name: 'Natalia Napitupulu',
+        teacher: 'English Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg',
+        message: 'Terimakasih kembali',
+        timestamp: '15 Mar'),
+  ];
+
+  final _contactList = [
+    Inbox(
+        name: 'Latika Puspasari',
+        teacher: 'Homeroom Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg'),
+    Inbox(
+        name: 'Vanya Sitorus',
+        teacher: 'Math Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
+    Inbox(
+        name: 'Natalia Napitupulu',
+        teacher: 'English Teacher',
+        message: 'Thank you',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg'),
+    Inbox(
+        name: 'Tirtayasa Saragih',
+        teacher: 'Science Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'),
+    Inbox(
+        name: 'Margana Wastuti',
+        teacher: 'Art Teacher',
+        urlPhoto:
+            'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
+  ];
+
   List<Due> get upcomingList {
     return List.from(_upcomingList);
   }
 
   List<Due> get overdueList {
     return List.from(_overdueList);
+  }
+
+  List<Inbox> get inboxList {
+    return List.from(_inboxList);
+  }
+
+  List<Inbox> get contactList {
+    return List.from(_contactList);
   }
 }

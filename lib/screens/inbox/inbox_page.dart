@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
+import '../../scoped_models/app_model.dart';
 import '../../models/inbox.dart';
 import '../../widgets/gradient_text_color.dart';
 import './contact_page.dart';
@@ -12,29 +14,29 @@ class InboxPage extends StatelessWidget {
     final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
     final double nameFontSize = deviceHeight > 640.0 ? 20.0 : 16.0;
 
-    final _inbox = [
-      Inbox(
-          name: 'Latika Puspasari',
-          teacher: 'Homeroom Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg',
-          message: 'Latest message chat goes here',
-          timeStamp: '1d'),
-      Inbox(
-          name: 'Vanya Sitorus',
-          teacher: 'Math Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg',
-          message: 'Baik, sama2 bu',
-          timeStamp: '15 Mar'),
-      Inbox(
-          name: 'Natalia Napitupulu',
-          teacher: 'English Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg',
-          message: 'Terimakasih kembali',
-          timeStamp: '15 Mar'),
-    ];
+    // final _inbox = [
+    //   Inbox(
+    //       name: 'Latika Puspasari',
+    //       teacher: 'Homeroom Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg',
+    //       message: 'Latest message chat goes here',
+    //       timestamp: '1d'),
+    //   Inbox(
+    //       name: 'Vanya Sitorus',
+    //       teacher: 'Math Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg',
+    //       message: 'Baik, sama2 bu',
+    //       timestamp: '15 Mar'),
+    //   Inbox(
+    //       name: 'Natalia Napitupulu',
+    //       teacher: 'English Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg',
+    //       message: 'Terimakasih kembali',
+    //       timestamp: '15 Mar'),
+    // ];
 
     Widget _inboxHeader = Container(
       margin: EdgeInsets.only(left: 24.0, bottom: 32.0),
@@ -101,7 +103,7 @@ class InboxPage extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            Text(inbox[index].timeStamp)
+                            Text(inbox[index].timestamp)
                           ],
                         ),
                         SizedBox(
@@ -157,7 +159,7 @@ class InboxPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[_inboxHeader, _buildChatList(_inbox)],
+            children: <Widget>[_inboxHeader, ScopedModelDescendant<AppModel>(builder: (context, child, model) => _buildChatList(model.inboxList))],
           ),
         ),
       ),

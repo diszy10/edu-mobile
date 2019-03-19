@@ -10,16 +10,16 @@ import './screens/main_page.dart';
 class EdukasiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppModel appModel = AppModel();
+
     final _routes = <String, WidgetBuilder>{
       '/start': (BuildContext context) => StartPage(),
       '/main': (BuildContext context) => MainPage(),
     };
 
-    AppModel appModel = AppModel();
-
     return ScopedModel<AppModel>(
       model: appModel,
-          child: MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Edukasi',
         home: MainPage(),
@@ -40,12 +40,9 @@ ThemeData _buildEduTheme() {
       buttonColor: eduPrimary,
       scaffoldBackgroundColor: Colors.white,
       buttonTheme: ButtonThemeData(buttonColor: Colors.yellow),
-      textTheme: _buildEduTextTheme(base.textTheme)
-  );
+      textTheme: _buildEduTextTheme(base.textTheme));
 }
 
 TextTheme _buildEduTextTheme(TextTheme base) {
-  return base.apply(
-      fontFamily: 'Okomito'
-  );
+  return base.apply(fontFamily: 'Okomito');
 }
