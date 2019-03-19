@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
+import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
-import '../../models/upcoming.dart';
+import '../../models/overdue.dart';
 
 class OverdueTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _overdueList = <Due>[
-      Due(
-          day: 'MON',
-          date: '10',
-          upcoming: [Upcoming(subject: 'Math & Logic', totalHomework: 3)]),
-      Due(day: 'TUE', date: '11', upcoming: [
-        Upcoming(subject: 'Physics', totalHomework: 2),
-        Upcoming(subject: 'Korean (Language & Literature)', totalHomework: 1)
-      ])
-    ];
+    // final _overdueList = <Due>[
+    //   Due(
+    //       day: 'MON',
+    //       date: '10',
+    //       upcoming: [Upcoming(subject: 'Math & Logic', totalHomework: 3)]),
+    //   Due(day: 'TUE', date: '11', upcoming: [
+    //     Upcoming(subject: 'Physics', totalHomework: 2),
+    //     Upcoming(subject: 'Korean (Language & Literature)', totalHomework: 1)
+    //   ])
+    // ];
 
     Widget _buildDueFeed(List<Due> due) {
       return ListView.builder(
@@ -30,7 +32,8 @@ class OverdueTabView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFFF7F8F9),
-      body: _buildDueFeed(_overdueList),
+      body: ScopedModelDescendant<AppModel>(
+          builder: (context, child, model) => _buildDueFeed(model.overdueList)),
     );
   }
 }
@@ -53,7 +56,7 @@ class RowDate extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  due.day,
+                  due.dayShort,
                   style: TextStyle(
                       color: Color(0xFF838C97), fontWeight: FontWeight.bold),
                 ),
@@ -79,9 +82,9 @@ class RowDate extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: due.upcoming.length,
+                  itemCount: due.overdue.length,
                   itemBuilder: (context, index) {
-                    return RowCard(due.upcoming[index]);
+                    return RowCard(due.overdue[index]);
                   },
                 ),
               ],
@@ -94,8 +97,8 @@ class RowDate extends StatelessWidget {
 }
 
 class RowCard extends StatelessWidget {
-  final Upcoming upcoming;
-  RowCard(this.upcoming);
+  final Overdue overdue;
+  RowCard(this.overdue);
 
   @override
   Widget build(BuildContext context) {
@@ -111,12 +114,12 @@ class RowCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              upcoming.subject,
+              overdue.subject,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontFamily: 'Circular'),
             ),
             SizedBox(height: 4.0),
-            Text(upcoming.totalHomework.toString() + ' homeworks',
+            Text(overdue.totalHomework.toString() + ' homeworks',
                 style: TextStyle(color: Colors.grey))
           ],
         ),

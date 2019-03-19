@@ -1,7 +1,11 @@
 import './upcoming.dart';
+import './overdue.dart';
 
 class Due {
-  final String day, date, timestamp;
+  final String dayShort, date, day;
   final List<Upcoming> upcoming;
-  Due({this.day, this.date, this.timestamp, this.upcoming});
+  final List<Overdue> overdue;
+
+  Due({this.dayShort, this.date, this.day, this.upcoming, this.overdue});
+
 }
