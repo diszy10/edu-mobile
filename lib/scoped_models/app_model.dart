@@ -208,6 +208,8 @@ class AppModel extends Model {
     return List.from(_overdueList);
   }
 
+  int get getTotalOverdue => overdueList.length;
+
   List<Inbox> get inboxList {
     return List.from(_inboxList);
   }
