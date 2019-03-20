@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
+import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
 import '../../models/upcoming.dart';
-import '../../models/homework.dart';
 import './homework_modal.dart';
 
 class UpcomingTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _upcomingList = <Due>[
-      Due(day: 'WED', date: '12', timestamp: 'Today', upcoming: [
-        Upcoming(
-            subject: 'Math & Logic',
-            totalHomework: 2,
-            topic: 'Decimal fractions and place value patterns',
-            dueDate: 'Monday, 10 March 2019',
-            homework: [
-              Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
-                  '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
-              Homework(2, 'Place Value and Rounding',
-                  '100+60+1 = ... \n90+80+3 = ...\n120+76+90 = ...\n250+123+9 = ...')
-            ]),
-        Upcoming(subject: 'Science', totalHomework: 3, topic: 'Yuna'),
-        Upcoming(
-            subject: 'Indonesian (Language & Literature)',
-            totalHomework: 1,
-            topic: 'Yuna')
-      ]),
-      Due(day: 'THU', date: '13', timestamp: 'Tomorrow', upcoming: [
-        Upcoming(subject: 'Physics', totalHomework: 2, topic: 'Yuna'),
-        Upcoming(
-            subject: 'Korean (Language & Literature)',
-            totalHomework: 1,
-            topic: 'Yuna'),
-      ])
-    ];
+    // final _upcomingList = <Due>[
+    //   Due(day: 'WED', date: '12', timestamp: 'Today', upcoming: [
+    //     Upcoming(
+    //         subject: 'Math & Logic',
+    //         totalHomework: 2,
+    //         topic: 'Decimal fractions and place value patterns',
+    //         dueDate: 'Monday, 10 March 2019',
+    //         homework: [
+    //           Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
+    //               '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
+    //           Homework(2, 'Place Value and Rounding',
+    //               '100+60+1 = ... \n90+80+3 = ...\n120+76+90 = ...\n250+123+9 = ...')
+    //         ]),
+    //     Upcoming(subject: 'Science', totalHomework: 3, topic: 'Yuna'),
+    //     Upcoming(
+    //         subject: 'Indonesian (Language & Literature)',
+    //         totalHomework: 1,
+    //         topic: 'Yuna')
+    //   ]),
+    //   Due(day: 'THU', date: '13', timestamp: 'Tomorrow', upcoming: [
+    //     Upcoming(subject: 'Physics', totalHomework: 2, topic: 'Yuna'),
+    //     Upcoming(
+    //         subject: 'Korean (Language & Literature)',
+    //         totalHomework: 1,
+    //         topic: 'Yuna'),
+    //   ])
+    // ];
 
     Widget _buildUpcomingFeed(List<Due> due) {
       return ListView.builder(
@@ -49,8 +50,11 @@ class UpcomingTabView extends StatelessWidget {
     }
 
     return Scaffold(
-        backgroundColor: Color(0xFFF7F8F9),
-        body: _buildUpcomingFeed(_upcomingList));
+      backgroundColor: Color(0xFFF7F8F9),
+      body: ScopedModelDescendant<AppModel>(
+          builder: (context, child, model) =>
+              _buildUpcomingFeed(model.upcomingList)),
+    );
   }
 }
 
@@ -71,8 +75,9 @@ class RowDate extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  due.day,
-                  style: TextStyle(color: Color(0xFF2C3235), fontWeight: FontWeight.bold),
+                  due.dayShort,
+                  style: TextStyle(
+                      color: Color(0xFF2C3235), fontWeight: FontWeight.bold),
                 ),
                 Text(
                   due.date,
@@ -93,7 +98,7 @@ class RowDate extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  due.timestamp,
+                  due.day,
                   style: TextStyle(color: Colors.grey),
                 ),
                 ListView.builder(

@@ -177,14 +177,21 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                     )
                   ],
                 )),
-            Flexible(
-              child: ListView.builder(
-                padding: EdgeInsets.all(8.0),
-                reverse: true,
-                itemBuilder: (_, index) => _messages[index],
-                itemCount: _messages.length,
-              ),
-            ),
+            _messages.isNotEmpty
+                ? Flexible(
+                    child: ListView.builder(
+                      padding: EdgeInsets.all(8.0),
+                      reverse: true,
+                      itemBuilder: (_, index) => _messages[index],
+                      itemCount: _messages.length,
+                    ),
+                  )
+                : Flexible(
+                    child: Center(
+                        child: Text(
+                    'No message here yet..',
+                    style: TextStyle(fontSize: 15.0, color: Colors.grey),
+                  ))),
             _buildTextComposer()
           ],
         ),

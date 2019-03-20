@@ -53,7 +53,7 @@ class UpdatePage extends StatelessWidget {
                         children: <Widget>[
                           Text(updatesList[index].title,
                               style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold)),
+                                  fontSize: 18.0, fontFamily: 'Circular')),
                           Text(updatesList[index].timeStamp)
                         ],
                       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
+import '../../scoped_models/app_model.dart';
 import '../../models/inbox.dart';
 import '../../widgets/gradient_text_color.dart';
 import './chat_page.dart';
@@ -11,34 +13,34 @@ class ContactPage extends StatelessWidget {
     final double photoSize = deviceHeight > 640.0 ? 60.0 : 50.0;
     final double nameFontSize = deviceHeight > 640.0 ? 20.0 : 16.0;
 
-    final _contacts = [
-      Inbox(
-          name: 'Latika Puspasari',
-          teacher: 'Homeroom Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg'),
-      Inbox(
-          name: 'Vanya Sitorus',
-          teacher: 'Math Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
-      Inbox(
-          name: 'Natalia Napitupulu',
-          teacher: 'English Teacher',
-          message: 'Thank you',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg'),
-      Inbox(
-          name: 'Tirtayasa Saragih',
-          teacher: 'Science Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'),
-      Inbox(
-          name: 'Margana Wastuti',
-          teacher: 'Art Teacher',
-          urlPhoto:
-              'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
-    ];
+    // final _contacts = [
+    //   Inbox(
+    //       name: 'Latika Puspasari',
+    //       teacher: 'Homeroom Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg'),
+    //   Inbox(
+    //       name: 'Vanya Sitorus',
+    //       teacher: 'Math Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg'),
+    //   Inbox(
+    //       name: 'Natalia Napitupulu',
+    //       teacher: 'English Teacher',
+    //       message: 'Thank you',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/headshot-portrait-happy-ginger-girl-260nw-623804987.jpg'),
+    //   Inbox(
+    //       name: 'Tirtayasa Saragih',
+    //       teacher: 'Science Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'),
+    //   Inbox(
+    //       name: 'Margana Wastuti',
+    //       teacher: 'Art Teacher',
+    //       urlPhoto:
+    //           'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
+    // ];
 
     Widget _buildSearchBar() {
       return Container(
@@ -95,7 +97,8 @@ class ContactPage extends StatelessWidget {
                         Text(
                           contacts[index].name,
                           style: TextStyle(
-                              fontSize: nameFontSize, fontWeight: FontWeight.bold),
+                              fontSize: nameFontSize,
+                              fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: 8.0,
@@ -137,7 +140,9 @@ class ContactPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildSearchBar(),
-                _buildContactList(_contacts)
+                ScopedModelDescendant<AppModel>(
+                    builder: (context, child, model) =>
+                        _buildContactList(model.contactList))
               ],
             ),
           ),
