@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../presentation/custom_icons_icons.dart';
 
 import './activity/activity_page.dart';
@@ -29,7 +30,8 @@ class _MainPageState extends State<MainPage> {
     final double iconSize = deviceHeight > 640.0 ? 24.0 : 20.0;
 
     return Scaffold(
-      body: _pageOptions[_selectedPage],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark, child: _pageOptions[_selectedPage]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPage,
         onTap: (int index) {
