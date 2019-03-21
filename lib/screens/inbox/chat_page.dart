@@ -14,11 +14,14 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
-  static DateTime now = DateTime.now();
-  final String lastDay = DateFormat("d MMMM").format(now);
+  FocusNode _focusNode;
+  bool _isComposing = false;
 
   void _handleSubmitted(String text) {
     _textController.clear();
+    setState(() {
+      _isComposing = false;
+    });
     ChatMessage message = ChatMessage(
       text: text,
       animationController: AnimationController(
@@ -33,16 +36,34 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _focusNode = new FocusNode();
+    _focusNode.addListener(_onOnFocusNodeEvent);
+  }
+
+  _onOnFocusNodeEvent() {
+    setState(() {});
+  }
+
+  @override
   void dispose() {
     for (ChatMessage message in _messages)
       message.animationController.dispose();
     super.dispose();
+    _focusNode.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double targetMargin = deviceHeight > 640.0 ? 0 : 8.0;
+
+    Color _getSendButtonBackground() {
+      return _focusNode.hasFocus
+          ? Theme.of(context).primaryColor
+          : Color(0xFFD4D8DC);
+    }
 
     Widget _buildTextComposer() {
       return IconTheme(
@@ -57,7 +78,13 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               Container(
                 padding: EdgeInsets.all(24.0),
                 child: TextField(
-                  autofocus: true,
+                  focusNode: _focusNode,
+                  onChanged: (String text) {
+                    setState(() {
+                      _isComposing = text.length > 0;
+                    });
+                  },
+                  autofocus: false,
                   controller: _textController,
                   onSubmitted: _handleSubmitted,
                   decoration: InputDecoration.collapsed(
@@ -83,12 +110,14 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(24.0),
-                    onTap: () => _handleSubmitted(_textController.text),
+                    onTap: _isComposing
+                        ? () => _handleSubmitted(_textController.text)
+                        : null,
                     child: Container(
                       margin: EdgeInsets.only(right: 16.0),
                       padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                          color: Color(0xFFD4D8DC),
+                          color: _getSendButtonBackground(),
                           borderRadius: BorderRadius.circular(24.0)),
                       child: Text(
                         'Send',
@@ -107,6 +136,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        brightness: Brightness.light,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           iconSize: 18.0,

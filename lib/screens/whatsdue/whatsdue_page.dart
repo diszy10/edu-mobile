@@ -22,6 +22,7 @@ class WhatsDuePage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(targetHeight),
           child: AppBar(
+            brightness: Brightness.light,
             elevation: 0.1,
             backgroundColor: Colors.white,
             flexibleSpace: SafeArea(

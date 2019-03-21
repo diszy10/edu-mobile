@@ -5,38 +5,11 @@ import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
 import '../../models/upcoming.dart';
 import './homework_modal.dart';
+import '.././../widgets/bottom_sheet.dart';
 
 class UpcomingTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final _upcomingList = <Due>[
-    //   Due(day: 'WED', date: '12', timestamp: 'Today', upcoming: [
-    //     Upcoming(
-    //         subject: 'Math & Logic',
-    //         totalHomework: 2,
-    //         topic: 'Decimal fractions and place value patterns',
-    //         dueDate: 'Monday, 10 March 2019',
-    //         homework: [
-    //           Homework(1, 'Multiply and divide decimals by 10, 100 and 1000',
-    //               '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
-    //           Homework(2, 'Place Value and Rounding',
-    //               '100+60+1 = ... \n90+80+3 = ...\n120+76+90 = ...\n250+123+9 = ...')
-    //         ]),
-    //     Upcoming(subject: 'Science', totalHomework: 3, topic: 'Yuna'),
-    //     Upcoming(
-    //         subject: 'Indonesian (Language & Literature)',
-    //         totalHomework: 1,
-    //         topic: 'Yuna')
-    //   ]),
-    //   Due(day: 'THU', date: '13', timestamp: 'Tomorrow', upcoming: [
-    //     Upcoming(subject: 'Physics', totalHomework: 2, topic: 'Yuna'),
-    //     Upcoming(
-    //         subject: 'Korean (Language & Literature)',
-    //         totalHomework: 1,
-    //         topic: 'Yuna'),
-    //   ])
-    // ];
-
     Widget _buildUpcomingFeed(List<Due> due) {
       return ListView.builder(
         itemCount: due.length,
@@ -124,6 +97,9 @@ class RowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double modalHeight = deviceHeight > 640.0 ? 650.0 : 450.0;
+
     return Container(
       margin: EdgeInsets.only(top: 8.0),
       decoration: BoxDecoration(
@@ -131,13 +107,13 @@ class RowCard extends StatelessWidget {
           border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
       child: InkWell(
         onTap: () {
-          showModalBottomSheet(
+          showModalBS(
               context: context,
               builder: (context) {
                 return Container(
                   color: Color(0xFF737373),
+                  height: modalHeight,
                   child: Container(
-                    height: 650.0,
                     decoration: BoxDecoration(
                         color: Theme.of(context).canvasColor,
                         borderRadius: BorderRadius.only(

@@ -15,13 +15,15 @@ class HomeworkPage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
+          brightness: Brightness.light,
           elevation: 0.0,
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
           automaticallyImplyLeading: false,
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.close), onPressed: () => Navigator.pop(context))
+                icon: Icon(Icons.close),
+                onPressed: () => Navigator.pop(context))
           ],
         ),
         body: SafeArea(
