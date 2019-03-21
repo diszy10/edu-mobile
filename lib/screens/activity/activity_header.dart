@@ -36,98 +36,10 @@ class ActivityHeader extends StatelessWidget {
       return Text(text, style: style);
     }
 
-    Widget _gempiKid = Container(
-      margin: EdgeInsets.symmetric(vertical: 16.0),
-      padding: EdgeInsets.symmetric(horizontal: 24.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: 60.0,
-            height: 60.0,
-            decoration: new BoxDecoration(
-              shape: BoxShape.circle,
-              image: new DecorationImage(
-                fit: BoxFit.cover,
-                image: new NetworkImage(
-                    'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
-              ),
-            ),
-          ),
-          SizedBox(width: 24.0),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Gempi',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Banana class',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-
-    Widget _rafatarKid = Container(
-      margin: EdgeInsets.symmetric(vertical: 16.0),
-      padding: EdgeInsets.symmetric(horizontal: 24.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: 60.0,
-            height: 60.0,
-            decoration: new BoxDecoration(
-              shape: BoxShape.circle,
-              image: new DecorationImage(
-                fit: BoxFit.cover,
-                image: new NetworkImage(
-                    'https://img.okeinfo.net/content/2017/06/19/33/1720301/foto-makin-tampan-rafathar-kalahkan-raffi-ahmad-LzkVtyuJaz.jpg'),
-              ),
-            ),
-          ),
-          SizedBox(width: 24.0),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Rafatar',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Apple class',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // TODO: Implements Kid List View for switching between each Kid feeds
-        // TODO: Implements real time for date text
         children: <Widget>[
           _kidAvatar(),
           _todayClass,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:intl/intl.dart';
 
 import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
@@ -8,17 +9,6 @@ import '../../models/overdue.dart';
 class OverdueTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final _overdueList = <Due>[
-    //   Due(
-    //       day: 'MON',
-    //       date: '10',
-    //       upcoming: [Upcoming(subject: 'Math & Logic', totalHomework: 3)]),
-    //   Due(day: 'TUE', date: '11', upcoming: [
-    //     Upcoming(subject: 'Physics', totalHomework: 2),
-    //     Upcoming(subject: 'Korean (Language & Literature)', totalHomework: 1)
-    //   ])
-    // ];
-
     Widget _buildDueFeed(List<Due> due) {
       return ListView.builder(
         itemCount: due.length,
@@ -45,6 +35,9 @@ class RowDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String day = DateFormat('EE').format(due.date);
+    String date = DateFormat('dd').format(due.date);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -57,12 +50,12 @@ class RowDate extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  due.dayShort,
+                  day.toUpperCase(),
                   style: TextStyle(
                       color: Color(0xFF838C97), fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  due.date,
+                  date,
                   style: TextStyle(
                       color: Color(0xFF838C97),
                       fontSize: 18.0,

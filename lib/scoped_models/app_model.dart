@@ -8,7 +8,7 @@ import '../models/inbox.dart';
 
 class AppModel extends Model {
   final _upcomingList = <Due>[
-    Due(dayShort: 'MON', date: '18', day: 'Today', upcoming: [
+    Due(date: DateTime(2019, 3, 18), day: 'Today', upcoming: [
       Upcoming(
           subject: 'Math & Logic',
           topic: 'Decimal fractions and place value patterns',
@@ -39,7 +39,7 @@ class AppModel extends Model {
                     '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
           ]),
     ]),
-    Due(dayShort: 'TUE', date: '19', day: 'Tomorrow', upcoming: [
+    Due(date: DateTime(2019, 3, 19), day: 'Tomorrow', upcoming: [
       Upcoming(
           subject: 'Science',
           topic: 'Decimal fractions and place value patterns',
@@ -90,7 +90,7 @@ class AppModel extends Model {
   ];
 
   final _overdueList = <Due>[
-    Due(dayShort: 'THU', date: '14', overdue: [
+    Due(date: DateTime(2019, 3, 14), overdue: [
       Overdue(
           subject: 'Social',
           topic: 'Decimal fractions and place value patterns',
@@ -126,7 +126,26 @@ class AppModel extends Model {
                     '100+60+1 = ... \n90+80+3 = ... \n120+76+90 = ... \n250+123+9 = ...')
           ]),
     ]),
-    Due(dayShort: 'FRI', date: '15', overdue: [
+    Due(date: DateTime(2019, 3, 15), overdue: [
+      Overdue(
+          subject: 'Politics',
+          topic: 'Decimal fractions and place value patterns',
+          totalHomework: 2,
+          dueDate: 'Monday, 15 March 2019',
+          homework: [
+            Homework(
+                no: 1,
+                lesson: 'Multiply and divide decimals by 10, 100 and 1000',
+                content:
+                    '90.5x100 = ... \n6.33x100 = ... \n0.0047x100 = ... \n0.0047x100 = ... \n0.0047x100 = ...'),
+            Homework(
+                no: 2,
+                lesson: 'Place Value and Rounding',
+                content:
+                    '100+60+1 = ... \n90+80+3 = ... \n120+76+90 = ... \n250+123+9 = ...')
+          ]),
+    ]),
+    Due(date: DateTime(2019, 3, 15), overdue: [
       Overdue(
           subject: 'Politics',
           topic: 'Decimal fractions and place value patterns',
