@@ -168,7 +168,7 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
 ///  * [showBottomSheet] and [ScaffoldState.showBottomSheet], for showing
 ///    non-modal bottom sheets.
 ///  * <https://material.io/design/components/sheets-bottom.html#modal-bottom-sheet>
-Future<T> showModalBS<T>({
+Future<T> showModalBottomSheet<T>({
   @required BuildContext context,
   @required WidgetBuilder builder,
 }) {

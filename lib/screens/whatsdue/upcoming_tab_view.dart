@@ -1,12 +1,12 @@
+import 'package:edukasi_mobile/widgets/bottom_sheet.dart' as CustomSheet;
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:intl/intl.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-import '../../scoped_models/app_model.dart';
+import './homework_modal.dart';
 import '../../models/due.dart';
 import '../../models/upcoming.dart';
-import './homework_modal.dart';
-import '.././../widgets/bottom_sheet.dart';
+import '../../scoped_models/app_model.dart';
 
 class UpcomingTabView extends StatelessWidget {
   @override
@@ -112,7 +112,7 @@ class RowCard extends StatelessWidget {
           border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
       child: InkWell(
         onTap: () {
-          showModalBS(
+          CustomSheet.showModalBottomSheet(
               context: context,
               builder: (context) {
                 return Container(
