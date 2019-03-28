@@ -11,7 +11,7 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double photoSize = deviceHeight > 640.0 ? 60.0 : 50.0;
-    final double nameFontSize = deviceHeight > 640.0 ? 20.0 : 16.0;
+    final double nameFontSize = deviceHeight > 640.0 ? 18.0 : 16.0;
 
     Widget _buildSearchBar() {
       return Container(
