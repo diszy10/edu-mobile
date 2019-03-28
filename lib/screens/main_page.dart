@@ -1,12 +1,14 @@
+import 'package:edukasi_mobile/widgets/bottom_navigation_bar.dart'
+    as CustomNavBar;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../presentation/custom_icons_icons.dart';
 
+import './account/profile_page.dart';
 import './activity/activity_page.dart';
-import './whatsdue/whatsdue_page.dart';
 import './inbox/inbox_page.dart';
 import './update/update_page.dart';
-import './account/profile_page.dart';
+import './whatsdue/whatsdue_page.dart';
+import '../presentation/custom_icons_icons.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -32,14 +34,25 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark, child: _pageOptions[_selectedPage]),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CustomNavBar.BottomNavigationBar(
         currentIndex: _selectedPage,
         onTap: (int index) {
           setState(() {
             _selectedPage = index;
           });
         },
-        type: BottomNavigationBarType.fixed,
+        onLongPress: (int index) {
+          if (index == 4) {
+            showModalBottomSheet(context: context, builder: (context) {
+              return Container(child: Text("TEST THIS"));
+            });
+          } else {
+            setState(() {
+              _selectedPage = index;
+            });
+          }
+        },
+        type: CustomNavBar.BottomNavigationBarType.fixed,
         iconSize: 28.0,
         items: [
           BottomNavigationBarItem(
