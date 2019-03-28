@@ -88,7 +88,7 @@ class _MainPageState extends State<MainPage> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        'https://www.workingmother.com/sites/workingmother.com/files/styles/1000_1x_/public/images/2016/10/emily_blunt.jpg?itok=uRNPOZ2B&fc=50,50'),
+                        'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
                   ),
                 ),
               ),

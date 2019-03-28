@@ -6,7 +6,7 @@ import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
 import '../../models/overdue.dart';
 import './overdue_homework_modal.dart';
-import '.././../widgets/bottom_sheet.dart';
+import '.././../widgets/bottom_sheet.dart' as CustomSheet;
 
 class OverdueTabView extends StatelessWidget {
   @override
@@ -108,7 +108,7 @@ class RowCard extends StatelessWidget {
           border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
       child: InkWell(
         onTap: () {
-          showModalBS(
+          CustomSheet.showModalBottomSheet(
               context: context,
               builder: (context) {
                 return Container(
