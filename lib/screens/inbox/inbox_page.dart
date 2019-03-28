@@ -12,7 +12,7 @@ class InboxPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
-    final double nameFontSize = deviceHeight > 640.0 ? 20.0 : 16.0;
+    final double nameFontSize = deviceHeight > 640.0 ?18.0 : 16.0;
 
     Widget _inboxHeader = Container(
       margin: EdgeInsets.only(left: 24.0, bottom: 32.0),
