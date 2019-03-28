@@ -148,10 +148,14 @@ class ActivityPage extends StatelessWidget {
               ],
             ),
             new Container(
+              margin: EdgeInsets.only(top: 16.0),
               padding: EdgeInsets.all(16.0),
-              color: Color(0xFFF7F8F9),
+              decoration: BoxDecoration(
+                color: Color(0xFFF7F8F9),
+                border: Border(top: BorderSide(color: Colors.grey[200]))
+              ),
               child: Container(
-                margin: EdgeInsets.only(top: 16.0, bottom: 24.0),
+                margin: EdgeInsets.only(top: 8.0, bottom: 16.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
