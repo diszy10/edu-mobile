@@ -4,6 +4,7 @@ import './activity_header.dart';
 import './activity_item.dart';
 import '../../models/activity.dart';
 import '../../widgets/gradient_text_color.dart';
+import './performance_page.dart';
 
 class ActivityPage extends StatelessWidget {
   @override
@@ -151,9 +152,8 @@ class ActivityPage extends StatelessWidget {
               margin: EdgeInsets.only(top: 16.0),
               padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Color(0xFFF7F8F9),
-                border: Border(top: BorderSide(color: Colors.grey[200]))
-              ),
+                  color: Color(0xFFF7F8F9),
+                  border: Border(top: BorderSide(color: Colors.grey[200]))),
               child: Container(
                 margin: EdgeInsets.only(top: 8.0, bottom: 16.0),
                 child: Row(
@@ -214,7 +214,12 @@ class ActivityPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.history), onPressed: () {}),
-          IconButton(icon: Icon(Icons.insert_chart), onPressed: () {}),
+          IconButton(
+              icon: Icon(Icons.insert_chart),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => PerformancePage()))),
         ],
       ),
       body: SafeArea(
