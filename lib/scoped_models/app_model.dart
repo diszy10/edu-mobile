@@ -1,5 +1,6 @@
 import 'package:scoped_model/scoped_model.dart';
 
+import '../models/student.dart';
 import '../models/due.dart';
 import '../models/upcoming.dart';
 import '../models/overdue.dart';
@@ -7,6 +8,18 @@ import '../models/homework.dart';
 import '../models/inbox.dart';
 
 class AppModel extends Model {
+
+ final _studentList = <Student>[
+      Student(
+          name: 'Cantika Fonda',
+          urlPhoto:
+              'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
+      Student(
+          name: 'Alex Heisenberg',
+          urlPhoto:
+              'https://img.okeinfo.net/content/2017/06/19/33/1720301/foto-makin-tampan-rafathar-kalahkan-raffi-ahmad-LzkVtyuJaz.jpg'),
+    ]; 
+
   final _upcomingList = <Due>[
     Due(date: DateTime(2019, 3, 18), day: 'Today', upcoming: [
       Upcoming(
@@ -218,6 +231,10 @@ class AppModel extends Model {
         urlPhoto:
             'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
   ];
+
+  List<Student> get studentList {
+    return List.from(_studentList);
+  }
 
   List<Due> get upcomingList {
     return List.from(_upcomingList);
