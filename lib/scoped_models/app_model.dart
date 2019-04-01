@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/student.dart';
+import '../models/activity.dart';
+import '../models/activity_class.dart';
 import '../models/due.dart';
 import '../models/upcoming.dart';
 import '../models/overdue.dart';
@@ -8,17 +11,51 @@ import '../models/homework.dart';
 import '../models/inbox.dart';
 
 class AppModel extends Model {
+  final _studentList = <Student>[
+    Student(
+        name: 'Cantika Fonda',
+        urlPhoto:
+            'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
+    Student(
+        name: 'Alex Heisenberg',
+        urlPhoto:
+            'https://img.okeinfo.net/content/2017/06/19/33/1720301/foto-makin-tampan-rafathar-kalahkan-raffi-ahmad-LzkVtyuJaz.jpg'),
+  ];
 
- final _studentList = <Student>[
-      Student(
-          name: 'Cantika Fonda',
-          urlPhoto:
-              'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
-      Student(
-          name: 'Alex Heisenberg',
-          urlPhoto:
-              'https://img.okeinfo.net/content/2017/06/19/33/1720301/foto-makin-tampan-rafathar-kalahkan-raffi-ahmad-LzkVtyuJaz.jpg'),
-    ]; 
+  final _activityList = <Activity>[
+    Activity(
+        teacherName: 'Tirtayasa Saragih',
+        teacherPhoto:
+            'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg',
+        teacherSubject: 'Science Teacher',
+        isTeaching: true,
+        activityClass: [
+          ActivityClass(
+              timeStamp: '10.50',
+              content: 'Teaching "Xenomorph Anatomy"',
+              shapeColor: Color(0xFFFFBA01),
+              iconColor: Color(0xFFD86A00)),
+        ]),
+    Activity(
+        teacherName: 'Vanya Sitorus',
+        teacherPhoto:
+            'https://image.shutterstock.com/image-photo/portrait-young-beautiful-cute-cheerful-260nw-666258808.jpg',
+        teacherSubject: 'Math Teacher',
+        isTeaching: false,
+        activityClass: [
+          ActivityClass(
+              timeStamp: '08.50',
+              content:
+                  'Vanya distributed homeworks "Compared decimal place value"',
+              shapeColor: Color(0xFFFF8888),
+              iconColor: Color(0xFFB21717)),
+          ActivityClass(
+              timeStamp: '07.30',
+              content: 'Teaching "Decimals"',
+              shapeColor: Color(0xFFC1CEFF),
+              iconColor: Color(0xFF5367AF)),
+        ]),
+  ];
 
   final _upcomingList = <Due>[
     Due(date: DateTime(2019, 3, 18), day: 'Today', upcoming: [
@@ -234,6 +271,10 @@ class AppModel extends Model {
 
   List<Student> get studentList {
     return List.from(_studentList);
+  }
+
+  List<Activity> get activityList {
+    return List.from(_activityList);
   }
 
   List<Due> get upcomingList {

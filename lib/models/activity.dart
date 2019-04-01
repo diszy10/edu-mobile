@@ -1,11 +1,15 @@
-import 'package:flutter/material.dart';
+
+import './activity_class.dart';
 
 class Activity {
-  final String imageUrl, subject, author, timeStamp, description;
-  final Color leftBorderColor;
+  final String teacherPhoto, teacherName, teacherSubject;
+  final bool isTeaching;
+  final List<ActivityClass> activityClass;
 
-  Activity(this.subject, this.author, this.timeStamp, this.description,
-      {this.leftBorderColor = Colors.black,
-      this.imageUrl =
-          'https://image.shutterstock.com/image-photo/indoor-portrait-beautiful-brunette-young-260nw-640005220.jpg'});
+  Activity(
+      {this.teacherPhoto,
+      this.teacherName,
+      this.teacherSubject,
+      this.isTeaching,
+      this.activityClass});
 }

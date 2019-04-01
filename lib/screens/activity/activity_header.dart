@@ -1,49 +1,33 @@
 import 'package:flutter/material.dart';
+import '../../widgets/gradient_text_color.dart';
 
 class ActivityHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _todayClass = Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
-      child: Text('Today class',
-          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
-    );
-
-    Widget _kidAvatar(
-        [String imageUrl =
-            'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg']) {
-      return Container(
-        margin: EdgeInsetsDirectional.only(top: 16.0),
-        width: 60.0,
-        height: 60.0,
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          image: new DecorationImage(
-            fit: BoxFit.cover,
-            image: new NetworkImage(imageUrl),
-          ),
-        ),
-      );
-    }
-
-    /// Accepts [String] text and optional [TextStyle] style
-    /// Returns [Text]
-    Widget _date(String text,
-        {TextStyle style = const TextStyle(
-            color: Color(0xFF3A3E41),
-            fontSize: 16.0,
-            fontWeight: FontWeight.normal)}) {
-      return Text(text, style: style);
-    }
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
+    final double nameFontSize = deviceHeight > 640.0 ? 17.0 : 14.0;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _kidAvatar(),
-          _todayClass,
-          _date('2 March 2019')
+          Container(
+            margin: EdgeInsets.only(left: 24.0),
+            child: BluePurpleGradientText(
+              text: 'Activity',
+              fontSize: titleFontSize,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 24.0),
+            child: Text(
+              'Cantika Fonda',
+              style: TextStyle(color: Colors.grey, fontSize: nameFontSize),
+            ),
+          ),
+          SizedBox(height: 14.0),
+          Divider(color: Colors.grey)
         ],
       ),
     );
