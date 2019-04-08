@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
 import '../../models/overdue.dart';
-import './overdue_homework_modal.dart';
+import './overdue_modal.dart';
 import '.././../widgets/bottom_sheet.dart' as CustomSheet;
 
 class OverdueTabView extends StatelessWidget {
@@ -121,7 +121,7 @@ class RowCard extends StatelessWidget {
                           topLeft: Radius.circular(10.0),
                           topRight: Radius.circular(10.0),
                         )),
-                    child: OverdueHomeworkModal(overdue),
+                    child: OverdueModal(overdue),
                   ),
                 );
               });

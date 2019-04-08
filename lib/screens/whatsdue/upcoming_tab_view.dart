@@ -1,12 +1,12 @@
-import 'package:edukasi_mobile/widgets/bottom_sheet.dart' as CustomSheet;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import './homework_modal.dart';
+import '../../scoped_models/app_model.dart';
 import '../../models/due.dart';
 import '../../models/upcoming.dart';
-import '../../scoped_models/app_model.dart';
+import '.././../widgets/bottom_sheet.dart' as CustomSheet;
+import './upcoming_modal.dart';
 
 class UpcomingTabView extends StatelessWidget {
   @override
@@ -125,7 +125,7 @@ class RowCard extends StatelessWidget {
                           topLeft: Radius.circular(10.0),
                           topRight: Radius.circular(10.0),
                         )),
-                    child: HomeworkModal(upcoming),
+                    child: UpcomingModal(upcoming),
                   ),
                 );
               });
