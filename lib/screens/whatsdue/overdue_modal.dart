@@ -1,11 +1,109 @@
 import 'package:flutter/material.dart';
 
-import '../../models/upcoming.dart';
+import '../../models/overdue.dart';
 import '../../widgets/gradient_text_color.dart';
+import './homework_list.dart';
 
-class HomeworkPage extends StatelessWidget {
-  final Upcoming upcoming;
-  HomeworkPage(this.upcoming);
+class OverdueModal extends StatelessWidget {
+  OverdueModal(this.overdue);
+  final Overdue overdue;
+
+  @override
+  Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double subjectFontSize = deviceHeight > 640.0 ? 28.0 : 24.0;
+
+    return Container(
+      child: Column(
+        children: <Widget>[
+          // Arrow top to slide into homework_page
+          InkWell(
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacement(new MaterialPageRoute<Null>(
+                        builder: (BuildContext context) {
+                          return OverdueFullPage(overdue);
+                        },
+                        fullscreenDialog: true));
+              },
+              child: Container(
+                      margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      padding: EdgeInsets.all(2.0),
+                      // decoration: BoxDecoration(
+                      //   color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      //   shape: BoxShape.circle,
+                      // ),
+                      child: Icon(Icons.keyboard_arrow_up,
+                          size: 24.0, ))
+              // Strip Card
+              // Center(
+              //   child: Container(
+              //     margin: EdgeInsets.only(top: 16.0),
+              //     width: 38.0,
+              //     height: 4.0,
+              //     decoration: BoxDecoration(
+              //         color: Colors.grey,
+              //         borderRadius: BorderRadius.circular(10.0)),
+              //   ),
+              // ),
+              ),
+          // Subject text
+          Container(
+            child: OrangeMagentaGradientText(
+              text: overdue.subject,
+              fontSize: subjectFontSize,
+            ),
+          ),
+          // Topic text
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
+            child: Text(
+              'Topic: ' + overdue.topic,
+              style: TextStyle(fontSize: 16.0, color: Color(0xFF838C97), fontFamily: 'Okomito'),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Divider(color: Colors.grey[300]),
+          // Due date text
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.movie, color: Color(0xFFFF5B30)),
+                SizedBox(width: 6.0),
+                Text('Due on', style: TextStyle(color: Color(0xFF8A939D))),
+                SizedBox(width: 4.0),
+                Text(
+                  'Monday, 10 March 2019',
+                  style: TextStyle(color: Color(0xFFFF5B30)),
+                )
+              ],
+            ),
+          ),
+          Divider(color: Colors.grey[300]),
+          Expanded(
+            child: overdue.homework != null
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: overdue.homework.length,
+                    itemBuilder: (context, index) {
+                      return HomeworkList(overdue.homework[index]);
+                    },
+                  )
+                : Container(),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class OverdueFullPage extends StatelessWidget {
+  final Overdue overdue;
+  OverdueFullPage(this.overdue);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +131,7 @@ class HomeworkPage extends StatelessWidget {
             Center(
               child: Container(
                 child: OrangeMagentaGradientText(
-                  text: upcoming.subject,
+                  text: overdue.subject,
                   fontSize: subjectFontSize,
                 ),
               ),
@@ -42,7 +140,7 @@ class HomeworkPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
               child: Text(
-                'Topic: ' + upcoming.topic,
+                'Topic: ' + overdue.topic,
                 style: TextStyle(fontSize: 16.0, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
@@ -67,11 +165,11 @@ class HomeworkPage extends StatelessWidget {
             ),
             Divider(color: Colors.grey[300]),
             Expanded(
-              child: upcoming.homework != null
+              child: overdue.homework != null
                   ? ListView.builder(
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
-                      itemCount: upcoming.homework.length,
+                      itemCount: overdue.homework.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: EdgeInsets.all(24.0),
@@ -85,7 +183,7 @@ class HomeworkPage extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     'Homeworks ' +
-                                        upcoming.homework[index].no.toString(),
+                                        overdue.homework[index].no.toString(),
                                     style: TextStyle(
                                         fontSize: 14.0, color: Colors.grey),
                                   ),
@@ -115,7 +213,7 @@ class HomeworkPage extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.symmetric(vertical: 16.0),
                                 child: Text(
-                                  upcoming.homework[index].lesson,
+                                  overdue.homework[index].lesson,
                                   style: TextStyle(
                                       fontSize: lessonFontSize,
                                       fontWeight: FontWeight.bold),
@@ -123,7 +221,7 @@ class HomeworkPage extends StatelessWidget {
                               ),
                               // Content text
                               Container(
-                                child: Text(upcoming.homework[index].content,
+                                child: Text(overdue.homework[index].content,
                                     style: TextStyle(color: Colors.grey)),
                               )
                             ],
