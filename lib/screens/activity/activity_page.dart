@@ -10,6 +10,9 @@ import './performance_page.dart';
 class ActivityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double targetHeight = deviceHeight > 640.0 ? 138.0 : 114.0;
+    final double targetPadding = deviceHeight > 640.0 ? 52.0 : 42.0;
 
     Widget _buildActivityFeed(List<Activity> activityFeed) {
       return ListView.builder(
@@ -24,21 +27,33 @@ class ActivityPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        brightness: Brightness.light,
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.history), onPressed: () {}),
-          IconButton(
-              icon: Icon(Icons.insert_chart),
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => PerformancePage()))),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(targetHeight),
+        child: AppBar(
+          brightness: Brightness.light,
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.history), onPressed: () {}),
+            IconButton(
+                icon: Icon(Icons.insert_chart),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => PerformancePage()))),
+          ],
+          flexibleSpace: SafeArea(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Color(0xFFE8E8E8), width: 1.0))
+              ),
+              margin: EdgeInsets.only(top: targetPadding),
+              child: ActivityHeader(),
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -46,7 +61,6 @@ class ActivityPage extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ActivityHeader(),
                   ScopedModelDescendant<AppModel>(
                       builder: (context, child, model) =>
                           _buildActivityFeed(model.activityList)),

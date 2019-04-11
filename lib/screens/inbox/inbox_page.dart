@@ -11,11 +11,13 @@ class InboxPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
+    final double targetHeight = deviceHeight > 640.0 ? 138.0 : 114.0;
+    final double targetPadding = deviceHeight > 640.0 ? 52.0 : 42.0;
     final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
-    final double nameFontSize = deviceHeight > 640.0 ?18.0 : 16.0;
+    final double nameFontSize = deviceHeight > 640.0 ? 18.0 : 16.0;
 
     Widget _inboxHeader = Container(
-      margin: EdgeInsets.only(left: 24.0, bottom: 32.0),
+      margin: EdgeInsets.only(left: 24.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -118,27 +120,35 @@ class InboxPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        brightness: Brightness.light,
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ContactPage()));
-            },
-          )
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(targetHeight),
+        child: AppBar(
+          brightness: Brightness.light,
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ContactPage()));
+              },
+            )
+          ],
+          flexibleSpace: SafeArea(
+            child: Container(
+              margin: EdgeInsets.only(top: targetPadding),
+              child: _inboxHeader,
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              _inboxHeader,
               ScopedModelDescendant<AppModel>(
                   builder: (context, child, model) =>
                       _buildChatList(model.inboxList))

@@ -26,8 +26,7 @@ class ActivityHeader extends StatelessWidget {
               style: TextStyle(color: Colors.grey, fontSize: nameFontSize),
             ),
           ),
-          SizedBox(height: 14.0),
-          Divider(color: Colors.grey)
+          SizedBox(height: 12.0),
         ],
       ),
     );
