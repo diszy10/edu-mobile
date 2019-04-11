@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 const double _kActiveFontSize = 14.0;
 const double _kInactiveFontSize = 12.0;
-const double _kTopMargin = 6.0;
+const double _kTopMargin = 8.0;
 const double _kBottomMargin = 8.0;
 
 /// Defines the layout and behavior of a [BottomNavigationBar].
