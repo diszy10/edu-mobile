@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
 
-import '../../scoped_models/app_model.dart';
 import './upcoming_tab_view.dart';
 import './overdue_tab_view.dart';
 import '../../widgets/gradient_text_color.dart';
@@ -65,11 +63,10 @@ class WhatsDuePage extends StatelessWidget {
                           padding: EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle, color: Colors.deepOrange),
-                          child: ScopedModelDescendant<AppModel>(
-                              builder: (context, child, model) => Text(
-                                    model.getTotalOverdue.toString(),
-                                    style: TextStyle(color: Colors.white),
-                                  )))
+                          child: Text(
+                            '4',
+                            style: TextStyle(color: Colors.white),
+                          ))
                     ],
                   ),
                 ),

@@ -144,7 +144,7 @@ class TeacherActivity extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Icon(
-                            Icons.label,
+                            Icons.folder_shared,
                             color: Color(0xFF1AA424),
                             size: 18.0,
                           ),

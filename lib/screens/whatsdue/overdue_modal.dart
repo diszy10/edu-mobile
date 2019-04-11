@@ -27,14 +27,16 @@ class OverdueModal extends StatelessWidget {
                         fullscreenDialog: true));
               },
               child: Container(
-                      margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      padding: EdgeInsets.all(2.0),
-                      // decoration: BoxDecoration(
-                      //   color: Theme.of(context).primaryColor.withOpacity(0.1),
-                      //   shape: BoxShape.circle,
-                      // ),
-                      child: Icon(Icons.keyboard_arrow_up,
-                          size: 24.0, ))
+                  margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  padding: EdgeInsets.all(2.0),
+                  // decoration: BoxDecoration(
+                  //   color: Theme.of(context).primaryColor.withOpacity(0.1),
+                  //   shape: BoxShape.circle,
+                  // ),
+                  child: Icon(
+                    Icons.keyboard_arrow_up,
+                    size: 24.0,
+                  ))
               // Strip Card
               // Center(
               //   child: Container(
@@ -59,7 +61,10 @@ class OverdueModal extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 64.0, vertical: 8.0),
             child: Text(
               'Topic: ' + overdue.topic,
-              style: TextStyle(fontSize: 16.0, color: Color(0xFF838C97), fontFamily: 'Okomito'),
+              style: TextStyle(
+                  fontSize: 16.0,
+                  color: Color(0xFF838C97),
+                  fontFamily: 'Okomito'),
               textAlign: TextAlign.center,
             ),
           ),
@@ -221,8 +226,13 @@ class OverdueFullPage extends StatelessWidget {
                               ),
                               // Content text
                               Container(
-                                child: Text(overdue.homework[index].content,
-                                    style: TextStyle(color: Colors.grey)),
+                                child: Text(
+                                  overdue.homework[index].content,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Color(0xFF838C97),
+                                      height: 1.2),
+                                ),
                               )
                             ],
                           ),

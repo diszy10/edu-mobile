@@ -53,7 +53,8 @@ class HomeworkList extends StatelessWidget {
           // Content homework
           Container(
               child: Text(homework.content,
-                  style: TextStyle(fontSize: 16.0, color: Color(0xFF838C97)),
+                  style: TextStyle(
+                      fontSize: 16.0, color: Color(0xFF838C97), height: 1.2),
                   maxLines: 3))
         ],
       ),
