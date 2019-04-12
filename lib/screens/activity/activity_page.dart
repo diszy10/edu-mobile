@@ -47,8 +47,9 @@ class ActivityPage extends StatelessWidget {
           flexibleSpace: SafeArea(
             child: Container(
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Color(0xFFE8E8E8), width: 1.0))
-              ),
+                  border: Border(
+                      bottom:
+                          BorderSide(color: Color(0xFFE8E8E8), width: 1.0))),
               margin: EdgeInsets.only(top: targetPadding),
               child: ActivityHeader(),
             ),
@@ -235,18 +236,38 @@ class TeacherActivityItem extends StatelessWidget {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double iconMarginLeft = deviceHeight > 640.0 ? 12.0 : 5.0;
 
+    Widget _buildTimeline() {
+      return new Positioned(
+        top: 0.0,
+        bottom: 0.0,
+        left: 12.0,
+        child: new Container(
+          width: 2.0,
+          color: Colors.grey[300],
+        ),
+      );
+    }
+
     return new Container(
       margin: EdgeInsets.only(top: 8.0, bottom: 16.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(left: iconMarginLeft, right: 16.0),
-            padding: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-                color: activityClass.shapeColor, shape: BoxShape.circle),
-            child: Icon(Icons.settings,
-                size: 20.0, color: activityClass.iconColor),
+          Stack(
+            children: <Widget>[
+              _buildTimeline(),
+              Container(
+                width: 16.0,
+                margin: EdgeInsets.only(
+                    left: iconMarginLeft, right: 16.0, top: 18.0),
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                    color: activityClass.shapeColor, shape: BoxShape.circle),
+                child: Container(),
+                // child: Icon(Icons.settings,
+                //     size: 20.0, color: activityClass.iconColor),
+              ),
+            ],
           ),
           Flexible(
             child: Container(
