@@ -55,7 +55,6 @@ class RowDate extends StatelessWidget {
                   day.toUpperCase(),
                   style: TextStyle(
                       color: Color(0xFF2C3235), fontWeight: FontWeight.bold),
-                  
                 ),
                 Text(
                   date,
@@ -108,43 +107,47 @@ class RowCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 8.0),
       decoration: BoxDecoration(
+        color: Colors.white,
           borderRadius: BorderRadius.circular(4.0),
           border: Border.all(color: Color(0xFFEEEFEF), width: 1.5)),
-      child: InkWell(
-        onTap: () {
-          CustomSheet.showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Container(
-                  color: Color(0xFF737373),
-                  height: modalHeight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).canvasColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0),
-                        )),
-                    child: UpcomingModal(upcoming),
-                  ),
-                );
-              });
-        },
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                upcoming.subject,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontFamily: 'Circular'),
-              ),
-              SizedBox(height: 4.0),
-              Text(upcoming.totalHomework.toString() + ' homeworks',
-                  style: TextStyle(color: Colors.grey))
-            ],
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            CustomSheet.showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    color: Color(0xFF737373),
+                    height: modalHeight,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).canvasColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0),
+                          )),
+                      child: UpcomingModal(upcoming),
+                    ),
+                  );
+                });
+          },
+          child: Container(
+            // color: Colors.white,
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  upcoming.subject,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontFamily: 'Circular'),
+                ),
+                SizedBox(height: 4.0),
+                Text(upcoming.totalHomework.toString() + ' homeworks',
+                    style: TextStyle(color: Colors.grey))
+              ],
+            ),
           ),
         ),
       ),
