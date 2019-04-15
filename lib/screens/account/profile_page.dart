@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/gradient_text_color.dart';
+import '../../widgets/raised_gradient_button.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -8,8 +9,8 @@ class ProfilePage extends StatelessWidget {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
 
-    Widget _buildPageTitle = Padding(
-        padding: EdgeInsets.only(left: 32.0, top: 32.0, bottom: 32.0),
+    final pageTitle = Padding(
+        padding: EdgeInsets.only(left: 24.0, top: 32.0, bottom: 32.0),
         child:
             BluePurpleGradientText(text: 'Profile', fontSize: titleFontSize));
 
@@ -71,15 +72,103 @@ class ProfilePage extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: Color(0xFFF7F7F7),
+      appBar: AppBar(
+        brightness: Brightness.light,
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.more_horiz), onPressed: () {}),
+        ],
+      ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: FractionallySizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[_buildPageTitle, profileCard],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // pageTitle,
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // ClipRRect(
+                  //   borderRadius: BorderRadius.circular(24.0),
+                  //   child: Image.network(
+                  //     'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg',
+                  //     fit: BoxFit.cover,
+                  //     height: 60.0,
+                  //     width: 60.0,
+                  //   ),
+                  // ),
+                  Container(
+                    width: 60.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFFCCCCCC),
+                          blurRadius:
+                              16.0, // has the effect of softening the shadow
+                          offset: Offset(
+                            0.0, // horizontal, move right 10
+                            10.0, // vertical, move down 10
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(height: 5.0),
+                          Text(
+                            'Zalina Raine Wyllie',
+                            style: TextStyle(
+                                fontSize: 14.0, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 4.0),
+                          Text(
+                            'Class 1A',
+                            style:
+                                TextStyle(fontSize: 12.0, color: Colors.grey),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            // Container(
+            //   margin: EdgeInsets.only(top: 64.0, left: 32.0, right: 24.0),
+            //   width: 160.0,
+            //   child: RaisedGradientButton(
+            //       child: Text(
+            //         '',
+            //         style:
+            //             TextStyle(color: Colors.white, fontFamily: 'Circular', fontSize: 14.0),
+            //       ),
+            //       gradient: LinearGradient(
+            //         colors: <Color>[Color(0xFF4B7DE2), Color(0xFF8F6BEB)],
+            //       ),
+            //       onPressed: () {}),
+            // ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(8.0)
+            //   ),
+            // )
+          ],
         ),
       ),
     );
