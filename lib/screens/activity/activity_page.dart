@@ -4,7 +4,8 @@ import 'package:scoped_model/scoped_model.dart';
 import './activity_header.dart';
 import '../../scoped_models/app_model.dart';
 import '../../models/activity.dart';
-import '../../models/activity_class.dart';
+import '../../widgets/timeline/timeline.dart';
+import '../../widgets/timeline/timeline_model.dart';
 import './performance_page.dart';
 
 class ActivityPage extends StatelessWidget {
@@ -211,80 +212,124 @@ class TeacherActivity extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Color(0xFFF7F8F9),
                 border: Border(top: BorderSide(color: Colors.grey[200]))),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: activity.activityClass.length,
-              itemBuilder: (context, index) {
-                return TeacherActivityItem(activity.activityClass[index]);
-              },
-            ),
-          )
+            // child: ListView.builder(
+            //   shrinkWrap: true,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   itemCount: activity.activityClass.length,
+            //   itemBuilder: (context, index) {
+            //     return TeacherActivityItem(activity.activityClass[index]);
+            //   },
+            // ),
+            child: timelineModel(TimelinePosition.Left),
+          ),
         ],
       ),
     );
   }
-}
 
-class TeacherActivityItem extends StatelessWidget {
-  final ActivityClass activityClass;
+  timelineModel(TimelinePosition position) => Timeline.builder(
+      itemBuilder: teacherActivityItem,
+      itemCount: activity.activityClass.length,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      position: position);
 
-  TeacherActivityItem(this.activityClass);
-
-  @override
-  Widget build(BuildContext context) {
-    final double deviceHeight = MediaQuery.of(context).size.height;
-    final double iconMarginLeft = deviceHeight > 640.0 ? 12.0 : 5.0;
-
-    return new Container(
-      margin: EdgeInsets.only(top: 8.0, bottom: 16.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              Container(
-                // width: 16.0,
-                margin: EdgeInsets.only(
-                    left: iconMarginLeft, right: 16.0),
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    color: activityClass.shapeColor, shape: BoxShape.circle),
-                // child: Container(),
-                child: Icon(Icons.settings,
-                    size: 20.0, color: activityClass.iconColor),
+  TimelineModel teacherActivityItem(BuildContext context, int i) {
+    final activityClass = activity.activityClass[i];
+    return TimelineModel(
+        Container(
+          margin: EdgeInsets.only(bottom: 16.0),
+          child: Container(
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadiusDirectional.only(
+                    topEnd: Radius.circular(8.0),
+                    bottomStart: Radius.circular(8.0),
+                    bottomEnd: Radius.circular(8.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey[300],
+                    offset: Offset(1.0, 3.0),
+                    blurRadius: 4.0,
+                  ),
+                ],
               ),
-            ],
-          ),
-          Flexible(
-            child: Container(
-                padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(8.0),
-                      bottomStart: Radius.circular(8.0),
-                      bottomEnd: Radius.circular(8.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.grey[300],
-                      offset: Offset(1.0, 3.0),
-                      blurRadius: 4.0,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(activityClass.timeStamp,
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(height: 4.0),
-                    Text(activityClass.content)
-                  ],
-                )),
-          ),
-        ],
-      ),
-    );
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(activityClass.timeStamp,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(height: 4.0),
+                  Text(activityClass.content)
+                ],
+              )),
+        ),
+        isFirst: i == 0,
+        isLast: i == activity.activityClass.length,
+        iconBackground: activityClass.shapeColor);
+        // icon: Icon(Icons.settings, color: activityClass.iconColor));
   }
 }
+
+// class TeacherActivityItem extends StatelessWidget {
+//   final ActivityClass activityClass;
+
+//   TeacherActivityItem(this.activityClass);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final double deviceHeight = MediaQuery.of(context).size.height;
+//     final double iconMarginLeft = deviceHeight > 640.0 ? 12.0 : 5.0;
+
+//     return new Container(
+//       margin: EdgeInsets.only(top: 8.0, bottom: 16.0),
+//       child: Row(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: <Widget>[
+//           Stack(
+//             children: <Widget>[
+//               Container(
+//                 // width: 16.0,
+//                 margin: EdgeInsets.only(left: iconMarginLeft, right: 16.0),
+//                 padding: EdgeInsets.all(8.0),
+//                 decoration: BoxDecoration(
+//                     color: activityClass.shapeColor, shape: BoxShape.circle),
+//                 // child: Container(),
+//                 child: Icon(Icons.settings,
+//                     size: 20.0, color: activityClass.iconColor),
+//               ),
+//             ],
+//           ),
+//           Flexible(
+//             child: Container(
+//                 padding: EdgeInsets.all(16.0),
+//                 decoration: BoxDecoration(
+//                   color: Colors.white,
+//                   borderRadius: BorderRadiusDirectional.only(
+//                       topEnd: Radius.circular(8.0),
+//                       bottomStart: Radius.circular(8.0),
+//                       bottomEnd: Radius.circular(8.0)),
+//                   boxShadow: <BoxShadow>[
+//                     BoxShadow(
+//                       color: Colors.grey[300],
+//                       offset: Offset(1.0, 3.0),
+//                       blurRadius: 4.0,
+//                     ),
+//                   ],
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: <Widget>[
+//                     Text(activityClass.timeStamp,
+//                         style: TextStyle(fontWeight: FontWeight.bold)),
+//                     SizedBox(height: 4.0),
+//                     Text(activityClass.content)
+//                   ],
+//                 )),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
