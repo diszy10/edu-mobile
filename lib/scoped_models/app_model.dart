@@ -32,7 +32,7 @@ class AppModel extends Model {
         activityClass: [
           ActivityClass(
               timeStamp: '10.30',
-              content: 'Tirtayasa distributed exercise "Xenomorph Anatomy"',
+              content: 'Tirtayasa distributed homeworks "Xenomorph Anatomy"',
               shapeColor: Color(0xFFFFBA01),
               iconColor: Color(0xFFD86A00)),
           ActivityClass(
