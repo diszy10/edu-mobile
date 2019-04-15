@@ -137,36 +137,39 @@ class SwitchModal extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: model.studentList.length,
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(16.0),
-                        child: Row(
-                          children: <Widget>[
-                            // Student photo
-                            Container(
-                              width: photoSize,
-                              height: photoSize,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      model.studentList[index].urlPhoto),
+                    return Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(16.0),
+                          child: Row(
+                            children: <Widget>[
+                              // Student photo
+                              Container(
+                                width: photoSize,
+                                height: photoSize,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        model.studentList[index].urlPhoto),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(width: 24.0),
-                            // Student name
-                            Text(
-                              model.studentList[index].name,
-                              style: TextStyle(
-                                  fontSize: nameFontSize,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
+                              SizedBox(width: 24.0),
+                              // Student name
+                              Text(
+                                model.studentList[index].name,
+                                style: TextStyle(
+                                    fontSize: nameFontSize,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

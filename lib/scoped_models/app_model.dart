@@ -31,9 +31,19 @@ class AppModel extends Model {
         isTeaching: true,
         activityClass: [
           ActivityClass(
-              timeStamp: '10.50',
-              content: 'Teaching "Xenomorph Anatomy"',
+              timeStamp: '10.30',
+              content: 'Tirtayasa distributed homeworks "Xenomorph Anatomy"',
               shapeColor: Color(0xFFFFBA01),
+              iconColor: Color(0xFFD86A00)),
+          ActivityClass(
+              timeStamp: '9.45',
+              content: 'Teaching "Xenomorph Anatomy"',
+              shapeColor: Color(0xFF43e97b),
+              iconColor: Color(0xFFD86A00)),
+          ActivityClass(
+              timeStamp: '9.30',
+              content: 'Raline is absent in my class',
+              shapeColor: Color(0xFFFF8888),
               iconColor: Color(0xFFD86A00)),
         ]),
     Activity(
@@ -47,12 +57,12 @@ class AppModel extends Model {
               timeStamp: '08.50',
               content:
                   'Vanya distributed homeworks "Compared decimal place value"',
-              shapeColor: Color(0xFFFF8888),
+              shapeColor: Color(0xFFFFBA01),
               iconColor: Color(0xFFB21717)),
           ActivityClass(
               timeStamp: '07.30',
               content: 'Teaching "Decimals"',
-              shapeColor: Color(0xFFC1CEFF),
+              shapeColor: Color(0xFF43e97b),
               iconColor: Color(0xFF5367AF)),
         ]),
   ];
