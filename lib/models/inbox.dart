@@ -1,5 +1,5 @@
 class Inbox {
-  final String name, position, message, urlPhoto;
+  final String name, teacher, message, urlPhoto, timestamp;
 
-  Inbox({this.name, this.message, this.position, this.urlPhoto});
+  Inbox({this.name, this.message, this.teacher, this.urlPhoto, this.timestamp});
 }
