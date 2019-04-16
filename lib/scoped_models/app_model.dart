@@ -13,7 +13,7 @@ import '../models/inbox.dart';
 class AppModel extends Model {
   final _studentList = <Student>[
     Student(
-        name: 'Cantika Fonda',
+        name: 'Zalina Raine Wyllie',
         urlPhoto:
             'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
     Student(

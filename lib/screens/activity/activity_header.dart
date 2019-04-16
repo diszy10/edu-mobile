@@ -22,7 +22,7 @@ class ActivityHeader extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 24.0),
             child: Text(
-              'Cantika Fonda',
+              'Zalina Raine Wyllie',
               style: TextStyle(color: Colors.grey, fontSize: nameFontSize),
             ),
           ),
