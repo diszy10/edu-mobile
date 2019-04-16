@@ -118,7 +118,7 @@ class _TimelinePainterLeft extends _TimelinePainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final double iconBackgroundRadius =
-        iconSize / 2 + TimelineBoxDecoration.LINE_GAP;
+        iconSize / 2.5 + TimelineBoxDecoration.LINE_GAP;
 
     double iconMargin;
     if (iconSize == TimelineBoxDecoration.DEFAULT_DOT_SIZE)
@@ -127,14 +127,15 @@ class _TimelinePainterLeft extends _TimelinePainter {
     else
       iconMargin = iconBackgroundRadius + TimelineBoxDecoration.LINE_GAP;
 
-    final leftOffset = configuration.size.center(Offset(0.0, 24.0));
-    final Offset top = configuration.size.topLeft(Offset(leftOffset.dx, 0.0));
+    final leftOffset = configuration.size.center(Offset(6.0, 24.0));
+    final Offset top = configuration.size.topLeft(Offset(leftOffset.dx, -35.0));
     final Offset centerTop = configuration.size
         .centerLeft(Offset(leftOffset.dx, leftOffset.dy - iconMargin + 12.0));
     final Offset centerBottom = configuration.size
         .centerLeft(Offset(leftOffset.dx, leftOffset.dy + iconMargin * 7));
     final Offset end =
         configuration.size.bottomLeft(Offset(leftOffset.dx, leftOffset.dy));
+    if (isFirst) canvas.drawLine(top, centerTop, linePaint);
     if (!isFirst) canvas.drawLine(top, centerTop, linePaint);
     if (!isLast) canvas.drawLine(centerBottom, end, linePaint);
 

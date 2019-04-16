@@ -238,9 +238,9 @@ class TeacherActivity extends StatelessWidget {
     final activityClass = activity.activityClass[i];
     return TimelineModel(
         Container(
-          margin: EdgeInsets.only(bottom: 16.0),
+          margin: EdgeInsets.only(bottom: 16.0, left: 16.0),
           child: Container(
-              padding: EdgeInsets.all(16.0),
+              // padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadiusDirectional.only(
@@ -255,20 +255,36 @@ class TeacherActivity extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(activityClass.timeStamp,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 4.0),
-                  Text(activityClass.content)
-                ],
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(activityClass.timeStamp,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        SizedBox(height: 4.0),
+                        Text(
+                          activityClass.content,
+                          style: TextStyle(fontSize: 16.0),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               )),
         ),
         isFirst: i == 0,
         isLast: i == activity.activityClass.length,
         iconBackground: activityClass.shapeColor);
-        // icon: Icon(Icons.settings, color: activityClass.iconColor));
+    // icon: Icon(Icons.settings, color: activityClass.iconColor));
   }
 }
 
