@@ -29,16 +29,37 @@ class _MainPageState extends State<MainPage> {
     ProfilePage()
   ];
 
+  // final PageController pageController =
+  //     PageController(initialPage: 0, keepPage: true);
+  // int page = 0;
+
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double iconSize = deviceHeight > 640.0 ? 24.0 : 20.0;
-    final double modalHeight = deviceHeight > 640.0 ? 350.0 : 250.0;
+    final double modalHeight = deviceHeight > 640.0 ? 300.0 : 250.0;
+
+    // List<Widget> pages = [
+    //   ActivityPage(),
+    //   WhatsDuePage(),
+    //   InboxPage(),
+    //   UpdatePage(),
+    //   ProfilePage()
+    // ];
 
     return Scaffold(
+      // body: PageView(
+      //   onPageChanged: (i) => setState(() => page = i),
+      //   controller: pageController,
+      //   children: pages,
+      // ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark, child: _pageOptions[_selectedPage]),
       bottomNavigationBar: CustomNavBar.BottomNavigationBar(
+        // currentIndex: page,
+        // onTap: (i) => pageController.animateToPage(i,
+        //     duration: const Duration(milliseconds: 300),
+        //     curve: Curves.easeInOut),
         currentIndex: _selectedPage,
         onTap: (int index) {
           setState(() {
