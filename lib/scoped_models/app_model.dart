@@ -9,9 +9,11 @@ import '../models/upcoming.dart';
 import '../models/overdue.dart';
 import '../models/homework.dart';
 import '../models/inbox.dart';
+import '../models/update.dart';
 
 class AppModel extends Model {
-  final _studentList = <Student>[
+
+  final _studentList = [
     Student(
         name: 'Zalina Raine Wyllie',
         urlPhoto:
@@ -22,7 +24,7 @@ class AppModel extends Model {
             'https://img.okeinfo.net/content/2017/06/19/33/1720301/foto-makin-tampan-rafathar-kalahkan-raffi-ahmad-LzkVtyuJaz.jpg'),
   ];
 
-  final _activityList = <Activity>[
+  final _activityList = [
     Activity(
         teacherName: 'Tirtayasa Saragih',
         teacherPhoto:
@@ -67,7 +69,7 @@ class AppModel extends Model {
         ]),
   ];
 
-  final _upcomingList = <Due>[
+  final _upcomingList = [
     Due(date: DateTime(2019, 3, 18), day: 'Today', upcoming: [
       Upcoming(
           subject: 'Math & Logic',
@@ -149,7 +151,7 @@ class AppModel extends Model {
     ]),
   ];
 
-  final _overdueList = <Due>[
+  final _overdueList = [
     Due(date: DateTime(2019, 3, 14), overdue: [
       Overdue(
           subject: 'Social',
@@ -226,7 +228,7 @@ class AppModel extends Model {
     ]),
   ];
 
-  final _inboxList = <Inbox>[
+  final _inboxList = [
     Inbox(
         name: 'Latika Puspasari',
         teacher: 'Homeroom Teacher',
@@ -279,6 +281,19 @@ class AppModel extends Model {
             'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
   ];
 
+  final _updateList = [
+    Update(
+        title: 'Announcement', content: 'Parent meeting', timestamp: '8.30 AM'),
+    Update(
+        title: 'Teaching session',
+        content: 'Ms. Luna teach math',
+        timestamp: '9.45 AM'),
+    Update(
+        title: 'Homework Assignment',
+        content: 'New homework assignment for Raine',
+        timestamp: '11.30 AM')
+  ];
+
   List<Student> get studentList {
     return List.from(_studentList);
   }
@@ -295,13 +310,15 @@ class AppModel extends Model {
     return List.from(_overdueList);
   }
 
-  int get getTotalOverdue => overdueList.length;
-
   List<Inbox> get inboxList {
     return List.from(_inboxList);
   }
 
   List<Inbox> get contactList {
     return List.from(_contactList);
+  }
+
+  List<Update> get updateList {
+    return List.from(_updateList);
   }
 }

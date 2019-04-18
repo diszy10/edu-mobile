@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import './switch_modal.dart';
 import '../activity/performance_page.dart';
 
-import '../../widgets/gradient_text_color.dart';
 import '../../widgets/raised_gradient_button.dart';
 import '../../widgets/bottom_sheet.dart' as CustomSheet;
 
@@ -11,70 +10,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
-    final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
     final double modalHeight = deviceHeight > 640.0 ? 300.0 : 250.0;
-
-    final pageTitle = Padding(
-        padding: EdgeInsets.only(left: 24.0, top: 32.0, bottom: 32.0),
-        child:
-            BluePurpleGradientText(text: 'Profile', fontSize: titleFontSize));
-
-    final profileCard = Card(
-      elevation: 8.0,
-      margin: EdgeInsets.only(bottom: 20.0, left: 24.0, right: 24.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg',
-                fit: BoxFit.cover,
-                height: 50.0,
-                width: 50.0,
-              ),
-            ),
-            SizedBox(
-              width: 24.0,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Cantika Fonda',
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  ButtonTheme.bar(
-                    child: ButtonBar(
-                      children: <Widget>[
-                        FlatButton(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.1),
-                          child: Text(
-                            'Edit Profile',
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
 
     return Scaffold(
       // appBar: AppBar(
@@ -119,7 +55,7 @@ class ProfilePage extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 24.0),
                   child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // ClipRRect(
                       //   borderRadius: BorderRadius.circular(24.0),
@@ -164,23 +100,26 @@ class ProfilePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               // Student info
-                              Container(
-                                margin: EdgeInsets.only(top: 4.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SizedBox(height: 5.0),
-                                    Text(
-                                      'Zalina Raine Wyllie',
-                                      style: TextStyle(
-                                          fontSize: 18.0,
-                                          fontFamily: 'Circular',
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 4.0),
-                                    Text('Class 1A',
-                                        style: TextStyle(color: Colors.grey))
-                                  ],
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 4.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      SizedBox(height: 5.0),
+                                      Text(
+                                        'Zalina Raine Wyllie',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontFamily: 'Circular',
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 4.0),
+                                      Text('Class 1A',
+                                          style: TextStyle(color: Colors.grey))
+                                    ],
+                                  ),
                                 ),
                               ),
                               // Switch student button
