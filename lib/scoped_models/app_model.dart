@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../models/student.dart';
 import '../models/activity.dart';
@@ -234,7 +236,7 @@ class AppModel extends Model {
         teacher: 'Homeroom Teacher',
         urlPhoto:
             'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg',
-        message: 'Sama-sama ibunya cantika',
+        message: 'Sama-sama ibu.',
         timestamp: '1d'),
     Inbox(
         name: 'Vanya Sitorus',
@@ -286,13 +288,31 @@ class AppModel extends Model {
         title: 'Announcement', content: 'Parent meeting', timestamp: '8.30 AM'),
     Update(
         title: 'Teaching session',
-        content: 'Ms. Luna teach math',
+        content: 'Ms. Luna teaching math',
         timestamp: '9.45 AM'),
     Update(
         title: 'Homework Assignment',
         content: 'New homework assignment for Raine',
         timestamp: '11.30 AM')
   ];
+
+  // List<Update> _updateList = [];
+
+  // void fetchUpdates() async {
+  //   final response = await http.get('https://edukasi-mobile.firebaseio.com/updates.json');
+  //   final List<Update> fetchedUpdatesList = [];
+  //   final Map<String, dynamic> studentListData = json.decode(response.body);
+  //   studentListData.forEach((String updateId, dynamic responseData) {
+  //     final Update update = Update(
+  //         id: updateId,
+  //         title: responseData['title'],
+  //         content: responseData['content'],
+  //         timestamp: responseData['timestamp']);
+  //     fetchedUpdatesList.add(update);
+  //   });
+  //   _updateList = fetchedUpdatesList;
+  //   notifyListeners();
+  // }
 
   List<Student> get studentList {
     return List.from(_studentList);
@@ -319,6 +339,6 @@ class AppModel extends Model {
   }
 
   List<Update> get updateList {
-    return List.from(_updateList);
+    return _updateList;
   }
 }

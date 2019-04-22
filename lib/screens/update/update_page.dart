@@ -5,7 +5,22 @@ import '../../models/update.dart';
 import '../../scoped_models/app_model.dart';
 import '../../widgets/gradient_text_color.dart';
 
-class UpdatePage extends StatelessWidget {
+class UpdatePage extends StatefulWidget {
+  final AppModel appModel;
+
+  UpdatePage(this.appModel);
+
+  @override
+  _UpdatePageState createState() => _UpdatePageState();
+}
+
+class _UpdatePageState extends State<UpdatePage> {
+
+  @override
+  void initState() {
+    // widget.appModel.fetchUpdates();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

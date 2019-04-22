@@ -229,7 +229,7 @@ class _PerformancePageState extends State<PerformancePage> {
         iconTheme: IconThemeData(color: Colors.black),
         automaticallyImplyLeading: false,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context)),
+            icon: Icon(Icons.close), onPressed: () => Navigator.pop(context)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

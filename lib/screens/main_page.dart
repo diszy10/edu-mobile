@@ -12,6 +12,8 @@ import './update/update_page.dart';
 import './whatsdue/whatsdue_page.dart';
 import '../presentation/custom_icons_icons.dart';
 
+import '../scoped_models/app_model.dart';
+
 class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
@@ -24,7 +26,7 @@ class _MainPageState extends State<MainPage> {
     ActivityPage(),
     WhatsDuePage(),
     InboxPage(),
-    UpdatePage(),
+    UpdatePage(AppModel()),
     ProfilePage()
   ];
 
