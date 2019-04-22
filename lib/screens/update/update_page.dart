@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/update.dart';
 import 'package:edukasi_mobile/scoped_models/app_model.dart';
-import '../../widgets/gradient_text_color.dart';
+import './update_header.dart';
 
 class UpdatePage extends StatefulWidget {
   final AppModel appModel;
@@ -24,20 +24,11 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
-    final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
-
-    Widget _buildPageTitle = Padding(
-        padding: EdgeInsets.only(left: 24.0, top: 32.0, bottom: 8.0),
-        child:
-            BluePurpleGradientText(text: 'Updates', fontSize: titleFontSize));
-
-    Widget _buildDate = Padding(
-        padding: EdgeInsets.only(left: 24.0, right: 32.0, bottom: 32.0),
-        child: Text('Today, 1 March 2019',
-            style: TextStyle(color: Color(0xFF3A3E41), fontSize: 16.0)));
+    final double targetHeight = deviceHeight > 640.0 ? 122.0 : 98.0;
 
     Widget _buildUpdateList(List<Update> updateList) {
       return ListView.builder(
+        physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         itemCount: updateList.length,
         itemBuilder: (BuildContext context, index) {
@@ -47,7 +38,7 @@ class _UpdatePageState extends State<UpdatePage> {
               onTap: () {},
               child: Container(
                   margin:
-                      EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -72,25 +63,39 @@ class _UpdatePageState extends State<UpdatePage> {
     }
 
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(targetHeight),
+        child: AppBar(
+          brightness: Brightness.light,
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          automaticallyImplyLeading: false,
+          flexibleSpace: SafeArea(
+            child: Container(
+              margin: EdgeInsets.only(top: 32.0),
+              child: UpdateHeader(),
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: FractionallySizedBox(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildPageTitle,
-              _buildDate,
-              ScopedModelDescendant<AppModel>(
-                  builder: (context, _, model) {
-                    if (model.isLoading) {
-                      return Container(padding: new EdgeInsets.all(5.0), child: Center(child: CircularProgressIndicator()));
-                    } else {
-                      return _buildUpdateList(model?.updateList);
-                    }
-                  })
-            ],
-          )),
-        ),
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 8.0),
+            ScopedModelDescendant<AppModel>(builder: (context, _, model) {
+              if (model.isLoading) {
+                return Container(
+                    padding: new EdgeInsets.all(5.0),
+                    child: Center(child: CircularProgressIndicator()));
+              } else {
+                return _buildUpdateList(model.updateList);
+              }
+            })
+          ],
+        )),
       ),
     );
   }
