@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/update.dart';
-import '../../scoped_models/app_model.dart';
+import 'package:edukasi_mobile/scoped_models/app_model.dart';
 import '../../widgets/gradient_text_color.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -15,10 +15,9 @@ class UpdatePage extends StatefulWidget {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-
   @override
   void initState() {
-    // widget.appModel.fetchUpdates();
+    widget.appModel.fetchUpdates();
     super.initState();
   }
 
@@ -76,17 +75,21 @@ class _UpdatePageState extends State<UpdatePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: FractionallySizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _buildPageTitle,
-                _buildDate,
-                ScopedModelDescendant<AppModel>(
-                    builder: (context, child, model) =>
-                        _buildUpdateList(model.updateList))
-              ],
-            ),
-          ),
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildPageTitle,
+              _buildDate,
+              ScopedModelDescendant<AppModel>(
+                  builder: (context, _, model) {
+                    if (model.isLoading) {
+                      return Container(padding: new EdgeInsets.all(5.0), child: Center(child: CircularProgressIndicator()));
+                    } else {
+                      return _buildUpdateList(model?.updateList);
+                    }
+                  })
+            ],
+          )),
         ),
       ),
     );

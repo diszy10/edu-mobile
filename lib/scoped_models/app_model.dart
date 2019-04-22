@@ -283,36 +283,44 @@ class AppModel extends Model {
             'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
   ];
 
-  final _updateList = [
-    Update(
-        title: 'Announcement', content: 'Parent meeting', timestamp: '8.30 AM'),
-    Update(
-        title: 'Teaching session',
-        content: 'Ms. Luna teaching math',
-        timestamp: '9.45 AM'),
-    Update(
-        title: 'Homework Assignment',
-        content: 'New homework assignment for Raine',
-        timestamp: '11.30 AM')
-  ];
+  // final _updateList = [
+  //   Update(
+  //       title: 'Announcement', content: 'Parent meeting', timestamp: '8.30 AM'),
+  //   Update(
+  //       title: 'Teaching session',
+  //       content: 'Ms. Luna teaching math',
+  //       timestamp: '9.45 AM'),
+  //   Update(
+  //       title: 'Homework Assignment',
+  //       content: 'New homework assignment for Raine',
+  //       timestamp: '11.30 AM')
+  // ];
 
-  // List<Update> _updateList = [];
+  List<Update> _updateList = [];
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
 
-  // void fetchUpdates() async {
-  //   final response = await http.get('https://edukasi-mobile.firebaseio.com/updates.json');
-  //   final List<Update> fetchedUpdatesList = [];
-  //   final Map<String, dynamic> studentListData = json.decode(response.body);
-  //   studentListData.forEach((String updateId, dynamic responseData) {
-  //     final Update update = Update(
-  //         id: updateId,
-  //         title: responseData['title'],
-  //         content: responseData['content'],
-  //         timestamp: responseData['timestamp']);
-  //     fetchedUpdatesList.add(update);
-  //   });
-  //   _updateList = fetchedUpdatesList;
-  //   notifyListeners();
-  // }
+  static AppModel of(BuildContext context) => ScopedModel.of<AppModel>(context);
+
+  void fetchUpdates() async {
+    _isLoading = true;
+    notifyListeners();
+
+    final response = await http.get('https://edukasi-mobile.firebaseio.com/updates.json');
+    final List<Update> fetchedUpdatesList = [];
+    final Map<String, dynamic> studentListData = json.decode(response.body);
+    studentListData.forEach((String updateId, dynamic responseData) {
+      final Update update = Update(
+          id: updateId,
+          title: responseData['title'],
+          content: responseData['content'],
+          timestamp: responseData['timestamp']);
+      fetchedUpdatesList.add(update);
+    });
+    _updateList = fetchedUpdatesList;
+    _isLoading = false;
+    notifyListeners();
+  }
 
   List<Student> get studentList {
     return List.from(_studentList);
@@ -341,4 +349,5 @@ class AppModel extends Model {
   List<Update> get updateList {
     return _updateList;
   }
+
 }

@@ -15,20 +15,29 @@ import '../presentation/custom_icons_icons.dart';
 import '../scoped_models/app_model.dart';
 
 class MainPage extends StatefulWidget {
+  final AppModel appModel;
+
+  MainPage(this.appModel);
+
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
   int _selectedPage = 0;
+  var _pageOptions = [];
 
-  final _pageOptions = [
-    ActivityPage(),
-    WhatsDuePage(),
-    InboxPage(),
-    UpdatePage(AppModel()),
-    ProfilePage()
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _pageOptions = [
+      ActivityPage(),
+      WhatsDuePage(),
+      InboxPage(),
+      UpdatePage(widget.appModel),
+      ProfilePage()
+    ];
+  }
 
   // final PageController pageController =
   //     PageController(initialPage: 0, keepPage: true);
