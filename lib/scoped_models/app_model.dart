@@ -309,14 +309,11 @@ class AppModel extends Model {
     final response = await http.get('https://edukasi-mobile.firebaseio.com/updates.json');
     final List<Update> fetchedUpdatesList = [];
     final Map<String, dynamic> studentListData = json.decode(response.body);
-    studentListData.forEach((String updateId, dynamic responseData) {
-      final Update update = Update(
-          id: updateId,
-          title: responseData['title'],
-          content: responseData['content'],
-          timestamp: responseData['timestamp']);
+    studentListData.forEach((k, v) {
+      final update = Update.fromJson({k: v});
       fetchedUpdatesList.add(update);
     });
+
     _updateList = fetchedUpdatesList;
     _isLoading = false;
     notifyListeners();

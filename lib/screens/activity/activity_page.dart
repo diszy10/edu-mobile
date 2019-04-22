@@ -6,7 +6,6 @@ import '../../scoped_models/app_model.dart';
 import '../../models/activity.dart';
 import '../../widgets/timeline/timeline.dart';
 import '../../widgets/timeline/timeline_model.dart';
-import './performance_page.dart';
 
 class ActivityPage extends StatelessWidget {
   @override
