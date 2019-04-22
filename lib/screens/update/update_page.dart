@@ -6,9 +6,6 @@ import 'package:edukasi_mobile/scoped_models/app_model.dart';
 import '../../widgets/gradient_text_color.dart';
 
 class UpdatePage extends StatefulWidget {
-  final AppModel appModel;
-
-  UpdatePage(this.appModel);
 
   @override
   _UpdatePageState createState() => _UpdatePageState();
@@ -17,8 +14,8 @@ class UpdatePage extends StatefulWidget {
 class _UpdatePageState extends State<UpdatePage> {
   @override
   void initState() {
-    widget.appModel.fetchUpdates();
     super.initState();
+    ScopedModel.of<AppModel>(context).fetchUpdates();
   }
 
   @override

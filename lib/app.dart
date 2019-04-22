@@ -14,7 +14,7 @@ class EdukasiApp extends StatelessWidget {
 
     final _routes = <String, WidgetBuilder>{
       '/start': (BuildContext context) => StartPage(),
-      '/main': (BuildContext context) => MainPage(appModel),
+      '/main': (BuildContext context) => MainPage(),
     };
 
     return ScopedModel<AppModel>(
@@ -22,7 +22,7 @@ class EdukasiApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Edukasi',
-        home: MainPage(appModel),
+        home: MainPage(),
         // initialRoute: '/start',
         routes: _routes,
         theme: _eduTheme,
