@@ -1,64 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/updates.dart';
-import '../../widgets/gradient_text_color.dart';
+import '../../models/update.dart';
+import 'package:edukasi_mobile/scoped_models/app_model.dart';
+import './update_header.dart';
 
-class UpdatePage extends StatelessWidget {
+class UpdatePage extends StatefulWidget {
+
+  @override
+  _UpdatePageState createState() => _UpdatePageState();
+}
+
+class _UpdatePageState extends State<UpdatePage> {
+  @override
+  void initState() {
+    super.initState();
+    ScopedModel.of<AppModel>(context).fetchUpdates();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
-    final double titleFontSize = deviceHeight > 640.0 ? 34.0 : 28.0;
+    final double targetHeight = deviceHeight > 640.0 ? 122.0 : 98.0;
 
-    final _updatesList = <Updates>[
-      Updates(1,
-          title: 'Announcement',
-          content: 'Parent meeting',
-          timeStamp: '8.30 AM'),
-      Updates(2,
-          title: 'Teaching session',
-          content: 'Ms. Luna teach math',
-          timeStamp: '9.45 AM'),
-      Updates(3,
-          title: 'Homework Assignment',
-          content: 'New homework assignment for Raline',
-          timeStamp: '11.30 AM')
-    ];
-
-    Widget _buildPageTitle = Padding(
-        padding: EdgeInsets.only(left: 32.0, top: 32.0, bottom: 8.0),
-        child: BluePurpleGradientText(text: 'Updates', fontSize: titleFontSize));
-
-    Widget _buildDate = Padding(
-        padding: EdgeInsets.only(left: 32.0, right: 32.0, bottom: 16.0),
-        child: Text('Today, 1 March 2019',
-            style: TextStyle(color: Color(0xFF3A3E41), fontSize: 16.0)));
-
-    Widget _buildUpdateList(List<Updates> updatesList) {
+    Widget _buildUpdateList(List<Update> updateList) {
       return ListView.builder(
+        physics: ClampingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: updatesList.length,
+        itemCount: updateList.length,
         itemBuilder: (BuildContext context, index) {
           return Dismissible(
-            key: Key(updatesList[index].id.toString()),
+            key: Key(updateList[index].id.toString()),
             child: InkWell(
               onTap: () {},
               child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  padding: EdgeInsets.only(left: 16.0, top: 4.0, bottom: 4.0),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(updatesList[index].title,
+                          Text(updateList[index].title,
                               style: TextStyle(
                                   fontSize: 18.0, fontFamily: 'Circular')),
-                          Text(updatesList[index].timeStamp)
+                          Text(updateList[index].timestamp)
                         ],
                       ),
                       SizedBox(height: 10.0),
-                      Text(updatesList[index].content,
+                      Text(updateList[index].content,
                           style: TextStyle(fontSize: 16.0)),
                     ],
                   )),
@@ -69,19 +60,39 @@ class UpdatePage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: FractionallySizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _buildPageTitle,
-                _buildDate,
-                _buildUpdateList(_updatesList)
-              ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(targetHeight),
+        child: AppBar(
+          brightness: Brightness.light,
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          automaticallyImplyLeading: false,
+          flexibleSpace: SafeArea(
+            child: Container(
+              margin: EdgeInsets.only(top: 32.0),
+              child: UpdateHeader(),
             ),
           ),
         ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 8.0),
+            ScopedModelDescendant<AppModel>(builder: (context, _, model) {
+              if (model.isLoading) {
+                return Container(
+                    padding: new EdgeInsets.all(5.0),
+                    child: Center(child: CircularProgressIndicator()));
+              } else {
+                return _buildUpdateList(model.updateList);
+              }
+            })
+          ],
+        )),
       ),
     );
   }

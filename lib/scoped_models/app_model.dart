@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../models/student.dart';
 import '../models/activity.dart';
@@ -9,11 +11,13 @@ import '../models/upcoming.dart';
 import '../models/overdue.dart';
 import '../models/homework.dart';
 import '../models/inbox.dart';
+import '../models/update.dart';
 
 class AppModel extends Model {
-  final _studentList = <Student>[
+
+  final _studentList = [
     Student(
-        name: 'Cantika Fonda',
+        name: 'Zalina Raine Wyllie',
         urlPhoto:
             'https://f4m6r3s3.stackpathcdn.com/wp-content/uploads/2018/11/gempi-696x391.jpg'),
     Student(
@@ -22,7 +26,7 @@ class AppModel extends Model {
             'https://img.okeinfo.net/content/2017/06/19/33/1720301/foto-makin-tampan-rafathar-kalahkan-raffi-ahmad-LzkVtyuJaz.jpg'),
   ];
 
-  final _activityList = <Activity>[
+  final _activityList = [
     Activity(
         teacherName: 'Tirtayasa Saragih',
         teacherPhoto:
@@ -67,7 +71,7 @@ class AppModel extends Model {
         ]),
   ];
 
-  final _upcomingList = <Due>[
+  final _upcomingList = [
     Due(date: DateTime(2019, 3, 18), day: 'Today', upcoming: [
       Upcoming(
           subject: 'Math & Logic',
@@ -149,7 +153,7 @@ class AppModel extends Model {
     ]),
   ];
 
-  final _overdueList = <Due>[
+  final _overdueList = [
     Due(date: DateTime(2019, 3, 14), overdue: [
       Overdue(
           subject: 'Social',
@@ -226,13 +230,13 @@ class AppModel extends Model {
     ]),
   ];
 
-  final _inboxList = <Inbox>[
+  final _inboxList = [
     Inbox(
         name: 'Latika Puspasari',
         teacher: 'Homeroom Teacher',
         urlPhoto:
             'https://image.shutterstock.com/image-photo/close-portrait-smiling-brunette-woman-260nw-530446444.jpg',
-        message: 'Sama-sama ibunya cantika',
+        message: 'Sama-sama ibu.',
         timestamp: '1d'),
     Inbox(
         name: 'Vanya Sitorus',
@@ -279,6 +283,42 @@ class AppModel extends Model {
             'https://image.shutterstock.com/image-photo/pleased-help-you-portrait-polite-260nw-1221332758.jpg'),
   ];
 
+  // final _updateList = [
+  //   Update(
+  //       title: 'Announcement', content: 'Parent meeting', timestamp: '8.30 AM'),
+  //   Update(
+  //       title: 'Teaching session',
+  //       content: 'Ms. Luna teaching math',
+  //       timestamp: '9.45 AM'),
+  //   Update(
+  //       title: 'Homework Assignment',
+  //       content: 'New homework assignment for Raine',
+  //       timestamp: '11.30 AM')
+  // ];
+
+  List<Update> _updateList = [];
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
+
+  static AppModel of(BuildContext context) => ScopedModel.of<AppModel>(context);
+
+  void fetchUpdates() async {
+    _isLoading = true;
+    notifyListeners();
+
+    final response = await http.get('https://edukasi-mobile.firebaseio.com/updates.json');
+    final List<Update> fetchedUpdatesList = [];
+    final Map<String, dynamic> studentListData = json.decode(response.body);
+    studentListData.forEach((k, v) {
+      final update = Update.fromJson({k: v});
+      fetchedUpdatesList.add(update);
+    });
+
+    _updateList = fetchedUpdatesList;
+    _isLoading = false;
+    notifyListeners();
+  }
+
   List<Student> get studentList {
     return List.from(_studentList);
   }
@@ -295,8 +335,6 @@ class AppModel extends Model {
     return List.from(_overdueList);
   }
 
-  int get getTotalOverdue => overdueList.length;
-
   List<Inbox> get inboxList {
     return List.from(_inboxList);
   }
@@ -304,4 +342,9 @@ class AppModel extends Model {
   List<Inbox> get contactList {
     return List.from(_contactList);
   }
+
+  List<Update> get updateList {
+    return _updateList;
+  }
+
 }
