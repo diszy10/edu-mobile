@@ -118,26 +118,17 @@ class _TimelinePainterLeft extends _TimelinePainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final double iconBackgroundRadius =
-        iconSize / 2 + TimelineBoxDecoration.LINE_GAP;
+        iconSize / 2.5;
 
-    double iconMargin;
-    if (iconSize == TimelineBoxDecoration.DEFAULT_DOT_SIZE)
-      iconMargin = TimelineBoxDecoration.DEFAULT_ICON_SIZE / 2 +
-          2 * TimelineBoxDecoration.LINE_GAP;
-    else
-      iconMargin = iconBackgroundRadius + TimelineBoxDecoration.LINE_GAP;
-
-    final leftOffset = configuration.size.center(Offset(0.0, 24.0));
-    final Offset top = configuration.size.topLeft(Offset(leftOffset.dx, 0.0));
-    final Offset centerTop = configuration.size
-        .centerLeft(Offset(leftOffset.dx, leftOffset.dy - iconMargin + 12.0));
-    final Offset centerBottom = configuration.size
-        .centerLeft(Offset(leftOffset.dx, leftOffset.dy + iconMargin * 7));
+    final leftOffset = configuration.size.topLeft(Offset(26.0, 24.0));
+    final Offset top = configuration.size.topLeft(Offset(leftOffset.dx, -32.0));
+    final Offset center = configuration.size
+        .centerLeft(Offset(leftOffset.dx, leftOffset.dy * 5));
     final Offset end =
         configuration.size.bottomLeft(Offset(leftOffset.dx, leftOffset.dy));
-    if (!isFirst) canvas.drawLine(top, centerTop, linePaint);
-    if (!isLast) canvas.drawLine(centerBottom, end, linePaint);
 
+    canvas.drawLine(top, leftOffset, linePaint);
+    if (!isLast) canvas.drawLine(center, end, linePaint);
     final Offset offsetCenter = configuration.size.centerLeft(leftOffset);
     canvas.drawCircle(offsetCenter, iconBackgroundRadius, circlePaint);
   }

@@ -6,14 +6,15 @@ import '../../scoped_models/app_model.dart';
 import '../../models/activity.dart';
 import '../../widgets/timeline/timeline.dart';
 import '../../widgets/timeline/timeline_model.dart';
-import './performance_page.dart';
 
 class ActivityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
-    final double targetHeight = deviceHeight > 640.0 ? 138.0 : 114.0;
-    final double targetPadding = deviceHeight > 640.0 ? 52.0 : 42.0;
+    // final double targetHeight = deviceHeight > 640.0 ? 138.0 : 114.0;
+    final double targetHeight = deviceHeight > 640.0 ? 122.0 : 98.0;
+    // final double targetPadding = deviceHeight > 640.0 ? 52.0 : 42.0;
+    // final double targetPadding = deviceHeight > 640.0 ? 32.0 : 32.0;
 
     Widget _buildActivityFeed(List<Activity> activityFeed) {
       return ListView.builder(
@@ -36,22 +37,22 @@ class ActivityPage extends StatelessWidget {
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
           automaticallyImplyLeading: false,
-          actions: <Widget>[
-            IconButton(icon: Icon(Icons.history), onPressed: () {}),
-            IconButton(
-                icon: Icon(Icons.insert_chart),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => PerformancePage()))),
-          ],
+          // actions: <Widget>[
+          //   IconButton(icon: Icon(Icons.history), onPressed: () {}),
+          //   IconButton(
+          //       icon: Icon(Icons.insert_chart),
+          //       onPressed: () => Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (BuildContext context) => PerformancePage(AppModel())))),
+          // ],
           flexibleSpace: SafeArea(
             child: Container(
               decoration: BoxDecoration(
                   border: Border(
                       bottom:
                           BorderSide(color: Color(0xFFE8E8E8), width: 1.0))),
-              margin: EdgeInsets.only(top: targetPadding),
+              margin: EdgeInsets.only(top: 32.0),
               child: ActivityHeader(),
             ),
           ),
@@ -59,15 +60,14 @@ class ActivityPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: FractionallySizedBox(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  ScopedModelDescendant<AppModel>(
-                      builder: (context, child, model) =>
-                          _buildActivityFeed(model.activityList)),
-                ]),
-          ),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // ActivityHeader(),
+                ScopedModelDescendant<AppModel>(
+                    builder: (context, child, model) =>
+                        _buildActivityFeed(model.activityList)),
+              ]),
         ),
       ),
     );
@@ -238,9 +238,9 @@ class TeacherActivity extends StatelessWidget {
     final activityClass = activity.activityClass[i];
     return TimelineModel(
         Container(
-          margin: EdgeInsets.only(bottom: 16.0),
+          margin: EdgeInsets.only(bottom: 16.0, left: 16.0),
           child: Container(
-              padding: EdgeInsets.all(16.0),
+              // padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadiusDirectional.only(
@@ -255,20 +255,36 @@ class TeacherActivity extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(activityClass.timeStamp,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 4.0),
-                  Text(activityClass.content)
-                ],
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(activityClass.timeStamp,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        SizedBox(height: 4.0),
+                        Text(
+                          activityClass.content,
+                          style: TextStyle(fontSize: 16.0),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               )),
         ),
         isFirst: i == 0,
         isLast: i == activity.activityClass.length,
         iconBackground: activityClass.shapeColor);
-        // icon: Icon(Icons.settings, color: activityClass.iconColor));
+    // icon: Icon(Icons.settings, color: activityClass.iconColor));
   }
 }
 

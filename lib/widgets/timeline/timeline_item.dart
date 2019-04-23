@@ -111,8 +111,6 @@ class TimelineItemLeft extends TimelineItem {
               alignment: Alignment.center,
               child: icon),
           Container(
-              padding:
-                  const EdgeInsets.only(left: TimelineBoxDecoration.LINE_GAP),
               constraints: BoxConstraints(
                   minHeight: margin,
                   maxWidth: constraints.maxWidth - margin * 2.0),
