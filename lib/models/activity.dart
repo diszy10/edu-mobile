@@ -1,15 +1,21 @@
-
-import './activity_class.dart';
+import 'package:flutter/material.dart';
 
 class Activity {
-  final String teacherPhoto, teacherName, teacherSubject;
+  final String teacherName, teacherSubject, urlPhoto;
   final bool isTeaching;
-  final List<ActivityClass> activityClass;
+  final List<ClassActivity> classActivity;
 
   Activity(
-      {this.teacherPhoto,
-      this.teacherName,
+      {this.teacherName,
       this.teacherSubject,
+      this.urlPhoto,
       this.isTeaching,
-      this.activityClass});
+      this.classActivity});
+}
+
+class ClassActivity {
+  final String content, timestamp;
+  final Color dotColor;
+
+  ClassActivity({this.content, this.timestamp, this.dotColor});
 }
