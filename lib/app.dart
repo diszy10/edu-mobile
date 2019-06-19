@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import './widgets/colors.dart';
+import './widgets/notification.dart';
 
 import './scoped_models/app_model.dart';
 import './screens/start_page.dart';
@@ -13,8 +14,9 @@ class EdukasiApp extends StatelessWidget {
     AppModel appModel = AppModel();
 
     final _routes = <String, WidgetBuilder>{
-      '/start': (BuildContext context) => StartPage(),
-      '/main': (BuildContext context) => MainPage(),
+      '/start': (BuildContext context) => new StartPage(),
+      '/main': (BuildContext context) => new MainPage(),
+      '/test': (BuildContext context) => new EduNotification(),
     };
 
     return ScopedModel<AppModel>(
