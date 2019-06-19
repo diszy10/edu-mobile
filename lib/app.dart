@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import './widgets/colors.dart';
 import './widgets/notification.dart';
 
+import './scoped_models/app_model.dart';
 import './screens/start_page.dart';
 import './screens/main_page.dart';
-import './screens/attendance_page.dart';
-import './screens/homework_page.dart';
 
 class EdukasiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppModel appModel = AppModel();
+
     final _routes = <String, WidgetBuilder>{
       '/start': (BuildContext context) => new StartPage(),
       '/main': (BuildContext context) => new MainPage(),
-      '/attendance': (BuildContext context) => new AttendancePage(),
-      '/homework': (BuildContext context) => new HomeworkPage(),
       '/test': (BuildContext context) => new EduNotification(),
     };
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Edukasi',
-      home: MainPage(),
-      initialRoute: '/start',
-      routes: _routes,
-      theme: _eduTheme,
+    return ScopedModel<AppModel>(
+      model: appModel,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Edukasi',
+        home: MainPage(),
+        // initialRoute: '/start',
+        routes: _routes,
+        theme: _eduTheme,
+      ),
     );
   }
 }
@@ -38,5 +41,10 @@ ThemeData _buildEduTheme() {
       primaryColor: eduPrimary,
       buttonColor: eduPrimary,
       scaffoldBackgroundColor: Colors.white,
-      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow));
+      buttonTheme: ButtonThemeData(buttonColor: Colors.yellow),
+      textTheme: _buildEduTextTheme(base.textTheme));
+}
+
+TextTheme _buildEduTextTheme(TextTheme base) {
+  return base.apply(fontFamily: 'Okomito');
 }
