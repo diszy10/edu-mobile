@@ -9,10 +9,6 @@ class SwitchBottomSheet extends StatelessWidget {
         urlPhoto:
             'https://asianparent-assets-id.dexecure.net/wp-content/uploads/sites/24/2018/08/WhatsApp-Image-2018-08-03-at-22.05.39-886x1024.jpeg'),
     Student(
-        name: 'Zalina Raine Wyllie',
-        urlPhoto:
-            'https://asianparent-assets-id.dexecure.net/wp-content/uploads/sites/24/2018/08/WhatsApp-Image-2018-08-03-at-22.05.39-886x1024.jpeg'),
-    Student(
         name: 'Muhammad Adhiyat',
         urlPhoto:
             'https://awsimages.detik.net.id/community/media/visual/2017/10/12/b6f6a923-3802-466d-b265-71d84d49b3fc_169.jpg?w=780&q=90'),
