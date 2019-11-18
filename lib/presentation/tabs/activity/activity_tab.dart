@@ -1,8 +1,9 @@
 import 'package:edukasi_mobile/core/models/models.dart';
 import 'package:edukasi_mobile/presentation/blocs/student/bloc.dart';
+import 'package:edukasi_mobile/presentation/shared/gradient_text.dart';
 import 'package:edukasi_mobile/presentation/shared/shared.dart';
+import 'package:edukasi_mobile/presentation/tabs/activity/activity_list.dart';
 import 'package:edukasi_mobile/presentation/tabs/activity/bloc/bloc.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

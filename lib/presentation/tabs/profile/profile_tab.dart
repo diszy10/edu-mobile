@@ -1,7 +1,7 @@
 import 'package:edukasi_mobile/presentation/blocs/auth/bloc.dart';
 import 'package:edukasi_mobile/presentation/blocs/student/bloc.dart';
+import 'package:edukasi_mobile/presentation/shared/gradient_text.dart';
 import 'package:edukasi_mobile/presentation/shared/shared.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,18 +62,12 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildBody(context) {
-    // return Center(
-    //   child: Text(
-    //     'Profile Page',
-    //     style: TextStyle(fontSize: 16.0, color: Colors.grey),
-    //   ),
-    // );
     return Center(
       child: RaisedButton(
         onPressed: () {
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
         },
-        child: Text('Logout'),
+        child: Text('Log out'),
       ),
     );
   }

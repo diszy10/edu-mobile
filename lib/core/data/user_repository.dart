@@ -10,9 +10,9 @@ class UserRepository {
   }) async {
     await Future.delayed(Duration(milliseconds: 100));
 
-    if (email == 'asd' && password == 'asd')
+    if (email == 'parent1@test.com' && password == '123456')
       return 'token1';
-    else if (email == 'qwe' && password == 'qwe')
+    else if (email == 'parent2@test.com' && password == '123456')
       return 'token2';
     else
       throw ('Invalid email or password.');

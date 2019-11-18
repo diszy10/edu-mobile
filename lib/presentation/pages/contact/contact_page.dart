@@ -1,5 +1,6 @@
 import 'package:edukasi_mobile/core/models/models.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart';
+import 'package:edukasi_mobile/presentation/pages/contact/widgets/contact_list.dart';
+import 'package:edukasi_mobile/presentation/shared/gradient_text.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatelessWidget {

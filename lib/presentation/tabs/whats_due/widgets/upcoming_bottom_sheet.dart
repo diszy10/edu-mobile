@@ -1,12 +1,13 @@
 import 'package:edukasi_mobile/core/models/models.dart';
+import 'package:edukasi_mobile/presentation/shared/gradient_text.dart';
 import 'package:edukasi_mobile/presentation/shared/shared.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart';
+import 'package:edukasi_mobile/presentation/tabs/whats_due/widgets/homework_list.dart';
 import 'package:flutter/material.dart';
 
-class OverdueBottomSheet extends StatelessWidget {
-  final Overdue overdue;
+class UpcomingBottomSheet extends StatelessWidget {
+  final Upcoming upcoming;
 
-  OverdueBottomSheet({@required this.overdue});
+  UpcomingBottomSheet({@required this.upcoming});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class OverdueBottomSheet extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pushReplacement(new MaterialPageRoute<Null>(
               builder: (BuildContext context) =>
-                  OverdueFullSheet(overdue: overdue),
+                  UpcomingFullSheet(upcoming: upcoming),
               fullscreenDialog: true));
         },
         child: Icon(Icons.keyboard_arrow_up),
@@ -60,7 +61,7 @@ class OverdueBottomSheet extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.0),
       child: OrangeMagentaGradientText(
-        text: overdue.subject,
+        text: upcoming.subject,
         fontSize: subjectSize(context),
       ),
     );
@@ -69,7 +70,7 @@ class OverdueBottomSheet extends StatelessWidget {
   Widget _buildTextTopic(context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      child: Text('Topic: ' + overdue.topic,
+      child: Text('Topic: ' + upcoming.topic,
           style: TextStyle(
             fontSize: topicSize(context),
             color: Color(0xFF87909A),
@@ -93,7 +94,8 @@ class OverdueBottomSheet extends StatelessWidget {
                 style: TextStyle(color: Color(0xFF87909A)),
               ),
               SizedBox(width: 2.0),
-              Text(overdue.dueDate, style: TextStyle(color: Color(0xFFFF5B30))),
+              Text(upcoming.dueDate,
+                  style: TextStyle(color: Color(0xFFFF5B30))),
               SizedBox(width: 16.0)
             ],
           ),
@@ -107,18 +109,18 @@ class OverdueBottomSheet extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: overdue.homework.length,
+        itemCount: upcoming.homework.length,
         itemBuilder: (context, index) =>
-            HomeworkList(index + 1, homework: overdue.homework[index]),
+            HomeworkList(index + 1, homework: upcoming.homework[index]),
       ),
     );
   }
 }
 
-class OverdueFullSheet extends StatelessWidget {
-  final Overdue overdue;
+class UpcomingFullSheet extends StatelessWidget {
+  final Upcoming upcoming;
 
-  OverdueFullSheet({@required this.overdue});
+  UpcomingFullSheet({@required this.upcoming});
 
   @override
   Widget build(BuildContext context) {
@@ -134,15 +136,19 @@ class OverdueFullSheet extends StatelessWidget {
               icon: Icon(Icons.close), onPressed: () => Navigator.pop(context))
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            _buildTextSubject(context),
-            _buildTextTopic(context),
-            _buildTextDueOn(),
-            _buildHomeworkList()
-          ],
-        ),
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(context) {
+    return SafeArea(
+      child: Column(
+        children: <Widget>[
+          _buildTextSubject(context),
+          _buildTextTopic(context),
+          _buildTextDueOn(),
+          _buildHomeworkList()
+        ],
       ),
     );
   }
@@ -151,7 +157,7 @@ class OverdueFullSheet extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.0),
       child: OrangeMagentaGradientText(
-        text: overdue.subject,
+        text: upcoming.subject,
         fontSize: subjectSize(context),
       ),
     );
@@ -160,7 +166,7 @@ class OverdueFullSheet extends StatelessWidget {
   Widget _buildTextTopic(context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      child: Text('Topic: ' + overdue.topic,
+      child: Text('Topic: ' + upcoming.topic,
           style: TextStyle(
             fontSize: topicSize(context),
             color: Color(0xFF87909A),
@@ -184,7 +190,8 @@ class OverdueFullSheet extends StatelessWidget {
                 style: TextStyle(color: Color(0xFF87909A)),
               ),
               SizedBox(width: 2.0),
-              Text(overdue.dueDate, style: TextStyle(color: Color(0xFFFF5B30))),
+              Text(upcoming.dueDate,
+                  style: TextStyle(color: Color(0xFFFF5B30))),
               SizedBox(width: 16.0)
             ],
           ),
@@ -198,9 +205,10 @@ class OverdueFullSheet extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: overdue.homework.length,
+          physics: BouncingScrollPhysics(),
+          itemCount: upcoming.homework.length,
           itemBuilder: (context, index) =>
-              HomeworkList(index + 1, homework: overdue.homework[index])),
+              HomeworkList(index + 1, homework: upcoming.homework[index])),
     );
   }
 }

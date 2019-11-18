@@ -1,6 +1,6 @@
 import 'package:edukasi_mobile/core/models/models.dart';
 import 'package:edukasi_mobile/presentation/shared/shared.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart';
+import 'package:edukasi_mobile/presentation/tabs/activity/widgets/timeline_painter.dart';
 import 'package:flutter/material.dart';
 
 class ActivityList extends StatelessWidget {

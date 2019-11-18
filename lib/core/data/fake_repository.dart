@@ -25,9 +25,9 @@ class FakeRepository extends Repository {
         return [
           Student(
             id: '3',
-            name: 'Muhammad Adhiyat',
+            name: 'Olivia',
             photo:
-                'https://asset.kompas.com/crops/P66BztO4TV-ySZuP7U8F8VsWZ4M=/31x0:875x563/750x500/data/photo/2017/10/21/1363546878.jpg',
+                'https://images.unsplash.com/photo-1489673446964-e1f989187ddc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=878&q=80',
           ),
         ];
       else

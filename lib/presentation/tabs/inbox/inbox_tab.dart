@@ -1,7 +1,8 @@
 import 'package:edukasi_mobile/core/models/models.dart';
-import 'package:edukasi_mobile/presentation/pages/contact.dart';
+import 'package:edukasi_mobile/presentation/pages/contact/contact_page.dart';
+import 'package:edukasi_mobile/presentation/shared/gradient_text.dart';
 import 'package:edukasi_mobile/presentation/shared/shared.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart';
+import 'package:edukasi_mobile/presentation/tabs/inbox/widget/inbox_list.dart';
 import 'package:flutter/material.dart';
 
 class InboxPage extends StatelessWidget {

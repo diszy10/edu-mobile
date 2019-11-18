@@ -1,5 +1,5 @@
 import 'package:edukasi_mobile/core/models/models.dart';
-import 'package:edukasi_mobile/presentation/pages/chat.dart';
+import 'package:edukasi_mobile/presentation/pages/chat/chat_page.dart';
 import 'package:flutter/material.dart';
 
 class ContactList extends StatelessWidget {

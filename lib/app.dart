@@ -1,14 +1,17 @@
 import 'package:edukasi_mobile/core/data/fake_repository.dart';
 import 'package:edukasi_mobile/presentation/blocs/student/bloc.dart';
 import 'package:edukasi_mobile/presentation/blocs/tab/bloc.dart';
+import 'package:edukasi_mobile/presentation/shared/bottom_navbar.dart'
+    as custom;
+import 'package:edukasi_mobile/presentation/shared/bottom_sheet.dart';
 import 'package:edukasi_mobile/presentation/shared/shared.dart';
 import 'package:edukasi_mobile/presentation/tabs/activity/activity_tab.dart';
 import 'package:edukasi_mobile/presentation/tabs/activity/bloc/bloc.dart';
-import 'package:edukasi_mobile/presentation/tabs/inbox.dart';
-import 'package:edukasi_mobile/presentation/tabs/profile.dart';
-import 'package:edukasi_mobile/presentation/tabs/update.dart';
-import 'package:edukasi_mobile/presentation/tabs/whats_due.dart';
-import 'package:edukasi_mobile/presentation/widgets/widgets.dart' as widget;
+import 'package:edukasi_mobile/presentation/tabs/inbox/inbox_tab.dart';
+import 'package:edukasi_mobile/presentation/tabs/profile/profile_tab.dart';
+import 'package:edukasi_mobile/presentation/tabs/update/update_tab.dart';
+import 'package:edukasi_mobile/presentation/tabs/whats_due/whats_due_tab.dart';
+import 'package:edukasi_mobile/presentation/tabs/profile/widgets/switch_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -79,9 +82,9 @@ class _AppState extends State<App> {
       bloc: BlocProvider.of<StudentBloc>(context),
       builder: (_, state) {
         if (state is ActiveStudentLoaded) {
-          return widget.BottomNavigationBar(
+          return custom.BottomNavigationBar(
             currentIndex: index,
-            type: widget.BottomNavigationBarType.fixed,
+            type: custom.BottomNavigationBarType.fixed,
             onLongPress: (int index) {
               if (index == 4) {
                 return _buildModalSwitchStudent();
@@ -155,7 +158,7 @@ class _AppState extends State<App> {
   }
 
   _buildModalSwitchStudent() {
-    return widget.showCustomModalBottomSheet(
+    return showCustomModalBottomSheet(
       context: context,
       builder: (context) {
         return Container(
@@ -175,7 +178,7 @@ class _AppState extends State<App> {
               child: BlocProvider<StudentBloc>(
                 builder: (context) =>
                     StudentBloc(repository: repository)..add(FetchStudents()),
-                child: widget.SwitchBottomSheet(),
+                child: SwitchBottomSheet(),
               ),
             ),
           ),

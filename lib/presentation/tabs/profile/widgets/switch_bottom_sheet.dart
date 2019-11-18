@@ -26,24 +26,24 @@ class SwitchBottomSheet extends StatelessWidget {
                   children: <Widget>[
                     /// Student list
                     Expanded(child: _buildStudentList(state.students)),
-                    SizedBox(height: 16.0),
 
+                    // SizedBox(height: 16.0),
                     /// Settings icon
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Color(0xFF838C97)),
-                            child: Icon(Icons.settings, color: Colors.white)),
-                        SizedBox(width: 16.0),
-                        Text('Settings',
-                            style: TextStyle(
-                                fontSize: 20.0, color: Color(0xFF838C97)))
-                      ],
-                    ),
-                    SizedBox(height: 16.0),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: <Widget>[
+                    //     Container(
+                    //         decoration: BoxDecoration(
+                    //             shape: BoxShape.rectangle,
+                    //             color: Color(0xFF838C97)),
+                    //         child: Icon(Icons.settings, color: Colors.white)),
+                    //     SizedBox(width: 16.0),
+                    //     Text('Settings',
+                    //         style: TextStyle(
+                    //             fontSize: 20.0, color: Color(0xFF838C97)))
+                    //   ],
+                    // ),
+                    // SizedBox(height: 16.0),
                   ],
                 ),
               ),

@@ -2,7 +2,7 @@ import 'package:edukasi_mobile/core/data/user_repository.dart';
 import 'package:edukasi_mobile/presentation/blocs/auth/bloc.dart';
 import 'package:edukasi_mobile/presentation/pages/login/bloc/bloc.dart';
 import 'package:edukasi_mobile/presentation/shared/loader.dart';
-import 'package:edukasi_mobile/presentation/widgets/custom_text_field.dart';
+import 'package:edukasi_mobile/presentation/pages/login/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -78,9 +78,9 @@ class __LoginFormState extends State<_LoginForm> {
   final FocusNode _passwordFocus = FocusNode();
 
   String _validateEmail(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
+    // Pattern pattern =
+    //     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    // RegExp regex = new RegExp(pattern);
     if (value == '') return 'Email must not be empty';
     // else if (!regex.hasMatch(value)) return 'Please enter valid email address';
     return null;
