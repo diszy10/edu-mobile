@@ -133,7 +133,7 @@ class __LoginFormState extends State<_LoginForm> {
                     hintText: "Email",
                     validator: _validateEmail,
                     focusNode: _emailFocus,
-                    // inputType: TextInputType.emailAddress,
+                    inputType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     // onSaved: (val) => _email = val,
                     onFieldSubmitted: (value) {

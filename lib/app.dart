@@ -168,7 +168,7 @@ class TabSelector extends StatelessWidget {
         });
   }
 
-  Widget _buildModalSwitchStudent(BuildContext context) {
+  Future _buildModalSwitchStudent(BuildContext context) {
     return showCustomModalBottomSheet(
       context: context,
       builder: (context) {
