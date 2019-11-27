@@ -22,25 +22,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TabBloc, AppTab>(builder: (context, activeTab) {
       return Scaffold(
-        body: activeTab == AppTab.activity
-            ? BlocBuilder(
-                bloc: BlocProvider.of<StudentBloc>(context),
-                builder: (_, state) {
-                  if (state is ActiveStudentLoaded) {
-                    return BlocProvider<ActivityBloc>(
-                      builder: (context) => ActivityBloc(repository)
-                        ..add(FetchActivityByStudent(state.student)),
-                      child: ActivityTab(),
-                    );
-                  }
-                  return Center(child: CircularProgressIndicator());
-                },
-              )
-            : activeTab == AppTab.due
-                ? WhatsDuePage()
-                : activeTab == AppTab.inbox
-                    ? InboxPage()
-                    : activeTab == AppTab.update ? UpdatePage() : ProfilePage(),
+        body: _buildBody(context, activeTab),
         bottomNavigationBar: TabSelector(
           activeTab: activeTab,
           onTabSelected: (tab) =>
@@ -48,6 +30,34 @@ class App extends StatelessWidget {
         ),
       );
     });
+  }
+
+  Widget _buildBody(BuildContext context, AppTab activeTab) {
+    if (activeTab == AppTab.activity) {
+      return BlocBuilder(
+        bloc: BlocProvider.of<StudentBloc>(context),
+        builder: (_, state) {
+          if (state is ActiveStudentLoaded) {
+            return BlocProvider<ActivityBloc>(
+              builder: (context) => ActivityBloc(repository)
+                ..add(FetchActivityByStudent(state.student)),
+              child: ActivityTab(),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      );
+    }
+    if (activeTab == AppTab.due) {
+      return WhatsDuePage();
+    }
+    if (activeTab == AppTab.inbox) {
+      return InboxPage();
+    }
+    if (activeTab == AppTab.update) {
+      return UpdatePage();
+    }
+    return ProfilePage();
   }
 }
 
@@ -158,7 +168,7 @@ class TabSelector extends StatelessWidget {
         });
   }
 
-  _buildModalSwitchStudent(BuildContext context) {
+  Widget _buildModalSwitchStudent(BuildContext context) {
     return showCustomModalBottomSheet(
       context: context,
       builder: (context) {
