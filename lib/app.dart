@@ -76,75 +76,86 @@ class TabSelector extends StatelessWidget {
       iconSize: mediaDevice(context) ? 24.0 : 20.0,
       items: AppTab.values.map((tab) {
         return BottomNavigationBarItem(
-          icon: tab == AppTab.activity
-              ? Icon(CustomIcons.icon_activity, color: Color(0xFFA7AAAC))
-              : tab == AppTab.due
-                  ? Icon(CustomIcons.icon_duedate, color: Color(0xFFA7AAAC))
-                  : tab == AppTab.inbox
-                      ? Icon(CustomIcons.icon_inbox, color: Color(0xFFA7AAAC))
-                      : tab == AppTab.update
-                          ? Icon(CustomIcons.icon_notifications,
-                              color: Color(0xFFA7AAAC))
-                          : BlocBuilder(
-                              bloc: BlocProvider.of<StudentBloc>(context),
-                              builder: (_, state) {
-                                if (state is ActiveStudentLoaded) {
-                                  return Container(
-                                    width: 26.0,
-                                    height: 26.0,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            NetworkImage(state.student.photo),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              }),
-          activeIcon: tab == AppTab.activity
-              ? Icon(CustomIcons.icon_activity,
-                  color: Theme.of(context).primaryColor)
-              : tab == AppTab.due
-                  ? Icon(CustomIcons.icon_duedate,
-                      color: Theme.of(context).primaryColor)
-                  : tab == AppTab.inbox
-                      ? Icon(CustomIcons.icon_inbox,
-                          color: Theme.of(context).primaryColor)
-                      : tab == AppTab.update
-                          ? Icon(CustomIcons.icon_notifications,
-                              color: Theme.of(context).primaryColor)
-                          : BlocBuilder(
-                              bloc: BlocProvider.of<StudentBloc>(context),
-                              builder: (_, state) {
-                                if (state is ActiveStudentLoaded) {
-                                  return Container(
-                                    width: 26.0,
-                                    height: 26.0,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 1.5,
-                                      ),
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            NetworkImage(state.student.photo),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              }),
+          icon: _buildItemIcon(context, tab),
+          activeIcon: _buildItemActiveIcon(context, tab),
           title: Text(''),
         );
       }).toList(),
     );
+  }
+
+  Widget _buildItemIcon(BuildContext context, AppTab tab) {
+    if (tab == AppTab.activity) {
+      return Icon(CustomIcons.icon_activity, color: Color(0xFFA7AAAC));
+    }
+    if (tab == AppTab.due) {
+      return Icon(CustomIcons.icon_duedate, color: Color(0xFFA7AAAC));
+    }
+    if (tab == AppTab.inbox) {
+      return Icon(CustomIcons.icon_inbox, color: Color(0xFFA7AAAC));
+    }
+    if (tab == AppTab.update) {
+      return Icon(CustomIcons.icon_notifications, color: Color(0xFFA7AAAC));
+    }
+    return BlocBuilder(
+        bloc: BlocProvider.of<StudentBloc>(context),
+        builder: (_, state) {
+          if (state is ActiveStudentLoaded) {
+            return Container(
+              width: 26.0,
+              height: 26.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(state.student.photo),
+                ),
+              ),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        });
+  }
+
+  Widget _buildItemActiveIcon(BuildContext context, AppTab tab) {
+    if (tab == AppTab.activity) {
+      return Icon(CustomIcons.icon_activity,
+          color: Theme.of(context).primaryColor);
+    }
+    if (tab == AppTab.due) {
+      return Icon(CustomIcons.icon_duedate,
+          color: Theme.of(context).primaryColor);
+    }
+    if (tab == AppTab.inbox) {
+      return Icon(CustomIcons.icon_inbox,
+          color: Theme.of(context).primaryColor);
+    }
+    if (tab == AppTab.update) {
+      return Icon(CustomIcons.icon_notifications,
+          color: Theme.of(context).primaryColor);
+    }
+    return BlocBuilder(
+        bloc: BlocProvider.of<StudentBloc>(context),
+        builder: (_, state) {
+          if (state is ActiveStudentLoaded) {
+            return Container(
+              width: 26.0,
+              height: 26.0,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).primaryColor,
+                  width: 1.5,
+                ),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(state.student.photo),
+                ),
+              ),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        });
   }
 
   _buildModalSwitchStudent(BuildContext context) {
