@@ -15,149 +15,139 @@ import 'package:edukasi_mobile/presentation/tabs/profile/widgets/switch_bottom_s
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class App extends StatefulWidget {
-  @override
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
+class App extends StatelessWidget {
   final repository = FakeRepository();
-  NavigationBloc _navigationBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _navigationBloc = NavigationBloc();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: _navigationBloc,
-      builder: (_, state) {
-        if (state is ActivityPageState) {
-          return _buildScaffold(
-            BlocBuilder(
-              bloc: BlocProvider.of<StudentBloc>(context),
-              builder: (_, state) {
-                if (state is ActiveStudentLoaded) {
-                  return BlocProvider<ActivityBloc>(
-                    builder: (context) => ActivityBloc(repository)
-                      ..add(FetchActivityByStudent(state.student)),
-                    child: ActivityTab(),
-                  );
-                }
-                return Center(child: CircularProgressIndicator());
-              },
-            ),
-            state.index,
-          );
+    return BlocBuilder<TabBloc, AppTab>(builder: (context, activeTab) {
+      return Scaffold(
+        body: activeTab == AppTab.activity
+            ? BlocBuilder(
+                bloc: BlocProvider.of<StudentBloc>(context),
+                builder: (_, state) {
+                  if (state is ActiveStudentLoaded) {
+                    return BlocProvider<ActivityBloc>(
+                      builder: (context) => ActivityBloc(repository)
+                        ..add(FetchActivityByStudent(state.student)),
+                      child: ActivityTab(),
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
+              )
+            : activeTab == AppTab.due
+                ? WhatsDuePage()
+                : activeTab == AppTab.inbox
+                    ? InboxPage()
+                    : activeTab == AppTab.update ? UpdatePage() : ProfilePage(),
+        bottomNavigationBar: TabSelector(
+          activeTab: activeTab,
+          onTabSelected: (tab) =>
+              BlocProvider.of<TabBloc>(context).add(UpdateTab(tab)),
+        ),
+      );
+    });
+  }
+}
+
+class TabSelector extends StatelessWidget {
+  final AppTab activeTab;
+  final Function(AppTab) onTabSelected;
+  final repository = FakeRepository();
+
+  TabSelector({
+    Key key,
+    @required this.activeTab,
+    @required this.onTabSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return custom.BottomNavigationBar(
+      type: custom.BottomNavigationBarType.fixed,
+      currentIndex: AppTab.values.indexOf(activeTab),
+      onTap: (index) => onTabSelected(AppTab.values[index]),
+      onLongPress: (int index) {
+        if (index == 4) {
+          return _buildModalSwitchStudent(context);
         }
-        if (state is DuePageState) {
-          return _buildScaffold(WhatsDuePage(), state.index);
-        }
-        if (state is InboxPageState) {
-          return _buildScaffold(InboxPage(), state.index);
-        }
-        if (state is UpdatePageState) {
-          return _buildScaffold(UpdatePage(), state.index);
-        }
-        if (state is ProfilePageState) {
-          return _buildScaffold(ProfilePage(), state.index);
-        }
-        return Container();
       },
+      iconSize: mediaDevice(context) ? 24.0 : 20.0,
+      items: AppTab.values.map((tab) {
+        return BottomNavigationBarItem(
+          icon: tab == AppTab.activity
+              ? Icon(CustomIcons.icon_activity, color: Color(0xFFA7AAAC))
+              : tab == AppTab.due
+                  ? Icon(CustomIcons.icon_duedate, color: Color(0xFFA7AAAC))
+                  : tab == AppTab.inbox
+                      ? Icon(CustomIcons.icon_inbox, color: Color(0xFFA7AAAC))
+                      : tab == AppTab.update
+                          ? Icon(CustomIcons.icon_notifications,
+                              color: Color(0xFFA7AAAC))
+                          : BlocBuilder(
+                              bloc: BlocProvider.of<StudentBloc>(context),
+                              builder: (_, state) {
+                                if (state is ActiveStudentLoaded) {
+                                  return Container(
+                                    width: 26.0,
+                                    height: 26.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image:
+                                            NetworkImage(state.student.photo),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              }),
+          activeIcon: tab == AppTab.activity
+              ? Icon(CustomIcons.icon_activity,
+                  color: Theme.of(context).primaryColor)
+              : tab == AppTab.due
+                  ? Icon(CustomIcons.icon_duedate,
+                      color: Theme.of(context).primaryColor)
+                  : tab == AppTab.inbox
+                      ? Icon(CustomIcons.icon_inbox,
+                          color: Theme.of(context).primaryColor)
+                      : tab == AppTab.update
+                          ? Icon(CustomIcons.icon_notifications,
+                              color: Theme.of(context).primaryColor)
+                          : BlocBuilder(
+                              bloc: BlocProvider.of<StudentBloc>(context),
+                              builder: (_, state) {
+                                if (state is ActiveStudentLoaded) {
+                                  return Container(
+                                    width: 26.0,
+                                    height: 26.0,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Theme.of(context).primaryColor,
+                                        width: 1.5,
+                                      ),
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image:
+                                            NetworkImage(state.student.photo),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              }),
+          title: Text(''),
+        );
+      }).toList(),
     );
   }
 
-  Scaffold _buildScaffold(Widget page, int index) {
-    return Scaffold(
-      body: page,
-      bottomNavigationBar: _buildBottomNavigationBar(index),
-    );
-  }
-
-  Widget _buildBottomNavigationBar(int index) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<StudentBloc>(context),
-      builder: (_, state) {
-        if (state is ActiveStudentLoaded) {
-          return custom.BottomNavigationBar(
-            currentIndex: index,
-            type: custom.BottomNavigationBarType.fixed,
-            onLongPress: (int index) {
-              if (index == 4) {
-                return _buildModalSwitchStudent();
-              }
-            },
-            onTap: (index) {
-              if (index == 0) _navigationBloc.add(NavigationEvent.activity);
-              if (index == 1) _navigationBloc.add(NavigationEvent.due);
-              if (index == 2) _navigationBloc.add(NavigationEvent.inbox);
-              if (index == 3) _navigationBloc.add(NavigationEvent.update);
-              if (index == 4) _navigationBloc.add(NavigationEvent.profile);
-            },
-            iconSize: mediaDevice(context) ? 24.0 : 20.0,
-            items: [
-              BottomNavigationBarItem(
-                  icon:
-                      Icon(CustomIcons.icon_activity, color: Color(0xFFA7AAAC)),
-                  activeIcon: Icon(CustomIcons.icon_activity,
-                      color: Theme.of(context).primaryColor),
-                  title: Text('')),
-              BottomNavigationBarItem(
-                  icon:
-                      Icon(CustomIcons.icon_duedate, color: Color(0xFFA7AAAC)),
-                  activeIcon: Icon(CustomIcons.icon_duedate,
-                      color: Theme.of(context).primaryColor),
-                  title: Text('')),
-              BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.icon_inbox, color: Color(0xFFA7AAAC)),
-                  activeIcon: Icon(CustomIcons.icon_inbox,
-                      color: Theme.of(context).primaryColor),
-                  title: Text('')),
-              BottomNavigationBarItem(
-                  icon: Icon(CustomIcons.icon_notifications,
-                      color: Color(0xFFA7AAAC)),
-                  activeIcon: Icon(CustomIcons.icon_notifications,
-                      color: Theme.of(context).primaryColor),
-                  title: Text('')),
-              BottomNavigationBarItem(
-                icon: Container(
-                  width: 26.0,
-                  height: 26.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(state.student.photo),
-                    ),
-                  ),
-                ),
-                activeIcon: Container(
-                  width: 26.0,
-                  height: 26.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).primaryColor, width: 1.5),
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(state.student.photo),
-                    ),
-                  ),
-                ),
-                title: Text(''),
-              ),
-            ],
-          );
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-    );
-  }
-
-  _buildModalSwitchStudent() {
+  _buildModalSwitchStudent(BuildContext context) {
     return showCustomModalBottomSheet(
       context: context,
       builder: (context) {

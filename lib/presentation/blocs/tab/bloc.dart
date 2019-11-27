@@ -1,3 +1,3 @@
-export 'navigation_bloc.dart';
-export 'navigation_event.dart';
-export 'navigation_state.dart';
+export 'tab_bloc.dart';
+export 'tab_event.dart';
+export 'tab_model.dart';

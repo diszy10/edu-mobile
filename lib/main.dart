@@ -3,6 +3,7 @@ import 'package:edukasi_mobile/core/data/fake_repository.dart';
 import 'package:edukasi_mobile/core/data/user_repository.dart';
 import 'package:edukasi_mobile/presentation/blocs/auth/bloc.dart';
 import 'package:edukasi_mobile/presentation/blocs/student/bloc.dart';
+import 'package:edukasi_mobile/presentation/blocs/tab/bloc.dart';
 import 'package:edukasi_mobile/presentation/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,9 +35,16 @@ class MainApp extends StatelessWidget {
         home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) {
             if (state is AuthenticationAuthenticated) {
-              return BlocProvider<StudentBloc>(
-                builder: (context) => StudentBloc(repository: repository)
-                  ..add(SetActiveStudent(state.activeStudent)),
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<TabBloc>(
+                    builder: (context) => TabBloc(),
+                  ),
+                  BlocProvider<StudentBloc>(
+                    builder: (context) => StudentBloc(repository: repository)
+                      ..add(SetActiveStudent(state.activeStudent)),
+                  )
+                ],
                 child: App(),
               );
             }
