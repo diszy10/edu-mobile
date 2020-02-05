@@ -1,5 +1,5 @@
 class Student {
-  final String id, name, urlPhoto;
+  final String name, urlPhoto;
 
-  Student({this.id, this.name, this.urlPhoto});
+  Student({this.name, this.urlPhoto});
 }
