@@ -39,7 +39,7 @@ class App extends StatelessWidget {
         builder: (_, state) {
           if (state is ActiveStudentLoaded) {
             return BlocProvider<ActivityBloc>(
-              builder: (context) => ActivityBloc(repository)
+              create: (context) => ActivityBloc(repository)
                 ..add(FetchActivityByStudent(state.student)),
               child: ActivityTab(),
             );
@@ -78,7 +78,7 @@ class TabSelector extends StatelessWidget {
       type: custom.BottomNavigationBarType.fixed,
       currentIndex: AppTab.values.indexOf(activeTab),
       onTap: (index) => onTabSelected(AppTab.values[index]),
-      onLongPress: (int index) {
+      onLongPress: (int index) async {
         if (index == 4) {
           return _buildModalSwitchStudent(context);
         }
@@ -187,7 +187,7 @@ class TabSelector extends StatelessWidget {
                 ),
               ),
               child: BlocProvider<StudentBloc>(
-                builder: (context) =>
+                create: (context) =>
                     StudentBloc(repository: repository)..add(FetchStudents()),
                 child: SwitchBottomSheet(),
               ),

@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return BlocProvider<AuthenticationBloc>(
-      builder: (context) {
+      create: (context) {
         return AuthenticationBloc(
             userRepository: userRepository, repository: repository)
           ..add(AppStarted());
@@ -38,10 +38,10 @@ class MainApp extends StatelessWidget {
               return MultiBlocProvider(
                 providers: [
                   BlocProvider<TabBloc>(
-                    builder: (context) => TabBloc(),
+                    create: (context) => TabBloc(),
                   ),
                   BlocProvider<StudentBloc>(
-                    builder: (context) => StudentBloc(repository: repository)
+                    create: (context) => StudentBloc(repository: repository)
                       ..add(SetActiveStudent(state.activeStudent)),
                   )
                 ],
