@@ -10,15 +10,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^3.1.0
+  equatable: ^1.0.0
+  shared_preferences: ^0.5.4+3
 
   intl: ^0.15.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
+
+flutter_icons:
+  android: true 
+  ios: false
+  image_path: "assets/images/edukasi-mark.png"
 
 flutter:
   uses-material-design: true
+
   fonts:
   - family: CustomIcons
     fonts:
@@ -35,3 +45,6 @@ flutter:
     fonts:
     - asset: assets/fonts/CircularStd-Book.otf
       weight: 300
+
+  assets:
+   - assets/images/

@@ -1,22 +1,62 @@
+import 'package:edukasi_mobile/app.dart';
+import 'package:edukasi_mobile/core/data/fake_repository.dart';
+import 'package:edukasi_mobile/core/data/user_repository.dart';
+import 'package:edukasi_mobile/presentation/blocs/auth/bloc.dart';
+import 'package:edukasi_mobile/presentation/blocs/student/bloc.dart';
+import 'package:edukasi_mobile/presentation/blocs/tab/bloc.dart';
+import 'package:edukasi_mobile/presentation/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import './start.dart';
+void main() async {
+  runApp(MainApp());
+}
 
-void main() => runApp(App());
+class MainApp extends StatelessWidget {
+  final userRepository = UserRepository();
+  final repository = FakeRepository();
 
-class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Edukasi Parent',
-      home: StartPage(),
-      theme: _eduTheme,
+    return BlocProvider<AuthenticationBloc>(
+      create: (context) {
+        return AuthenticationBloc(
+            userRepository: userRepository, repository: repository)
+          ..add(AppStarted());
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Edukasi Mobile',
+        home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) {
+            if (state is AuthenticationAuthenticated) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<TabBloc>(
+                    create: (context) => TabBloc(),
+                  ),
+                  BlocProvider<StudentBloc>(
+                    create: (context) => StudentBloc(repository: repository)
+                      ..add(SetActiveStudent(state.activeStudent)),
+                  )
+                ],
+                child: App(),
+              );
+            }
+            if (state is AuthenticationUnauthenticated) {
+              return LoginPage(userRepository: userRepository);
+            }
+            // if state is uninitialized & loading
+            return SplashPage();
+          },
+        ),
+        theme: _eduTheme,
+      ),
     );
   }
 }
